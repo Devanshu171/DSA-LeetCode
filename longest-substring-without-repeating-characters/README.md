@@ -1,3 +1,4 @@
+[Discussion Post (created on 5/9/2021 at 21:4)](https://leetcode.com/problems/longest-substring-without-repeating-characters/discuss/1504834/Simple-C%2B%2B-O(n)-solution-using-hashmap-with-comments)  
 <h2>3. Longest Substring Without Repeating Characters</h2><h3>Medium</h3><hr><div><p>Given a string <code>s</code>, find the length of the <b>longest substring</b> without repeating characters.</p>
 
 <p>&nbsp;</p>
