@@ -1,32 +1,36 @@
 class Solution {
 public:
-    void helper(vector<int>&a,int i,int k,vector<int>vec,vector<vector<int>>&ans)
+    
+    void helper(int i,int sum,int k,vector<int> &a,vector<vector<int>>&ans,vector<int>&ds  )
     {
-        // draw a recursion tree to understand
         int n=a.size();
-        if(i==n)
+        if(sum>=k || i==n)
         {
-            if(k==0){
-                ans.push_back(vec);
+            if(sum==k){
+                ans.push_back(ds);
             return;}
-            
-            return;    
+            return;
         }
+        
         
         if(a[i]<=k)
         {
-            k-=a[i];
-            vec.push_back(a[i]);
-            helper(a,i,k,vec,ans);
-            vec.pop_back();
-            k+=a[i];
+            sum+=a[i];
+            ds.push_back(a[i]);
+            helper(i,sum,k,a,ans,ds);
+            sum-=a[i];
+            ds.pop_back();
+
         }
-        helper(a,i+1,k,vec,ans);
+        helper(i+1,sum,k,a,ans,ds);
+        
+        
+        
     }
-    vector<vector<int>> combinationSum(vector<int>& a, int k) {
+    vector<vector<int>> combinationSum(vector<int>&a, int k) {
         vector<vector<int>>ans;
         vector<int>vec;
-        helper(a,0,k,vec,ans);
-        return ans;
+        helper(0,0,k,a,ans,vec);
+            return ans;
     }
 };
