@@ -5,8 +5,10 @@ public:
         if(k==0)
         {
             ans.push_back(vec);
-            return;
+            // return;
         }
+        if( k<0)
+            return;
         
         for(int i=ind;i<a.size() && a[i]<=k ;i++)
         {
