@@ -18,7 +18,7 @@ public:
         {
             int mid = start+(end - start)/2;
             
-            if(a[mid]>a[(mid+1)%n] && a[mid]>a[(mid+n-1)%n])
+            if(a[mid]>a[(mid+1)] && a[mid]>a[(mid-1)])
                 return mid;
             else if(a[mid]>a[mid+1])
                 end=mid-1;
