@@ -5,7 +5,8 @@ public:
        
         int start=0;
         int end=n-1;
-           
+           if(n==1)
+               return a[0];
         while(start<=end)
         {
             int mid=start+(end-start)/2;
@@ -17,7 +18,7 @@ public:
             return a[start];
             
 
-            else if(a[mid]<=a[prev] && a[mid]<=a[next])
+            else if(a[mid]<a[prev] && a[mid]<a[next])
                 return a[mid];
             else
             {
