@@ -1,31 +1,27 @@
 class Solution {
 public:
-    void helper(vector<int>&a,int ind,vector<int>&vec,vector<vector<int>>&ans)
+    void helper(int ind,vector<int>&a,vector<int>&vec,vector<vector<int>>&ans)
     {
-        
-        // draw recursive tree 
-        int n=a.size();
-         ans.push_back(vec);
-            // return;
-        
-           for(int i=ind;i<n;i++){
-               
-           if(i>ind && a[i]==a[i-1])
-               continue;
-           vec.push_back(a[i]);
-            helper(a,i+1,vec,ans);
-            vec.pop_back();
-               
-           }
+        ans.push_back(vec);
+                  
+        for(int i=ind;i<a.size();i++)
+        {
+            
+            // as if its thr fist time a=or is a different from previous
+            if(i>ind && a[i]==a[i-1]) continue;
+          
+                vec.push_back(a[i]);
+                helper(i+1,a,vec,ans);
+                vec.pop_back();
+            
+        }
     }
     vector<vector<int>> subsetsWithDup(vector<int>& a) {
-      
-    
-    sort(a.begin(),a.end());
-        vector<vector<int>>ans;
         vector<int>vec;
-        helper(a,0,vec,ans);
+        vector<vector<int>>ans;
+        sort(a.begin(),a.end());
+        helper(0,a,vec,ans);
         return ans;
-
+        
     }
 };
