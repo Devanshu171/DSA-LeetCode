@@ -18,7 +18,7 @@ class Solution{
         unordered_set<int>st;
         for(int i=0;i<n;i++){
              sum+=arr[i];
-             if(sum==0 || st.find(sum)!=st.end())
+             if(sum==0 ||arr[i]==0|| st.find(sum)!=st.end())
              return true;
              else
              st.insert(sum);
