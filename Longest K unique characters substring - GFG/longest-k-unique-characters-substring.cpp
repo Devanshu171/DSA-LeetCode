@@ -27,8 +27,8 @@ class Solution{
                 if(mpp[s[i]]==0) mpp.erase(s[i]);
                 i++;
             }
-             if(mpp.size()==k)
-            mx=max(j-i+1,mx);
+            //  if(mpp.size()==k)
+            // mx=max(j-i+1,mx);
             j++;
         }
     }
