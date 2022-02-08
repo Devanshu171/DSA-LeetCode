@@ -10,33 +10,35 @@ class Solution{
 public:
 	int search(string pat, string txt) {
 	    // code here
-	    int ans=0,k=pat.length(),n=txt.length();
-    unordered_map<char,int>m;
-    for(int i=0;i<k;i++){
-        m[pat[i]]++;
-    }
-    int i=0,j=0,count=m.size();
-    while(j<n){
-        if(m.find(txt[j])!=m.end()){
-            m[txt[j]]--;
-            if(m[txt[j]]==0){
-                count--;
-            }
-        }
-        if(j-i+1<k) j++;
-        else if(j-i+1==k){
-            if(count==0){
-                ans++;
-            }
-            if(m.find(txt[i])!=m.end()){
-                m[txt[i]]++;
-                if(m[txt[i]]==1) count++;
-            }
-            i++;
-            j++;
-        }
-    }
-    return ans;
+	    unordered_map<char,int>mpp;
+	    int k=pat.length();
+	    for(int i=0;i<k;i++) mpp[pat[i]]++;
+	    int count=mpp.size();
+	    int n=txt.length();
+	    int i=0,j=0,ans=0;
+	   // count<<k<<count;
+	    while(j<n){
+	        if(mpp.find(txt[j])!=mpp.end()){
+	            mpp[txt[j]]--;
+	            if(mpp[txt[j]]==0) count--;
+	        }
+	        if(j-i+1<k) j++;
+	        else if(j-i+1==k){
+	            if(count==0){
+	                ans++;
+	            }
+	            if(mpp.find(txt[i])!=mpp.end()){
+	                mpp[txt[i]]++;
+	                if(mpp[txt[i]]==1) count++;
+	            }
+	            i++;
+	            j++;
+	        }
+	        
+	    }
+	    return ans;
+	    
+	    
 	}
 
 };
