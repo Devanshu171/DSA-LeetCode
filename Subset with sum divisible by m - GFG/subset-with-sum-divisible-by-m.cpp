@@ -14,9 +14,8 @@ class Solution{
                 }
                 return;
             }
-            sum+=arr[ind];
-            func(ind+1,arr,sum,n,k);
-            sum-=arr[ind];
+            func(ind+1,arr,sum+arr[ind],n,k);
+            
             func(ind+1,arr,sum,n,k);
             
         }
