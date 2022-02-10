@@ -11,19 +11,21 @@ class Solution
 {
     public:
     //Function to delete middle element of a stack.
+    void helper(stack<int>&st,int n){
+        if(n==1){
+            st.pop();
+            return;
+        }
+        int temp=st.top();
+        st.pop();
+        helper(st,n-1);
+        st.push(temp);
+        return;
+    }
     void deleteMid(stack<int>&s, int n)
     {
         // code here.. 
-        stack<int>temp;
-        for(int i=0;i<n/2+1;i++){
-            temp.push(s.top());
-            s.pop();
-        }
-        temp.pop();
-        while(!temp.empty()){
-            s.push(temp.top());
-            temp.pop();
-        }
+        helper(s,n/2+1);
     }
 };
 
