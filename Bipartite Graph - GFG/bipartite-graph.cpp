@@ -18,7 +18,7 @@ public:
 	        q.pop();
 	        for(auto it:adj[node]){
 	            if(color[it]==-1){
-	                color[it]=1-color[node];
+	                color[it]=!color[node];
 	                q.push(it);
 	            }
 	            else if(color[it]==color[node]){
