@@ -17,10 +17,8 @@ class Solution{
         //code here
         int ans=0;
         sort(arr,arr+r+1);
-        for(int i=l;i<k;i++){
-            ans=arr[i];
-        }
-        return ans;
+       return arr[k-1];
+        
     }
 };
 
