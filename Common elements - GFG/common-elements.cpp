@@ -7,27 +7,30 @@ using namespace std;
 class Solution
 {
     public:    
-       vector <int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3)
+     vector <int> commonElements (int a[], int b[], int c[], int n1, int n2, int n3)
         {
-            //code here.
-            unordered_map<int,int>mpp1,mpp2,mpp3;
-
-            for(int i=0;i<n1;i++) mpp1[A[i]]++;
-            for(int i=0;i<n2;i++) mpp2[B[i]]++;
-            for(int i=0;i<n3;i++) mpp3[C[i]]++;
-            vector<int>ans;
-            for(int i=0;i<n1;i++){
-                if(mpp1[A[i]]>0 && mpp2[A[i]]>0 && mpp3[A[i]]>0) 
-                {ans.push_back(A[i]);
-                mpp1[A[i]]=0;
+            int i=0,j=0,k=0;
+            vector<int>v;
+            while(i<n1 and j<n2 and k<n3){
+                if(a[i]==b[j] and b[j]==c[k]) 
+                {
+                    v.push_back(a[i]);
+                    i++;j++;k++;
                 }
+                else if(a[i]<b[j]) i++;
+                else if(b[j]<c[k]) j++;
+                else k++;
+                int xx = a[i-1];
+                while(a[i]==xx) i++;
+                int yy = b[j-1];
+                while(b[j]==yy) j++;
+                int zz = c[k-1];
+                while(c[k]==zz) k++;
             }
-            return ans;
-            
-
-            
-            
+            if(v.size()==0) return {-1};
+            return v;
         }
+
 
 };
 
