@@ -13,15 +13,12 @@ class Solution{
     //Function to check whether there is a subarray present with 0-sum or not.
     bool subArrayExists(int arr[], int n)
     {
-        //Your code here
-        int sum=0;
         unordered_set<int>st;
+        int sum=0;
         for(int i=0;i<n;i++){
-             sum+=arr[i];
-             if(sum==0 ||arr[i]==0|| st.find(sum)!=st.end())
-             return true;
-             else
-             st.insert(sum);
+            sum+=arr[i];
+            if(sum==0 ||st.find(sum)!=st.end()) return true;
+            st.insert(sum);
         }
         return false;
     }
