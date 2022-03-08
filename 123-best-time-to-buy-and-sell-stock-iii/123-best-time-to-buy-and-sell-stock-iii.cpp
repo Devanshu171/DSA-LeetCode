@@ -20,7 +20,7 @@ public:
         for(int i=n-1;i>=0;i--){
             sell=max(sell,prices[i]);
             mp=max(0,sell-prices[i]);
-            profit[i]=max(profit[i],mp+profit[i]);
+            profit[i]=mp+profit[i];
             ans=max(ans,profit[i]);
         }
           
