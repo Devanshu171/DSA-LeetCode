@@ -8,18 +8,23 @@ using namespace std;
 // User function template for c++
 class Solution {
   public:
-    string removeChars(string s1, string s2) {
+    string removeChars(string string1, string string2) {
         // code here
-        string ans;
-        unordered_set<char>st(s2.begin(),s2.end());
-        for(int i=0;i<s1.size();i++){
-            if(st.count(s1[i])) continue;
-            ans.push_back(s1[i]);
+        string ss="";
+        for(int i=0;i<string1.size();i++){
+            bool flag=true;
+            for(int j=0;j<string2.size();j++){
+                if(string1[i]==string2[j]){
+                    flag=false;
+                }
+            }
+            if(flag==true){
+                ss+=string1[i];
+            }
         }
-        return ans;
+        return ss;
     }
 };
-
 
 // { Driver Code Starts.
 int main() {
