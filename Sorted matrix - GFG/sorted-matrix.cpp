@@ -12,7 +12,7 @@ class Solution {
     vector<vector<int>> sortedMatrix(int N, vector<vector<int>> Mat) {
         // code here
         vector<int>arr;
-        vector<vector<int>>ans(N,vector<int>(N));
+        // vector<vector<int>>ans(N,vector<int>(N));
         for(int i=0;i<N;i++){
             for(int j=0;j<N;j++){
                 arr.push_back(Mat[i][j]);
@@ -22,10 +22,10 @@ class Solution {
         int k=0;
         for(int i=0;i<N;i++){
             for(int j=0;j<N;j++){
-                ans[i][j]=arr[k++];
+                Mat[i][j]=arr[k++];
             }
         }
-        return ans;
+        return Mat;
     }
 };
 
