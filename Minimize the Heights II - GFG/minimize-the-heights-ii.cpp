@@ -10,20 +10,17 @@ using namespace std;
 class Solution {
   public:
     int getMinDiff(int arr[], int n, int k) {
-        
+        // code here
         sort(arr,arr+n);
-        int diff=arr[n-1]-arr[0];
-        int s=arr[0]+k;
-        int l=arr[n-1]-k;
+        int mini,maxi;
+        int res=arr[n-1]-arr[0];
         for(int i=0;i<n-1;i++){
-            int mini=min(s,arr[i+1]-k);
-            int maxi=max(l,arr[i]+k);
-            
+            mini=min(arr[i+1]-k,arr[0]+k);
+            maxi=max(arr[i]+k,arr[n-1]-k);
             if(mini<0) continue;
-            diff=min(diff,maxi-mini);
+            res=min(res,maxi-mini);
         }
-        return diff;
-        
+        return res;
     }
 };
 
