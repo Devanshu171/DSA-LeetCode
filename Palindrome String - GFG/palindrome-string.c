@@ -12,8 +12,8 @@
 int isPalindrome(char S[])
 {
     // int n=sizeof(S)/sizeof(S[i]);
-    int len=0;
-    while(S[len]!='\0')len++;
+    int len=strlen(S);
+    
     for(int i=0;i<len;i++){
         if(S[i]!=S[len-i-1])
         return 0;
