@@ -1,5 +1,5 @@
 # Rotation
-##  Easy 
+## Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an ascending&nbsp;sorted rotated&nbsp;array&nbsp;<strong>Arr&nbsp;</strong>of distinct integers&nbsp;of size <strong>N</strong>. The array is right rotated <strong>K</strong>&nbsp;times. Find the value of <strong>K</strong>.</span></p>
 
