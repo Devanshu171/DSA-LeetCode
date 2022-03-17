@@ -14,13 +14,14 @@ class Solution{
 	int lps(string s) {
 	    // Your code goes here
 	    int n=s.size();
-	    int lpss[n]={0};
+	    vector<int>lpss(n);
 	    lpss[0]=0;
 	    int ans=0;
 	    int i=1,j=0;
 	    while(i<n){
 	        if(s[i]==s[j]){
 	            lpss[i]=j+1;
+	           // ans=max(ans,lpss[j]);
 	            i++;
 	            j++;
 	        }else{
