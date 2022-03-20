@@ -9,7 +9,7 @@ class Solution{
     string findSubString(string s)
     {
        
-        unordered_set<int>st;
+        unordered_set<char>st;
         unordered_map<char,int>mpp;
          int n=s.size();
         for(int i=0;i<n;i++)
