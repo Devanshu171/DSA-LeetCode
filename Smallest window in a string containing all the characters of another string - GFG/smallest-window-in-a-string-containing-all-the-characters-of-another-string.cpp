@@ -23,7 +23,7 @@ class Solution
                 if(mpp[s[j]]==0)
                 count--;
             }
-            if(count==0){
+  
                 while(count==0){
                     if(len>j-i+1){
                         len=j-i+1;
@@ -42,7 +42,7 @@ class Solution
                     }
                     i++;
                 }
-            }
+            
             j++;
         }
         return len==s.size()? "-1":s.substr(start,len);
