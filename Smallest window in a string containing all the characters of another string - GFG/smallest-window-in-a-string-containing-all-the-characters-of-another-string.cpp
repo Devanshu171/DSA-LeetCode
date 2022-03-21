@@ -36,10 +36,10 @@ class Solution
                         }
                         
                     }
-                    if(len>j-i+1){
-                        len=j-i+1;
-                        start=i;
-                    }
+                    // if(len>j-i+1){
+                    //     len=j-i+1;
+                    //     start=i;
+                    // }
                     i++;
                 }
             
