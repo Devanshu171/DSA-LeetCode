@@ -2,9 +2,7 @@ class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
         
-        int i=0;
-        int n=nums.size();
-        
+        int n=nums.size(),i=0;
         while(i<n){
             if(nums[i]!=nums[nums[i]-1]){
                 swap(nums[i],nums[nums[i]-1]);
@@ -12,9 +10,10 @@ public:
                 i++;
             }
         }
-        for( i=0;i<n;i++){
-            if(nums[i]!=i+1) return nums[i];
+        for(int i=0;i<n;i++){
+            if(nums[i]!=i+1)
+                return nums[i];
         }
-        return 0;
+        return -1;
     }
 };
