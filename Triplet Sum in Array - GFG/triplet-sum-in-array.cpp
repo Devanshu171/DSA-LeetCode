@@ -8,24 +8,22 @@ class Solution{
     public:
     //Function to find if there exists a triplet in the 
     //array A[] which sums up to X.
-    bool find2Numbers(int a[],int s,int n,int x){
-    unordered_set<int>st;
-    for(int i=s;i<n;i++){
-        int dif=x-a[i];
-        if(st.count(dif)) return true;
-        st.insert(a[i]);
+    bool find3Numbers(int a[], int n, int x)
+    {
+       sort(a,a+n);
+       for(int i=0;i<n-2;i++){
+           
+           int s=i+1,j=n-1;
+           while(s<j){
+               int sum=a[i]+a[j]+a[s];
+               if(sum==x)
+               return true;
+               else if(sum<x) s++;
+               else j--;
+           }
+       }
+       return false;
     }
-    return false;
-}
-bool find3Numbers(int a[], int n, int x)
-{
-    for(int i=0;i<n;i++){
-        int diff=x-a[i];
-        if(find2Numbers(a,i+1,n,diff)) return true;
-    }
-    return false;
-    
-}
 
 };
 
