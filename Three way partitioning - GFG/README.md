@@ -1,5 +1,5 @@
 # Three way partitioning
-## Easy 
+##  Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array of size n&nbsp;and a range [<strong>a</strong>, <strong>b</strong>]. The task is to partition the array around the range such that array is divided into three parts.<br>
 1) All elements smaller than <strong>a</strong> come first.<br>
