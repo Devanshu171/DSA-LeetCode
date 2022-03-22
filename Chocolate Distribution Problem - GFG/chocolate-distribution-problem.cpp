@@ -5,22 +5,16 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
     public:
-    typedef long long LL;
+    #define ll long long
     long long findMinDiff(vector<long long> a, long long n, long long m){
     //code
-    if(n<m) return -1;
-    LL ans=INT_MAX;
-    LL i=0,j=m-1;
     sort(a.begin(),a.end());
-    while(j<n){
-        if(ans>a[j]-a[i]){
-            ans=a[j]-a[i];
-        }
-        i++;
-        j++;
+    ll l=0,h=m-1,ans=1e9+10;
+    while(h<n){
+        ans=min(ans,a[h]-a[l]);
+        h++;l++;
     }
     return ans;
-    
     }   
 };
 
