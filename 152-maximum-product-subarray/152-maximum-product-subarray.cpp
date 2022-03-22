@@ -1,25 +1,18 @@
 class Solution {
 public:
-    int maxProduct(vector<int>& nums) {
-       int ans=INT_MIN;
-        int p=1;
-        int n=nums.size();
-        for(int i=0;i<n;i++){
-            p*=nums[i];
-            cout<<p<<" ";
-            ans=max(ans,p);
-            if(p==0){
-                p=1;
-            }
-        }
-        p=1;
-        for(int i=n-1;i>=0;i--){
-             p*=nums[i];
-            ans=max(ans,p);
-            if(p==0){
-                p=1;
-            }
-        }
-        return ans;
+    int maxProduct(vector<int>& arr) {
+      
+        int n=arr.size();
+        int p1=1,p2=1;
+	    int mx1=-10000+10,mx2=-10000+19;
+	    for(int i=0;i<n;i++){
+	        p1*=arr[i];
+	        p2*=arr[n-i-1];
+	        mx1=max(mx1,p1);
+	        mx2=max(mx2,p2);
+	        if(p1==0) p1=1;
+	        if (p2==0) p2=1;
+	    }
+	    return max(mx1,mx2);
     }
 };
