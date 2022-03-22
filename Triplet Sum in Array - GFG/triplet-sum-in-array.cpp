@@ -11,7 +11,7 @@ class Solution{
     bool find3Numbers(int a[], int n, int x)
     {
        sort(a,a+n);
-       for(int i=0;i<n-2;i++){
+       for(int i=0;i<n;i++){
            
            int s=i+1,j=n-1;
            while(s<j){
