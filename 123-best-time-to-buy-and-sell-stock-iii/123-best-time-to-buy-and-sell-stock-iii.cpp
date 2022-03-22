@@ -2,28 +2,28 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
-        vector<int>profit(n,0);
+        int profit[n];
         int buy=INT_MAX;
-        int mp=0;
+      int  cp=INT_MIN;
+        int mxi=cp;
+        
         for(int i=0;i<n;i++){
-            if(buy>prices[i]){
-                buy=prices[i];
-            }else if(mp<prices[i]-buy){
-                mp=prices[i]-buy;
-            }
-            profit[i]=mp;
-            // cout<<mp<<" ";
+            buy=min(buy,prices[i]);
+            cp=max(cp,prices[i]-buy);
+            mxi=max(mxi,cp);
+            profit[i]=mxi;
         }
-        int sell=0;
-        mp=0;
-        int ans=0;
+        int sell=INT_MIN;
+        cp=INT_MIN;
+        mxi=cp;
+        int ans=-1;
         for(int i=n-1;i>=0;i--){
             sell=max(sell,prices[i]);
-            mp=max(0,sell-prices[i]);
-            profit[i]=mp+profit[i];
+            cp=max(cp,sell-prices[i]);
+            mxi=max(cp,mxi);
+            profit[i]+=mxi;
             ans=max(ans,profit[i]);
         }
-          
         return ans;
     }
 };
