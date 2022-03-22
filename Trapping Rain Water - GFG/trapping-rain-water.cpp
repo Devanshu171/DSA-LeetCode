@@ -8,28 +8,23 @@ using namespace std;
 class Solution{
 
     // Function to find the trapped water between the blocks.
+    #define ll long long
     public:
-    typedef long long LL;
     long long trappingWater(int arr[], int n){
         // code here
-        LL right[n],left[n];
-        left[0]=arr[0];
-        int maxi=arr[0];
-        for(int i=1;i<n;i++){
-            maxi=max(maxi,arr[i]);
-            left[i]=maxi;
+        int right[n],left[n];
+        int lx=-1,rx=-1;
+        for(int i=0;i<n;i++){
+            lx=max(lx,arr[i]);
+            rx=max(rx,arr[n-i-1]);
+            left[i]=lx;
+            right[n-i-1]=rx;
         }
-        maxi=arr[n-1];
-        right[n-1]=arr[n-1];
-         for(int i=n-2;i>=0;i--){
-            maxi=max(maxi,arr[i]);
-            right[i]=maxi;
+        ll ans=0;
+        for(int i=0;i<n;i++){
+            ans+=min(left[i],right[i])-arr[i];
         }
-            LL ans=0;
-            for(int i=0;i<n;i++){
-                ans+=min(right[i],left[i])-arr[i];
-            }
-            return ans;
+        return ans;
     }
 };
 
