@@ -1,5 +1,5 @@
 # Minimum swaps and K together
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array <strong>arr</strong> of <strong>n</strong> positive integers and a number&nbsp;<strong>k</strong>. One can apply a swap operation on the array any number of times, i.e choose any two index i and j&nbsp;(i &lt; j) and swap arr[i] , arr[j] . Find the&nbsp;<strong>minimum</strong>&nbsp;number of swaps required to bring all the numbers less than or equal to&nbsp;<strong>k</strong>&nbsp;together, i.e. make them a contiguous&nbsp;subarray.</span></p>
 
