@@ -15,18 +15,20 @@ public:
     void threeWayPartition(vector<int>& arr,int a, int b)
     {
         // code here 
-        int l=0,mid=0,h=arr.size()-1;
-    while(mid<=h){
-        if(arr[mid]<a){
-            swap(arr[mid],arr[l]);
-            l++; mid++;
-        }else if(arr[mid]>b){
-            swap(arr[mid],arr[h]);
-            h--;
-        }else {
-            mid++;
+      int n=arr.size();
+        int l=0,mid=0,h=n-1;
+        while(mid<=h){
+            if(arr[mid]<a){
+                swap(arr[mid],arr[l]);
+                l++;
+                mid++;
+            }else if(arr[mid]>b ){
+                swap(arr[mid],arr[h]);
+                h--;
+            }else{
+                mid++;
+            }
         }
-    }
     }
 };
 
