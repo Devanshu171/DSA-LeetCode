@@ -12,15 +12,15 @@ public:
     int getPairsCount(int arr[], int n, int k) {
         // code here
         unordered_map<int,int>mpp;
-        int count=0;
+        int ans=0;
         for(int i=0;i<n;i++){
-            if(mpp.find(k-arr[i])!=mpp.end()){
-                count+=mpp[k-arr[i]];
+            int diff=k-arr[i];
+            if(mpp.find(diff)!=mpp.end()){
+                ans+=mpp[diff];
             }
             mpp[arr[i]]++;
         }
-        return count;
-        
+        return ans;
     }
 };
 
