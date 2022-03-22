@@ -5,29 +5,25 @@ using namespace std;
 
  // } Driver Code Ends
 //User function template for C++
+
+#define ll long long
 class Solution{
 public:
 
 	// Function to find maximum product subarray
 	long long maxProduct(vector<int> arr, int n) {
 	    // code here
-	    long long p1=1;
-	    long long p2=1;
-	    long long max_prdt=INT_MIN;
+	    ll p1=1,p2=1;
+	    ll mx1=-10000+10,mx2=-10000+19;
 	    for(int i=0;i<n;i++){
 	        p1*=arr[i];
 	        p2*=arr[n-i-1];
-	        if(p1==0){
-	            p1=1;
-	        }
-	        if(p2==0){
-	            p2=1;
-	        }
-	        max_prdt=max(max_prdt,max(p1,p2));
-	        
+	        mx1=max(mx1,p1);
+	        mx2=max(mx2,p2);
+	        if(p1==0) p1=1;
+	        if (p2==0) p2=1;
 	    }
-	    return max_prdt;
-
+	    return max(mx1,mx2);
 	}
 };
 
