@@ -14,24 +14,21 @@ class Solution{
     {
       //Your code here
       unordered_set<int>st;
-      for(int i=0;i<n;i++){
-          st.insert(arr[i]);
-      }
-      int ans=-1;
+      for(int i=0;i<n;i++) st.insert(arr[i]);
+      int ans=0;
       for(int i=0;i<n;i++){
           int k=arr[i];
-          int curlen=0;
-          if(st.count(k-1)) continue;
-          else{
-              while(st.count(k)){
-            curlen++;
+          
+          if(st.count(k-1)>0) continue;
+          int count=0;
+          while(st.count(k)>0){
+              count++;
               k++;
-              }
-              
-            ans=max(ans,curlen);  
           }
+          ans=max(ans,count);
       }
       return ans;
+      
     }
 };
 
