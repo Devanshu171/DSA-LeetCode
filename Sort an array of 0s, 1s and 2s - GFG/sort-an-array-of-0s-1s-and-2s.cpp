@@ -8,27 +8,23 @@ using namespace std;
 class Solution
 {
     public:
-   void swap(int &a,int &b){
-    int temp=a;
-    a=b;
-    b=temp;
-}
-void sort012(int a[], int n)
-{
-    int start=0,mid=0,end=n-1;
-    
-    while(mid<=end){
-        if(a[mid]==0){
-            swap(a[mid],a[start]);
-            start++,mid++;
-        }else if(a[mid]==1){
-            mid++;
-        }else{
-            swap(a[mid],a[end]);
-            end--;
+    void sort012(int a[], int n)
+    {
+        int l=0,mid=0,h=n-1;
+        while(mid<=h){
+            if(a[mid]==0){
+                swap(a[mid],a[l]);
+                mid++;
+                l++;
+            }else if(a[mid]==2){
+                swap(a[mid],a[h]);
+                h--;
+            }else{
+                mid++;
+            }
         }
     }
-}
+    
 };
 
 // { Driver Code Starts.
