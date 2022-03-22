@@ -27,7 +27,7 @@ class Solution
             if(arr[i]!=0)
             return -1;
         }
-        while(i>=0 && j>=0){
+        while(i>=0){
             if(a[i]==b[j]){
                 i--;
                 j--;
