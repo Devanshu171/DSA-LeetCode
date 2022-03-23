@@ -1,20 +1,19 @@
 class Solution {
 public:
     string countAndSay(int n) {
-        string res="1";
-        if(n==0) return "";
+        string ans="1";
+        if(n==1) return ans;
         while(--n){
             string cur="";
-            for(int i=0;i<res.size();i++){
+            for(int i=0;i<ans.size();i++){
                 int count=1;
-                while(i+1<res.size() && res[i]==res[i+1]){
-                    count++;
-                    i++;
+                while(i<ans.size()-1 && ans[i]==ans[i+1]){
+                    count++; i++;
                 }
-                cur+=to_string(count)+res[i];
+                cur+=to_string(count)+ans[i];
             }
-            res=cur;
+            ans=cur;
         }
-        return res;
+        return ans;
     }
 };
