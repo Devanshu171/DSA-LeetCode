@@ -7,27 +7,23 @@ class Solution {
 public:
   int di[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
     int dj[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-bool dfs(vector<vector<char>> &mat, string target,int n,int m, int x, int y, int count)
+bool dfs(vector<vector<char>> &mat, string target,int n,int m, int x, int y)
 {
-    if(mat[x][y]!=target[count] )
+    if(mat[x][y]!=target[0] )
     return false;
-    count++;
     for(int i=0;i<8;i++){
         int nx=x+di[i];
         int ny=y+dj[i];
         int j=1;
         for(;j<target.size();j++){
             if(nx<0 || nx==n || ny<0 ||ny==m|| mat[nx][ny]!=target[j] ) break;
-            count++;
             nx+=di[i];
-            ny+=dj[i];
-            
+            ny+=dj[i]; 
         }
         if(j==target.size())
              return true;
     }
     return false;
-   
 }
 
 vector<vector<int>>searchWord(vector<vector<char>>&mat, string target){ 
@@ -39,7 +35,7 @@ vector<vector<int>>searchWord(vector<vector<char>>&mat, string target){
   {
     for (int j = 0; j < m; j++)
     {
-      if(dfs(mat, target,n,m, i, j, 0)){
+      if(dfs(mat, target,n,m, i, j)){
             ans.push_back({i,j});
       }
     }
