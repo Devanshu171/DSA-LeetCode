@@ -28,7 +28,6 @@ vector<int> find(int arr[], int n , int x )
 {
     // code here
     int first=bs(arr,n,x,0);
-    if(first==-1)return {-1,-1};
     int last=bs(arr,n,x,1);
     return {first,last};
 }
