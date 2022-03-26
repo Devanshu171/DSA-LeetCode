@@ -6,16 +6,23 @@ using namespace std;
 class Solution {
   public:
   #define ll long long
-    int countSquares(int N) {
+    int countSquares(int n) {
         // code here
-        int count=0;
-        for(int i=1;i*i<N;i++){
-            
-            if(i*(ll)i>=N)
-            break;
-            count++;
-        }
-        return count;
+      int s=1,e=n;
+      int ans=-1;
+      while(s<=e){
+          int mid=s+(e-s)/2;
+          if( mid*(ll)mid<=n){
+              ans=mid;
+              s=mid+1;
+          }else{
+              e=mid-1;
+          }
+      }
+      if(ans*(ll)ans!=n)
+      return ans;
+      else return ans-1;
+     
     }
 };
 
