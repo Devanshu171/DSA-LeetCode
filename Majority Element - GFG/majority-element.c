@@ -14,22 +14,25 @@
 int majorityElement(int a[], int n)
 {
         
-        int count=1;
-        int res=0;
-        for(int i=0;i<n;i++){
-            if(a[i]==a[res]) count++;
-            else count--;
-            if(count==0) {
+    // your code here
+    int ele=a[0];
+    int count=1;
+    for(int i=1;i<n;i++){
+        if(a[i]==ele){
+            count++;
+        }else{
+            count--;
+            if(count==0){
+                ele=a[i];
                 count=1;
-                res=i;
             }
         }
-        int cnt=0;
-        for(int i=0;i<n;i++){
-            if(a[i]==a[res]) cnt++;
-        }
-        return cnt>n/2? a[res]:-1;
-    // your code here
+    }
+    count=0;
+    for(int i=0;i<n;i++){
+        if(a[i]==ele) count++;
+    }
+    return count>n/2?ele:-1;
         
 }
 
