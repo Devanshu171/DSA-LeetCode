@@ -17,20 +17,28 @@ class Solution{
     vector<long long int> productExceptSelf(vector<long long int>& arr, int n) {
        
         
-        vector<ll>left,right(n),ans;
-        left.push_back(1);
+        vector<ll>ans(n,0);
+        int countZero=0;
+        ll product=1;
+        for(int i=0;i<n;i++){
+            if(arr[i]==0){
+                countZero++;
+            }else{
+                product*=arr[i];
+            }
+        }
         
-       right[n-1]=1;
-        for(int i=0;i<n;i++){
-           left.push_back(left.back()*arr[i]);
-        }
-        for(int i=n-2;i>=0;i--){
-           
-            right[i]=right[i+1]*arr[i+1];
-        }
-        for(int i=0;i<n;i++){
-            // cout<<right[i]<<" "<<left[i]<<endl;
-            ans.push_back(left[i]*(ll)right[i]);
+        if(countZero==0){
+            for(int i=0;i<n;i++){
+                ans[i]=product/arr[i];
+            }
+        }else if(countZero==1){
+            for(int i=0;i<n;i++){
+                if(arr[i]==0){
+                    ans[i]=product;
+                    break;
+                }
+            }
         }
         return ans;
         
