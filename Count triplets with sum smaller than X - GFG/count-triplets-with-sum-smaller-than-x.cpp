@@ -12,12 +12,12 @@ class Solution{
 	{
             ll ans=0;
             sort(arr,arr+n);
-            for(int i=0;i<n;i++){
-                ll diff=sum-arr[i];
+            for(int i=0;i<n-2;i++){
+                ll sum1=sum-arr[i];
                 int s=i+1,e=n-1;
                 while(s<e){
                     ll sum2=arr[s]+arr[e];
-                    if(sum2<diff){
+                    if(sum2<sum1){
                         ans+=e-s;
                         s++;
                     }else{
