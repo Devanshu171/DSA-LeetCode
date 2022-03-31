@@ -27,39 +27,32 @@ class Solution
 {
     public:
     //Function to find the maximum profit and the number of jobs done.
-    static bool cmp( struct Job a,struct Job b){
-        
-        return a.profit>b.profit;
-    }
-  
     vector<int> JobScheduling(Job arr[], int n) 
     { 
-        // your code here
-        sort(arr,arr+n,cmp);
-         int ans=arr[0].dead;
-        for(int i=1;i<n;i++){
-        ans=max(ans,arr[i].dead);
-        }
-        // cout<<ans<<endl;
-        vector<int>occupied(ans+1,-1);
-        int prof=0;
-        int jb=0;
+  
+        int mxd=0;
         for(int i=0;i<n;i++){
-            int cur_pf=arr[i].profit;
-            int cur_dl=arr[i].dead;
-            for(int j=cur_dl;j>0;j--){
-            if(occupied[j]==-1){
-                occupied[j]=arr[i].id;
-                // cout<<cur_pf<<" ";
-                prof+=cur_pf;
-                jb++;
-                break;
-            }
-            
-            }
-            
+            mxd=max(mxd,arr[i].dead);   
         }
-        return {jb,prof};
+        vector<int>sdl(mxd+1,0);
+        sort(arr,arr+n,[](Job &a,Job &b){
+            return a.profit>b.profit;
+        });
+        int profit=0,job=0;
+        for(int i=0;i<n;i++){
+            int d=arr[i].dead;
+            int prf=arr[i].profit;
+            // cout<<d<<" "<<prf<<endl;
+            for(int i=sdl.size()-1;i>0;i--){
+                if(sdl[i]==0 && i<=d){
+                    sdl[i]=1;
+                    job++;
+                    profit+=prf;
+                    break;
+                }
+            }
+        }
+        return {job,profit};
     } 
 };
 
