@@ -34,25 +34,25 @@ class Solution
         for(int i=0;i<n;i++){
             mxd=max(mxd,arr[i].dead);   
         }
-        vector<int>sdl(mxd+1,0);
+        vector<int>timeSlot(mxd+1,0);
         sort(arr,arr+n,[](Job &a,Job &b){
             return a.profit>b.profit;
         });
-        int profit=0,job=0;
+        int Tprofit=0,job=0;
         for(int i=0;i<n;i++){
-            int d=arr[i].dead;
-            int prf=arr[i].profit;
-            // cout<<d<<" "<<prf<<endl;
-            for(int i=sdl.size()-1;i>0;i--){
-                if(sdl[i]==0 && i<=d){
-                    sdl[i]=1;
+            int deadline=arr[i].dead;
+            int profit=arr[i].profit;
+        
+            for(int i=timeSlot.size()-1;i>0;i--){
+                if(timeSlot[i]==0 && i<=deadline){
+                    timeSlot[i]=1;
                     job++;
-                    profit+=prf;
+                    Tprofit+=profit;
                     break;
                 }
             }
         }
-        return {job,profit};
+        return {job,Tprofit};
     } 
 };
 
