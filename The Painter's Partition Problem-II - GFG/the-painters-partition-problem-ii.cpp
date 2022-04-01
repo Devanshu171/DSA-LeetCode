@@ -11,37 +11,37 @@ using namespace std;
 class Solution
 {
   public:
-  bool ifpossible(int arr[],int n,int k,long long mx){
-      long int painter=1;
-      long long units=0;
+  #define ll long long
+  bool isvalid(int arr[],int n,int k,ll mb){
+      int painters=1; int units=0;
       for(int i=0;i<n;i++){
-          if(units+arr[i]>mx){
-              units=arr[i];
-              painter++;
-          }else{
-              units+=arr[i];
-          }
+         if(units+arr[i]>mb){
+             painters++;
+             units=arr[i];
+         }else{
+             units+=arr[i];
+         }
       }
-      return painter<=k;
+      return painters<=k;
   }
     long long minTime(int arr[], int n, int k)
     {
-        long long ans=0;
-        long long sum=0;
-        long long mx=-1;
+        // code here
+        
+        ll low=0,high=0,ans=-1;
         for(int i=0;i<n;i++){
-            sum+=arr[i];
-           if(mx<arr[i])
-           mx=arr[i];
+            high+=arr[i];
+            if(low<arr[i]){
+                low=arr[i];
+            }
         }
-        long long s=mx,e=sum;
-        while(s<=e){
-            long long mid=s+(e-s)/2;
-            if(ifpossible(arr,n,k,mid)){
+        while(low<=high){
+            ll mid=low+(high-low)/2;
+            if(isvalid(arr,n,k,mid)){
                 ans=mid;
-                e=mid-1;
+                high=mid-1;
             }else{
-                s=mid+1;
+                low=mid+1;
             }
         }
         return ans;
