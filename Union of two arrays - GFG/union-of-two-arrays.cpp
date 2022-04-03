@@ -11,45 +11,40 @@ class Solution{
     public:
     //Function to return the count of number of elements in union of two arrays.
     int doUnion(int a[], int n, int b[], int m)  {
-        
-        int i=0,j=0,ans=0;
+        //code here
         sort(a,a+n);
         sort(b,b+m);
+        
+        int i=0,j=0,ans=0;
         while(i<n && j<m){
             while(i<n-1 && a[i]==a[i+1]) i++;
             while(j<m-1 && b[j]==b[j+1]) j++;
-            if(a[i]<b[j]){
-                ans++;
-                i++;
-            }else if(a[i]>b[j]){
-                ans++;
-                j++;
-            }else{
-                ans++;
-                i++;
-                j++;
+            if(i<n && j<m){
+                if(a[i]<b[j]){
+                    ans++;
+                    i++;
+                }else if(a[i]>b[j]){
+                    ans++;
+                    j++;
+                }else{
+                    ans++;i++;j++;
+                }
             }
-            
-           }
-           while(i<n) {
-               if(i<n-1 && a[i]==a[i+1]){
-               i++;
-               }else{
-               i++;ans++;
-               }
-           }
-           while(j<m){
-               if(j,m-1 && b[j]==b[j+1])
-               j++;
-               else{
-               j++;ans++;
-               }
-           } 
-           return ans;
+        }
+        while(i<n){
+        while(i<n-1 && a[i]==a[i+1]) i++;
+        ans++;
+        i++;
+        }
+        while(j<m){
+            while(j<m-1 && b[j]==b[j+1]) j++;
+            ans++;
+            j++;
             
         }
-        
-    
+
+return ans;
+    }
 };
 
 // { Driver Code Starts.
