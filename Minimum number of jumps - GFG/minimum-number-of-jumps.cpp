@@ -9,20 +9,19 @@ using namespace std;
 class Solution{
   public:
     int minJumps(int arr[], int n){
-      if(n<=1)
-      return 0;
-        if(arr[0]==0)
-        return -1;
+        // Your code here
+        if(n==1) return 0;
+        if(arr[0]==0) return -1;
         int steps=arr[0];
         int jumps=1;
-        int mxreach=arr[0];
+        int maxreach=arr[0];
         for(int i=1;i<n-1;i++){
-            mxreach=max(mxreach,i+arr[i]);
             steps--;
+            maxreach=max(i+arr[i],maxreach);
             if(steps==0){
                 jumps++;
-                steps=mxreach-i;
-                if(i>=mxreach)
+                steps=maxreach-i;
+                if(i>=maxreach)
                 return -1;
             }
         }
