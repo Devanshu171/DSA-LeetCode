@@ -5,44 +5,49 @@ using namespace std;
  // } Driver Code Ends
 class Solution {
 public:
-  int di[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
-    int dj[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
-bool dfs(vector<vector<char>> &mat, string target,int n,int m, int x, int y)
-{
-    if(mat[x][y]!=target[0] )
+bool isValid(vector<vector<char>>grid,int x,int y,string s,int indx){
+    return (x>=0 && x<grid.size() && y>=0 && y<grid[0].size() &&grid[x][y]==s[indx]);
+}
+bool search(vector<vector<char>>grid,int x,int y,string s){
+    if(grid[x][y]!=s[0])
     return false;
+    // cout<<x<<" "<<y<<endl;
+   int di[8] = {-1, 0, 1, -1, 1, -1, 0, 1};
+    int dj[8] = {-1, -1, -1, 0, 0, 1, 1, 1};
+    
     for(int i=0;i<8;i++){
-        int nx=x+di[i];
-        int ny=y+dj[i];
+        int  newx=x+di[i];
+        int newy=y+dj[i];
         int j=1;
-        for(;j<target.size();j++){
-            if(nx<0 || nx==n || ny<0 ||ny==m|| mat[nx][ny]!=target[j] ) break;
-            nx+=di[i];
-            ny+=dj[i]; 
+        for(;j<s.size();j++){
+            if(isValid(grid,newx,newy,s,j)){
+            // cout<<newx<<" "<<newy<<endl;
+                newx+=di[i];
+                newy+=dj[i];
+            }else{
+                break;
+            }
         }
-        if(j==target.size())
-             return true;
+        if(j==s.size())
+        return true;
+        
     }
     return false;
 }
-
-vector<vector<int>>searchWord(vector<vector<char>>&mat, string target){ 
+	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+	    // Code here
+	    vector<vector<int>>ans;
+	    for(int i=0;i<grid.size();i++){
+	        for(int j=0;j<grid[0].size();j++){
+	           // cout<<i<<" "<<j<<endl;
+	                if(search(grid,i,j,word))
+	                ans.push_back({i,j});
+	        }
+	    }
+	    return ans;
 	    
-  int n = mat.size();
-  int m = mat[0].size();
-  vector<vector<int>>ans;
-  for (int i = 0; i < n; i++)
-  {
-    for (int j = 0; j < m; j++)
-    {
-      if(dfs(mat, target,n,m, i, j)){
-            ans.push_back({i,j});
-      }
-    }
-  }
-  return ans;
 	    
-	 
+	    
 	}
 };
 
