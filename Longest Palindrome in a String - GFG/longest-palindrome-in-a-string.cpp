@@ -8,30 +8,27 @@ class Solution {
   public:
     string longestPalin (string s) {
         // code here
-        int len=1;
-        int n=s.size();
-        int l,h;
-        int start=0;
-        
-        for(int i=0;i<n;i++){
-            l=i-1,h=i+1;
-            while(l>=0 && h<n && s[l]==s[h]){
-                if(h-l+1>len){
-                    len=h-l+1;
+        int start=0,len=1;
+        for(int i=0;i<s.size();i++){
+            int l=i-1,h=i+1;
+            while(l>=0 && h<s.size() && s[l]==s[h]){
+                if(len<h-l+1){
                     start=l;
+                len=h-l+1;
                 }
-                l--;h++;
+                l--;
+                h++;
             }
-            
-             l=i,h=i+1;
-            while(l>=0 && h<n && s[l]==s[h]){
-                if(h-l+1>len){
-                    len=h-l+1;
+            l=i-1,h=i;
+            while(l>=0 && h<s.size() && s[l]==s[h]){
+             if(len<h-l+1){
                     start=l;
+                len=h-l+1;
                 }
-                l--;h++;
+                l--;
+                h++;
             }
-            
+
         }
         return s.substr(start,len);
     }
