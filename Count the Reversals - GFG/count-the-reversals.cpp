@@ -21,24 +21,17 @@ int countRev (string s)
 {
     // your code here
     if(s.size()&1) return -1;
-    stack<char>st;
+    int op=0,cl=0;
     for(int i=0;i<s.size();i++){
-        if(!st.empty() && s[i]=='}'){
-            if(st.top()=='{')
-            st.pop();
+        if(s[i]=='{')
+        op++;
+        else{
+            if(op<=0)
+            cl++;
             else{
-                st.push(s[i]);
+                op--;
             }
-        }else{
-            st.push(s[i]);
         }
     }
-        int op=0,cl=0;
-        while(!st.empty()){
-            if(st.top()=='{') op++;
-            else cl++;
-            st.pop();
-        }
-        return (cl+1)/2+(op+1)/2;
-    
+    return (op+1)/2+(cl+1)/2;
 }
