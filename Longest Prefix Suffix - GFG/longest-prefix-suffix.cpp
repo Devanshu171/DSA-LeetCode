@@ -13,26 +13,23 @@ class Solution{
   public:		
 	int lps(string s) {
 	    // Your code goes here
-	    vector<int>lpss(s.size());
-	    int i=1,j=0;
-	    int ans=0,n=s.size();
-	    lpss[0]=0;
-	    while(i<n){
+	    vector<int>ans(s.size());
+	    ans[0]=0;
+	    int j=0,i=1;
+	    while(i<s.size()){
 	        if(s[i]==s[j]){
-	            lpss[i]=j+1;
-	           // ans=max(ans,lpss[i]);
-	            j++;
-	            i++;
+	            ans[i]=j+1;
+	            i++;j++;
 	        }else{
 	            if(j!=0){
-	                j=lpss[j-1];
-	            }else{
-	                lpss[i]=0;
-	                i++;
-	            }
+	                j=ans[j-1];
+	                }else{
+	                    ans[i]=0;
+	                    i++;
+	                }
 	        }
 	    }
-	    return lpss.back();
+	    return ans[s.size()-1];
 	}
 };
 
