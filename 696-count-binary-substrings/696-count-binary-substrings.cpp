@@ -1,19 +1,17 @@
 class Solution {
 public:
     int countBinarySubstrings(string s) {
-        int cur_cons=1,prev_cons=0;
-        int ans=0;
-        for(int i=1;i<s.size();i++){
-            if(s[i]!=s[i-1]){
-                ans+=min(prev_cons,cur_cons);
-                prev_cons=cur_cons;
-                cur_cons=1;
-            }else{
-                cur_cons++;
-            }
+        int cur=1,prev=0,ans=0;
+        for(int i=0;i<s.size();i++){
+            while(i<s.size()-1 && s[i]==s[i+1]){
+                i++;
+                cur++;
+            } 
+            ans+=min(prev,cur);
+            prev=cur;
+            cur=1;
+            
         }
-          ans+=min(prev_cons,cur_cons);
         return ans;
-        
     }
 };
