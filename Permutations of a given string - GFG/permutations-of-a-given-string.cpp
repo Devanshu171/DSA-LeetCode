@@ -5,16 +5,16 @@ using namespace std;
  // } Driver Code Ends
 class Solution
 {
-    
 	public:
-	void helper(int i,string s,vector<string>&ans){
-	    if(i==s.size()){
-	        ans.push_back(s);
+	void solve(int ind,string s,vector<string>&ans){
+	   // cout<<ind<<endl;
+	    if(ind==s.size()){
+	     ans.push_back(s);
 	        return;
 	    }
-	    for(int ind=i;ind<s.size();ind++){
+	    for(int i=ind;i<s.size();i++){
 	        swap(s[i],s[ind]);
-	        helper(i+1,s,ans);
+	        solve(ind+1,s,ans);
 	        swap(s[i],s[ind]);
 	    }
 	}
@@ -22,7 +22,7 @@ class Solution
 		{
 		    // Code here there
 		    vector<string>ans;
-		    helper(0,s,ans);
+		    solve(0,s,ans);
 		    sort(ans.begin(),ans.end());
 		    return ans;
 		}
