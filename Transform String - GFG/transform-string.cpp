@@ -10,7 +10,7 @@ class Solution
     public:
     int transform (string a, string b)
     {
-        //code here.
+          //code here.
         int n=a.size();
         int m=b.size();
         int i=n-1;
@@ -39,6 +39,7 @@ class Solution
             }
         }
         return res;
+        
     }
 };
 
