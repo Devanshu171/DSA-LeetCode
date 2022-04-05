@@ -20,15 +20,15 @@ int32_t main()
 int minFlips (string s)
 {
     // your code here
-    int c1=0,c0=0,n=s.size();
-    for(int i=0;i<n;i++){
+    int c1=0,c2=0;
+    for(int i=0;i<s.size();i++){
         if(i&1){
-            if(s[i]=='1') c1++;
-            else c0++;
+            if(s[i]=='0') c1++;
+            else c2++;
         }else{
-            if(s[i]=='1')c0++;
+            if(s[i]=='0') c2++;
             else c1++;
         }
     }
-    return min(c1,c0);
+    return min(c1,c2);
 }
