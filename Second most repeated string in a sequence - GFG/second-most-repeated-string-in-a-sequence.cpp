@@ -11,17 +11,23 @@ class Solution
     {
         //code here.
         unordered_map<string,int>mpp;
-        int fst=0;
-        string ans;
+        string first;
+        int mc=0;
         for(int i=0;i<n;i++){
-        mpp[arr[i]]++;
-        fst=max(fst,mpp[arr[i]]);
+            mpp[arr[i]]++;
         }
-        int mx=0;
-        for(int i=0;i<n;i++){
-            if(mpp[arr[i]]<fst && mpp[arr[i]]>mx){
-                mx=mpp[arr[i]];
-                ans=arr[i];
+        for(auto it:mpp){
+            if(mc<it.second){
+                mc=it.second;
+                first=it.first;
+            }
+        }
+        mc=0;
+        string ans;
+        for(auto it:mpp){
+            if(mc<it.second && it.first!=first){
+                mc=it.second;
+                ans=it.first;
             }
         }
         return ans;
