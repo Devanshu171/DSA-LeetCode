@@ -8,34 +8,33 @@ class Solution{
     public:
     string findSubString(string s)
     {
-       
-        unordered_set<char>st;
-        unordered_map<char,int>mpp;
-         int n=s.size();
-        for(int i=0;i<n;i++)
-        st.insert(s[i]);
-        
-        int dis_count=st.size();
-        int ans=n;  int start;
-        int i=0,j=0;
-        
-        while(j<n){
-            mpp[s[j]]++;
-           
-                while(mpp.size()==dis_count){
-                    if(ans>j-i+1){
+        // Your code goes here 
+        unordered_map<char,int>mpp1,mpp2;
+        for(int i=0;i<s.size();i++){
+            mpp1[s[i]]++;
+        }
+        int count=mpp1.size();
+        int i=0,j=0,ans=s.size(),start=0;
+        while(j<s.size()){
+            mpp2[s[j]]++;
+          
+             if(mpp2.size()==count){
+                while(mpp2.size()==count){
+                    if(j-i+1<ans){
                         ans=j-i+1;
                         start=i;
                     }
-                    mpp[s[i]]--;
-                    if(mpp[s[i]]==0)
-                    mpp.erase(s[i]);
+                    mpp2[s[i]]--;
+                    if(mpp2[s[i]]==0)
+                    mpp2.erase(s[i]);
                     i++;
-                    
                 }
+                
+            }
             j++;
         }
         return s.substr(start,ans);
+        
     }
 };
 
