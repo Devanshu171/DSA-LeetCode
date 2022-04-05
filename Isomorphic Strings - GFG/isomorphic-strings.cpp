@@ -7,39 +7,38 @@ using namespace std;
 #define MAX_CHARS 256
 
  // } Driver Code Ends
+     #include<unordered_map>
 class Solution
 {
     public:
     //Function to check if two strings are isomorphic.
-    bool areIsomorphic(string str1, string str2)
+    bool areIsomorphic(string s1, string s2)
     {
-            int mpp[256];
-            bool isMap[256];
-            for(int i=0;i<256;i++){
-                mpp[i]=-1;
-               isMap[i]=false;
-            }
-            if(str1.size()!=str2.size())
-            return false;
-            for(int i=0;i<str1.size();i++){
-                // cout<<str1[i]<<endl;
-                if(mpp[str1[i]]==-1){
-                    // cout<<"first"<<endl;
-                    if(isMap[str2[i]])
-                    return false;
-                    else{
-                        mpp[str1[i]]=str2[i];
-                      isMap[str2[i]]=true;
-                    }
-                }else{
-                    // cout<<char(mpp[str1[i]+'a']+'a')<<" ";
-                    // cout<<"second"<<endl;
-                    if(str2[i]!=char(mpp[str1[i]]))
-                    return false;
-                }
-            }
-            return true;
-                }
+         if(s1.size()!=s2.size())
+         return false;
+        int map[256]={-1};
+         bool isMark[256]={0};
+        for(int i=0;i<256;i++){
+            map[i]=-1;
+            isMark[i]=false;
+        }
+         for(int i=0;i<s1.size();i++){
+             if(map[s1[i]]!=-1){
+                 if(char(map[s1[i]])!=s2[i])
+                 return false;
+             }else{
+                
+                 if(isMark[s2[i]])
+                 return false;
+                 else{
+                   map[s1[i]]=s2[i];
+                   isMark[s2[i]]=1;
+                 }
+             }
+         }
+         return true;
+         
+    }
 };
 
 // { Driver Code Starts.
