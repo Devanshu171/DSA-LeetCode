@@ -8,37 +8,36 @@ using namespace std;
 class Solution
 {
     public:
+   
     int transform (string a, string b)
     {
-          //code here.
-        int n=a.size();
-        int m=b.size();
-        int i=n-1;
-        int j=m-1;
-        if(n!=m)
-        return -1;
-        int res=0;
-        int arr[256]={0};
-        for(int i=0;i<n;i++){
-            arr[a[i]]++;
-            arr[b[i]]--;
+        //code here.
+        if(a.size()!=b.size()) return -1;
+        int count[256]={0};
+        for(int i=0;i<a.size();i++){
+            count[a[i]]++;
+            count[b[i]]--;
         }
         for(int i=0;i<256;i++){
-            if(arr[i]!=0)
+            if(count[i]!=0) 
             return -1;
         }
+        
+                int j=b.size()-1;
+        int ans=0,i=a.size()-1;
         while(i>=0){
             if(a[i]==b[j]){
                 i--;
                 j--;
             }else{
-                while(i>=0 && a[i]!=b[j]){
+                while(i>=0&&a[i]!=b[j]){
                     i--;
-                    res++;
+                ans++;
                 }
+                
             }
         }
-        return res;
+        return ans;
         
     }
 };
