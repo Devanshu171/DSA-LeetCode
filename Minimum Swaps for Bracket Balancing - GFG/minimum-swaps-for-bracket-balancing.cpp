@@ -6,24 +6,37 @@ using namespace std;
 class Solution{   
 public:
     int minimumNumberOfSwaps(string s){
-
+        // code here 
         int n=s.size();
-       
-        int open=0,close=0,swaps=0,unbalanced=0;
+        vector<int>pos;
+        for(int i=0;i<n;i++){
+            if(s[i]=='[')
+            pos.push_back(i);
+        }
+        int op=0,p=0,swaps=0;
         for(int i=0;i<n;i++){
             if(s[i]=='['){
-                open++;
-                if(unbalanced>0){
-                    swaps+=unbalanced;
-                    unbalanced--;
-                }
+                op++;
+                p++;
             }else{
-                close++;
-                unbalanced=close-open;
+                if(op>0){
+                    op--;
+                }else{
+                    // cout<<"thid si s"<<endl;
+                    int k=pos[p];
+                    p++;
+                    // cout<<k<<" "<<i<<endl;
+                    swaps+=k-i;
+                    // cout<<swaps<<endl;
+                    while(k>i){
+                        swap(s[k],s[k-1]);
+                        k--;
+                    }
+                    op++;
+                }
             }
         }
         return swaps;
-        
     }
 };
 
