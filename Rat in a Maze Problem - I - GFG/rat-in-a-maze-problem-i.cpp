@@ -14,6 +14,8 @@ class Solution{
         return (x>=0 && x<n && y>=0 && y<n && m[x][y]==1 && vis[x][y]==0);
     }
     void solve(int x,int y,vector<vector<int>>&m,int n,vector<string>&ans,vector<vector<int>>&vis,string temp){
+        if(!isValid(x,y,m,n,vis))
+                return;
         if(x==n-1 && y==n-1){
             ans.push_back(temp);
             return;
@@ -21,25 +23,18 @@ class Solution{
         int di[4]={1,0,0,-1};
         int dj[4]={0,-1,1,0};
         char dir[4]={'D','L','R','U'};
-        for(int i=0;i<4;i++){
-            int newX=x+di[i];
-            int newY=y+dj[i];
-            if(isValid(newX,newY,m,n,vis)){
+                vis[x][y]=1;
+        for(int i=0;i<4;i++){    
                 temp.push_back(dir[i]);
-                vis[newX][newY]=1;
-                solve(newX,newY,m,n,ans,vis,temp);
-                vis[newX][newY]=0;    
+                solve(x+di[i],y+dj[i],m,n,ans,vis,temp);
                 temp.pop_back();
-            }
         }
+                vis[x][y]=0;    
     }
     vector<string> findPath(vector<vector<int>> &m, int n) {
         // Your code goes here
         vector<string>ans;
         vector<vector<int>>vis(n,vector<int>(n,0));
-        vis[0][0]=1;
-        if(m[0][0]==0)
-        return ans;
         solve(0,0,m,n,ans,vis,"");
         return ans;
     }
