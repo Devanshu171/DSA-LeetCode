@@ -1,7 +1,8 @@
 class Solution {
 public:
     int compress(vector<char>& chars) {
-        string ans="";
+     
+        int k=0;
         int n=chars.size();
         for(int i=0;i<n;i++){
             int count=1;
@@ -10,14 +11,17 @@ public:
                 count++;
             }
             
-            ans.push_back(chars[i]);
-            if(count>1)
-                ans+=to_string(count);
-        
+            chars[k++]=chars[i];
+            if(count>1){
+                string cnt=to_string(count);
+                cout<<cnt.size()<<endl;
+                for(int j=0;j<cnt.size();j++)
+                    chars[k++]=cnt[j];
+                
+            }
         }
-        for(int i=0;i<ans.size();i++)
-            chars[i]=ans[i];
-        cout<<ans<<endl;
-        return ans.size();
+    
+    
+        return k;
     }
 };
