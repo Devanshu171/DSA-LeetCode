@@ -11,14 +11,14 @@ public:
     bool solve(int node,int path,int k,vector<pair<int,int>>adj[],vector<int>vis){
         if(path>=k)
         return true;
+             vis[node]=1;
         for(auto it:adj[node]){
             if(!vis[it.first]){
-             vis[it.first]=1;
                 if(solve(it.first,path+it.second,k,adj,vis))
                 return true;
-             vis[it.first]=0;
             }
         }
+             vis[node]=0;
         return false;
     }
     bool pathMoreThanK(int v, int e, int k, int *a) 
