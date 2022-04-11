@@ -15,25 +15,25 @@ class Solution
 public:
     int minSwap(int arr[], int n, int k) {
         // Complet the function
-        int fv=0;
+        int cnt=0;
         for(int i=0;i<n;i++){
-            if(arr[i]<=k)fv++;
+            if(arr[i]<=k) cnt++;
         }
-        if(fv==n || fv==0) return 0;
-        int i=0,j=0,bad=0,ans=INT_MAX;
+        if(cnt==0 || cnt==n) return 0;
+        int i=0,j=0,ans=n,bad=0;
+        
         while(j<n){
             if(arr[j]>k) bad++;
-            if(j-i+1<fv) j++;
-            else if(j-i+1==fv){
-                if(bad==0) return 0;
+            if(j-i+1<cnt) j++;
+            else if(j-i+1==cnt){
                 ans=min(ans,bad);
                 if(arr[i]>k) bad--;
                 i++;
                 j++;
             }
-          
         }
         return ans;
+        
     }
 };
 
