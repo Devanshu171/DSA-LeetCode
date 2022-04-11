@@ -8,14 +8,12 @@ class Solution{
     #define ll long long
     long long findMinDiff(vector<long long> a, long long n, long long m){
     //code
-    ll ans=INT_MAX;
-    sort(a.begin(),a.end());
-    for(ll i=0;i<n-m+1;i++){
-        // cout<<a[i]<<" "<<a[i+m-1]<<endl;
-        ans=min(a[i+m-1]-a[i],ans);
-    }
-    return ans;
-    
+            ll ans=INT_MAX;
+            sort(a.begin(),a.end());
+            for(int i=0;i<n-m+1;i++){
+                ans=min(ans,abs(a[i+m-1]-a[i]));
+            }
+            return ans;
     }   
 };
 
