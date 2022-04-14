@@ -9,7 +9,7 @@ using namespace std;
 
 bool valid(bool graph[101][101],int node,int v,int cur,int color[]){
     for(int i=0;i<v;i++){
-        if(i!=node && graph[i][node]==1 && color[i]==cur)
+        if(i!=node && graph[node][i]==1 && color[i]==cur)
         return false;
     }
     return true;
