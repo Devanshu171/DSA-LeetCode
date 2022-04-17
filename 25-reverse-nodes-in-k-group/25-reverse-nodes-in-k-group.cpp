@@ -18,8 +18,9 @@ public:
             prev=cur;
             cur=nxt;
         }
+        begin->next->next=cur;
         begin->next=prev;
-        first->next=cur;
+        // first->next=cur;
         return first;        
         
     }
