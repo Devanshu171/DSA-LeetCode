@@ -60,8 +60,8 @@ class Solution
     {
         // Your Code here
         // return head of list after adding one
-       Node * newhead=reverse(head);
-        Node *k=newhead,*prev=k;
+       head=reverse(head);
+        Node *k=head,*prev=k;
         int carry=1;
             while(carry!=0 && k){
                 int val=k->data+carry;
@@ -75,7 +75,7 @@ class Solution
                 prev->next=new Node(carry);
             }
         
-        return reverse(newhead);
+        return reverse(head);
         
     }
 };
