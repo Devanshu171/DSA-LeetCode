@@ -76,19 +76,24 @@ struct Node {
 int countNodesinLoop(struct Node *head)
 {
     // Code here
-    int ans=1;
-    Node *p=head,*q=head;
-    while(p && p->next){
-        q=q->next;
-        p=p->next->next;
-        if(q==p){
-            q=q->next;
-           while(q!=p){
-               ans++;
-               q=q->next;
-           }
-           return ans;
+    
+        Node* slow=head,*fast=head;
+        while(fast && fast->next){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(fast==slow){
+            break;
+            }
         }
-    }
-    return 0;
+        if(!fast || !fast->next)
+        return 0;
+        Node* first=slow;
+       int cnt=0;
+        do{
+            cnt++;
+            first=first->next;
+        }while(first!=slow);
+        
+        return cnt;
+        
 }
