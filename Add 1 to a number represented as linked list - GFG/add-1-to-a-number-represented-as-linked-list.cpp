@@ -42,7 +42,11 @@ struct Node
 };
 
 */
-Node* reverse(Node* k){
+
+class Solution
+{
+    public:
+    Node* reverse(Node* k){
     Node *prev=NULL;
     while(k){
         Node*  next=k->next;
@@ -53,20 +57,15 @@ Node* reverse(Node* k){
     return prev;
 }
 
-class Solution
-{
-    public:
     Node* addOne(Node *head) 
     {
-        // Your Code here
-        // return head of list after adding one
        head=reverse(head);
         Node *k=head,*prev=k;
         int carry=1;
             while(carry!=0 && k){
                 int val=k->data+carry;
                 k->data=val%10;
-                // cout<<val<<endl;
+
                 carry=val/10;
                 prev=k;
                 k=k->next;
