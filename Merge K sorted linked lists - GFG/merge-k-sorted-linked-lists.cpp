@@ -46,47 +46,33 @@ struct Node
 class Solution{
   public:
     //Function to merge K sorted linked list.
-    Node *merge(Node *l1,Node *l2){
-        Node *head=NULL,*last=NULL;
-        while(l1 && l2){
-            if(l1->data<=l2->data){
-                if(!last){
-                    head=l1;
-                }else{
-                    last->next=l1;
-                }
-                last=l1;
-                l1=l1->next;
-            }else{
-                if(!last){
-                    head=l2;
-                }else{
-                    last->next=l2;
-                }
-                last=l2;
-                l2=l2->next;
-            }
+   
+    class cmp{
+        public:
+        bool operator()(Node *a,Node *b){
+          return  a->data>b->data;
         }
-        if(l1) last->next=l1;
-        if(l2) last->next=l2;
-        
-        return head;
-    }
+    };
     Node * mergeKLists(Node *arr[], int k)
     {
            // Your code here
+           priority_queue<Node*,vector<Node*>,cmp>pq;
            
-          if(k==0)
-          return NULL;
-           Node *cur=arr[0];
-           Node *head=cur;
-           for(int i=1;i<k;i++){
-             head= merge(head,arr[i]);
-             
+           for(int i=0;i<k;i++){
+               if(arr[i])
+               pq.push(arr[i]);
            }
-           return head;
-           
-           
+           Node *head=new Node(-1),*last=head;
+           while(!pq.empty()){
+               Node *temp=pq.top();
+               pq.pop();
+               last->next=temp;
+               last=temp;
+               if(temp->next)
+               pq.push(temp->next);
+              
+           }
+           return head->next;
     }
 };
 
