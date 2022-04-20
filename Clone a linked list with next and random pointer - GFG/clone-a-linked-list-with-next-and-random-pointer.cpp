@@ -25,20 +25,49 @@ class Solution
     {
         //Write your code here
         
-        unordered_map<Node*,Node*>mpp;
-        Node *k=head;
-        while(k){
-            mpp[k]=new Node(k->data);
-            k=k->next;
+        // 1 insert a copy of node just after node
+         
+        Node *l1=head,*l2;
+        while(l1){
+            Node *nxt=l1->next;
+            Node *temp=new Node(l1->data);
+            l1->next=temp;
+            temp->next=nxt;
+            l1=nxt;
+            
         }
-        k=head;
-        while(k){
-            mpp[k]->next=mpp[k->next];
-            mpp[k]->arb=mpp[k->arb];
-            k=k->next;
+   
+        // 2 pointing random pointer with the help old node
+        l1=head;
+        while(l1){
+           if(l1->arb) l1->next->arb=l1->arb->next;
+            l1=l1->next->next;
         }
-        head=mpp[head];
-        return head;
+         
+        //3 disconnect old and new nodes and linking new nodes
+        l1=head,l2=head->next;
+        Node *newHead=l2;
+        
+        while(l1->next && l2->next){
+            l1->next=l2->next;
+            l1=l1->next;
+            l2->next=l1->next;
+            l2=l2->next;
+        }
+        l1->next=NULL;
+        //     Node *k=head;
+        // while(k){
+        //     cout<<k->data<<" ";
+        //     k=k->next;
+        // }
+        // cout<<endl;
+        
+        // Node *k=newHead;
+        // while(k){
+        //     cout<<k->data<<" ";
+        //     k=k->next;
+        // }
+        return newHead;
     }
 
 };
