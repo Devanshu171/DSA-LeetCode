@@ -10,46 +10,31 @@
  */
 class Solution {
 public:
-     ListNode *merge(ListNode *l1,ListNode *l2){
-        ListNode *head=NULL,*last=NULL;
-         if(!l1) return l2;
-         if(!l2) return l1;
-        while(l1 && l2){
-            if(l1->val<=l2->val){
-                if(!last){
-                    head=l1;
-                }else{
-                    last->next=l1;
-                }
-                last=l1;
-                l1=l1->next;
-            }else{
-                if(!last){
-                    head=l2;
-                }else{
-                    last->next=l2;
-                }
-                last=l2;
-                l2=l2->next;
-            }
-        }
-        if(l1) last->next=l1;
-        if(l2) last->next=l2;
-        
-        return head;
-    }
+     class cmp{
+         public:
+         bool operator()(ListNode* a,ListNode* b){
+             return a->val>b->val;
+         }
+     };
     ListNode* mergeKLists(vector<ListNode*>& lists) {
           
-         int k=lists.size();
-              if(k==0)
-          return NULL;
-        
-           ListNode *head=lists[0];
-           for(int i=1;i<k;i++){
-             head= merge(head,lists[i]);
-             
+          priority_queue<ListNode*,vector<ListNode*>,cmp>pq;
+           int k=lists.size();
+           for(int i=0;i<k;i++){
+               if(lists[i])
+               pq.push(lists[i]);
            }
-           return head;
+           ListNode *head=new ListNode(-1),*last=head;
+           while(!pq.empty()){
+               ListNode *temp=pq.top();
+               pq.pop();
+               last->next=temp;
+               last=temp;
+               if(temp->next)
+               pq.push(temp->next);
+              
+           }
+           return head->next;
            
     }
 };
