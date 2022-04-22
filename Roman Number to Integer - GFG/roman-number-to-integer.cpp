@@ -21,17 +21,17 @@ class Solution {
                 mpp['D']=500;
                 mpp['M']=1000;
                 
-                int ans=0,prev=0;
-                
-                for(int i=str.size()-1;i>=0;i--){
-                    if(mpp[str[i]]>=prev){
-                        ans+=mpp[str[i]];
-                        prev=mpp[str[i]];
-                    }else{
-                        ans-=mpp[str[i]];
-                        prev=mpp[str[i]];
-                    }
-                }
+               int ans=0;
+               int prev=0;
+               for(int i=str.size();i>=0;i--){
+                   if(mpp[str[i]]<prev){
+                       ans-=mpp[str[i]];
+                   }else{
+                       ans+=mpp[str[i]];
+                   }
+                       prev=mpp[str[i]];
+                   
+               }
                 return ans;
     }
 };
