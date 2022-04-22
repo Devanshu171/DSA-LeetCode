@@ -1,18 +1,18 @@
 class Solution {
 public:
-
     bool rotateString(string s, string goal) {
-      if(s.size()!=goal.size()) return false;
+        
+        if(s.size()!=goal.size())
+            return false;
         for(int i=0;i<s.size();i++){
-            if(rotate(s,goal,i)){
+            if(check(i,s,goal))
                 return true;
-            }
         }
-        return false;      
+        return false;
     }
-    bool rotate(string s,string goal,int k){
-        for(int i=0;i<s.size();i++){
-            if(goal[i]!=s[(i+k)%s.size()])
+    bool check(int r,string s,string goal){
+        for(int i=0;i<goal.size();i++){
+            if(s[(i+r)%s.size()]!=goal[i])
                 return false;
         }
         return true;
