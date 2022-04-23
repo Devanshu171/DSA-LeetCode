@@ -17,19 +17,19 @@ class Solution{
         sort(arr.begin(),arr.end());
         for(int i=0;i<n-3;i++){
             int sum3=k-arr[i];
-            
             for(int j=i+1;j<n-2;j++){
                 int sum2=sum3-arr[j];
                 int s=j+1,e=n-1;
-                
                 while(s<e){
                     int sum=arr[s]+arr[e];
-                    if(sum<sum2) s++;
-                    else if(sum>sum2) e--;
-                    else{
+                    if(sum>sum2){
+                        e--;
+                    }else if(sum<sum2) {
+                        s++;
+                    }else{
                         ans.push_back({arr[i],arr[j],arr[s],arr[e]});
                         while(s<e && arr[s]==arr[s+1]) s++;
-                        while(s<e && arr[e]==arr[e-1]) e--;
+                        while(s<e && arr[e]==arr[e-1])  e--;
                         s++;e--;
                     }
                 }
