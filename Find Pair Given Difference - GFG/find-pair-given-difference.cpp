@@ -27,20 +27,21 @@ int main()
 }// } Driver Code Ends
 
 
-bool findPair(int arr[], int l, int n){
+bool findPair(int arr[], int n, int diff){
     //code
-    sort(arr,arr+l);
-    int i=0,j=1;
-    while(i<l && j<l){
-        int diff=arr[j]-arr[i];
-        if(diff==n && i<j){
-            return true;
-        }else if(diff>n){
-            i++;
-        }else{
-            j++;
+    sort(arr,arr+n);
+    
+  
+    for(int i=0;i<n;i++){
+        int s=i+1,e=n-1,t=arr[i]+diff;
+        // cout<<t<<endl;
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            // cout<<arr[mid]<<endl;
+            if(arr[mid]==t) return true;
+            else if(arr[mid]>t) e=mid-1;
+            else s=mid+1;
         }
     }
-    return false;
-    
+        return false;
 }
