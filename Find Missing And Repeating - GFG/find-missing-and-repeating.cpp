@@ -7,7 +7,7 @@ using namespace std;
 class Solution{
 public:
     int *findTwoElement(int *arr, int n) {
-        //
+        // code here
         int *ans=new int[2];
         int i=0;
         while(i<n){
@@ -17,11 +17,11 @@ public:
                 i++;
             }
         }
-        i=0;
-        for(;i<n;i++){
+        for(int i=0;i<n;i++){
             if(arr[i]!=i+1){
                 ans[0]=arr[i];
                 ans[1]=i+1;
+                break;
             }
         }
         return ans;
