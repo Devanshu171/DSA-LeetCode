@@ -15,24 +15,23 @@ int majorityElement(int a[], int n)
 {
         
     // your code here
-    int ele=a[0];
+    int cand=a[0];
     int count=1;
     for(int i=1;i<n;i++){
-        if(a[i]==ele){
-            count++;
-        }else{
-            count--;
-            if(count==0){
-                ele=a[i];
-                count=1;
-            }
+        if(cand==a[i])
+        count++;
+        else
+        count--;
+        if(count==0){
+            cand=a[i];
+            count=1;
         }
     }
     count=0;
     for(int i=0;i<n;i++){
-        if(a[i]==ele) count++;
+        if(a[i]==cand) count++;
     }
-    return count>n/2?ele:-1;
+    return count>n/2?cand:-1;
         
 }
 
