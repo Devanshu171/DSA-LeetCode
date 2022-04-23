@@ -21,17 +21,42 @@ int main() {
     return 0;
 }// } Driver Code Ends
 
-
+#define ll long long
 pair<long long, long long> getMinMax(long long arr[], int n) {
-    long long mini=INT_MAX;
-    long long maxi=INT_MIN;
-    for(long long i=0;i<n;i++){
-        if(mini>arr[i]){
-            mini=arr[i];
-        }
-        if(maxi<arr[i]){
-            maxi=arr[i];
-        }
-    }
-    return make_pair(mini,maxi);
+   ll min,max;
+   int i;
+   if(n&1){
+       min=max=arr[0];
+       i=1;
+   }else{
+       if(arr[0]<arr[1]){
+           max=arr[1];
+           min=arr[0];
+       }else{
+           min=arr[1];
+           max=arr[0];
+       }
+       i=2;
+   }
+   for(;i<n-1;i+=2){
+       ll a=arr[i];
+       ll b=arr[i+1];
+    //   cout<<a<<" "<<b<<endl;
+       if(a>b){
+           if(max<a){
+               max=a;
+           }
+           if(min>b){
+               min=b;
+           }
+       }else{
+           if(b>max){
+               max=b;
+           }
+           if(min>a){
+               min=a;
+           }
+       }
+   }
+    return make_pair(min,max);
 }
