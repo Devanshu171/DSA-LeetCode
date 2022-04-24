@@ -15,49 +15,49 @@ class Solution
 {
     public:
     //Function to find a solved Sudoku.
-    bool getCell(int grid[N][N],int &i,int &j){
-        for(i=0;i<9;i++){
-            for(j=0;j<9;j++){
-                if(grid[i][j]==0)
-                return true;
+    bool getEmptyCell(int grid[N][N],int &row,int &col){
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(grid[i][j]==0){
+                    row=i;
+                    col=j;
+                    return true;
+                }
             }
         }
         return false;
     }
-    bool valid(int grid[N][N],int row,int col,int num){
-        for(int i=0;i<9;i++){
-            if(grid[row][i]==num)
-            return false;
-            
-           if(grid[i][col]==num)
+    bool valid(int row,int col,int grid[N][N],int num){
+        for(int i=0;i<N;i++){
+            if(grid[row][i]==num || grid[i][col]==num)
             return false;
         }
-        
-        int rf=(row/3)*3;
-        int cf=(col/3)*3;
-        
-        for(int i=rf;i<rf+3;i++){
-            for(int j=cf;j<cf+3;j++){
-                if(grid[i][j]==num)
+        int rf=(row/3)*3,cf=(col/3)*3;
+        for(int i=0;i<3;i++){
+            for(int j=0;j<3;j++){
+                if(grid[rf+i][cf+j]==num)
                 return false;
             }
         }
+        
         return true;
         
     }
     bool SolveSudoku(int grid[N][N])  
     { 
         // Your code here
+        
         int row,col;
-        if(!getCell(grid,row,col)){
+        if(!getEmptyCell(grid,row,col)){
             return true;
-        }
-        for(int i=1;i<=9;i++){
-            if(valid(grid,row,col,i)){
-                grid[row][col]=i;
-                if(SolveSudoku(grid))
-                return true;
-                grid[row][col]=0;
+        }else{
+            for(int i=1;i<=N;i++){
+                if(valid(row,col,grid,i)){
+                    grid[row][col]=i;
+                    if(SolveSudoku(grid))
+                    return true;
+                    grid[row][col]=0;
+                }
             }
         }
         return false;
@@ -67,15 +67,11 @@ class Solution
     void printGrid (int grid[N][N]) 
     {
         // Your code here 
-         for(int i=0;i<9;i++){
-             
-            for(int j=0;j<9;j++){
+         for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
                 cout<<grid[i][j]<<" ";
-               
             }
-           
         }
-      
     }
 };
 
