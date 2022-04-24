@@ -13,21 +13,22 @@ class Solution
 	{
 	    // Code here
 	    int n=arr.size();
-	    vector<pair<int,int>>vec;
+	    unordered_map<int,int>mpp;
 	    for(int i=0;i<n;i++){
-	        vec.push_back({arr[i],i});
+	        mpp[arr[i]]=i;
 	    }
-	    sort(vec.begin(),vec.end());
-	    int count=0;
-	    for(int i=0;i<n;i++){
-	        while(i!=vec[i].second){
-	            swap(vec[i],vec[vec[i].second]);
-	            count++;
-	            
+	    int i=0;
+	    int ans=0;
+	    sort(arr.begin(),arr.end());
+	    while(i<n){
+	        if(i!=mpp[arr[i]]){
+	            swap(arr[i],arr[mpp[arr[i]]]);
+	            ans++;
+	        }else{
+	            i++;
 	        }
 	    }
-	    return count;
-	    
+	    return ans;
 	}
 };
 
