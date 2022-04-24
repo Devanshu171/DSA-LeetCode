@@ -10,32 +10,38 @@ using namespace std;
 
 class Solution{
     public:
-    bool isValid(int x,int y,vector<vector<int>>&m,int n,vector<vector<int>>&vis){
-        return (x>=0 && x<n && y>=0 && y<n && m[x][y]==1 && vis[x][y]==0);
+    bool isValid(int x,int y,int n,vector<vector<int>> &vis,vector<vector<int>> &m){
+        return x>=0 && x<n && y>=0 && y<n && vis[x][y]==0 && m[x][y]==1;
     }
-    void solve(int x,int y,vector<vector<int>>&m,int n,vector<string>&ans,vector<vector<int>>&vis,string temp){
-        if(!isValid(x,y,m,n,vis))
-                return;
+    void solve(int x,int y,vector<vector<int>> &m,int n,vector<vector<int>>&vis,vector<string>&ans,string temp){
         if(x==n-1 && y==n-1){
             ans.push_back(temp);
             return;
         }
+        vis[x][y]=1;
+        string dir="DLRU";
         int di[4]={1,0,0,-1};
         int dj[4]={0,-1,1,0};
-        char dir[4]={'D','L','R','U'};
-                vis[x][y]=1;
-        for(int i=0;i<4;i++){    
+        
+        for(int i=0;i<4;i++){
+            int newX=x+di[i];
+            int newY=y+dj[i];
+            if(isValid(newX,newY,n,vis,m)){
                 temp.push_back(dir[i]);
-                solve(x+di[i],y+dj[i],m,n,ans,vis,temp);
+                solve(newX,newY,m,n,vis,ans,temp);
                 temp.pop_back();
+            }
         }
-                vis[x][y]=0;    
+        vis[x][y]=0;
     }
     vector<string> findPath(vector<vector<int>> &m, int n) {
         // Your code goes here
+       
         vector<string>ans;
+         if(m[0][0]==0)
+        return ans;
         vector<vector<int>>vis(n,vector<int>(n,0));
-        solve(0,0,m,n,ans,vis,"");
+        solve(0,0,m,n,vis,ans,"");
         return ans;
     }
 };
