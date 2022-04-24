@@ -7,22 +7,22 @@ using namespace std;
 
 class Solution {
   public:
-  bool isPalin(string s){
+  bool ispalin(string s){
       for(int i=0;i<s.size()/2;i++){
           if(s[i]!=s[s.size()-i-1])
           return false;
       }
       return true;
   }
-  void solve(int ind,string s,vector<vector<string>>&ans,vector<string>&temp){
+  void solve(int ind,string s,vector<vector<string>>&ans,vector<string>temp){
       if(ind==s.size()){
+        //   temp.pop_back();
           ans.push_back(temp);
           return;
       }
       for(int i=ind;i<s.size();i++){
           string sub=s.substr(ind,i-ind+1);
-        //   cout<<sub<<endl;
-          if(isPalin(sub)){
+          if(ispalin(sub)){
               temp.push_back(sub);
               solve(i+1,s,ans,temp);
               temp.pop_back();
