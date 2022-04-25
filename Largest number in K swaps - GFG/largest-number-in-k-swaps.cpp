@@ -10,28 +10,29 @@ class Solution
 {
     public:
     //Function to find the largest number after k swaps.
-    void solve(int ind,int k,string str,string &ans){
-
-        ans=max(ans,str);
-        if(k==0 || ind==str.size())
-        return;
-        char mxc=str[ind];
-        for(int i=ind+1;i<str.size();i++){
-            if(mxc<str[i])
-            mxc=str[i];
+    void solve(int ind,int k,string s,string &ans){
+        if(s>ans){
+            ans=s;
         }
-        if(mxc!=str[ind])
-        k--;
-        for(int i=str.size()-1;i>=ind;i--){
-            if(str[i]==mxc){
-                    swap(str[ind],str[i]);
-                    solve(ind+1,k,str,ans);
-                    swap(str[ind],str[i]);
+        if(k==0 || ind==s.size())
+        return;
+        char ch=s[ind];
+        
+        for(int i=ind;i<s.size();i++){
+            if(s[i]>ch){
+                ch=s[i];
             }
         }
+        if(ch!=s[ind])
+        k-=1;
         
-       
-        
+        for(int i=s.size()-1;i>=ind;i--){
+            if(s[i]==ch){
+                swap(s[ind],s[i]);
+                solve(ind+1,k,s,ans);
+                swap(s[ind],s[i]);
+            }
+        }
     }
     string findMaximumNum(string str, int k)
     {
