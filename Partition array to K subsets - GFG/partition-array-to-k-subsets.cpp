@@ -8,45 +8,38 @@ using namespace std;
 
 class Solution{
   public:
- 
-  bool solve(int ind,int sum,int k,int tsum,int a[],int n,vector<int>&vis ){
-     if(k==0)
-     return true;
-     if(sum==tsum)
-     {
-        return solve(0,0,k-1,tsum,a,n,vis);
-     }
-     if( sum>tsum)
-     return false;
-     
-     for(int i=ind;i<n;i++){
-         if(!vis[i]){
-             vis[i]=1;
-             if(solve(i+1,sum+a[i],k,tsum,a,n,vis))
-             return true;
-           else  vis[i]=0;
-         }
-         
-     }
-       return false;
-     
-  }
+  
+    bool solve(int ind, int sum,int k,int tsum,int a[],int n,vector<int>&temp){
+        
+        if(k==1)
+        return true;
+        if(sum==tsum){
+            return solve(0,0,k-1,tsum,a,n,temp);
+        }
+        
+        
+        for(int i=ind;i<n;i++){
+            if(sum+a[i]<=tsum && temp[i]==0){
+                temp[i]=1;
+                if(solve(i+1,sum+a[i],k,tsum,a,n,temp))
+                return true;
+                temp[i]=0;
+            }
+        }
+        return false;
+    }
     bool isKPartitionPossible(int a[], int n, int k)
     {
-         //Your code here
-         int tsum=0;
+        
+         int sum=0;
          for(int i=0;i<n;i++){
-             tsum+=a[i];
+             sum+=a[i];
          }
-         if(k>n) return false;
-         int sum=tsum/k;
-         if(sum*k!=tsum) return false;
-      
-         vector<int>vis(n,0);
-         
-           return   solve(0,0,k,sum,a,n,vis);
-
- }
+         if(sum%k!=0 || k>n)
+         return false;
+         vector<int>temp(n,0);
+         return solve(0,0,k,sum/k,a,n,temp);
+    }
 };
 
 // { Driver Code Starts.
