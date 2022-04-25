@@ -12,30 +12,29 @@ class Solution {
   public:
     //Function to return a list of indexes denoting the required 
     //combinations whose sum is equal to given number.
-    void solve(int ind,int sum,int k,vector<int>arr,vector<vector<int>>&ans,vector<int>temp){
-      
-            if(sum==k){
+    void solve(int ind,int sum,int target,vector<int>&arr,vector<vector<int>>&ans,vector<int>temp){
+        if(sum>target)
+        return;
+        if(sum==target){
             ans.push_back(temp);
             return;
         }
-        if(sum>k)
-        return;
-       for(int i=ind;i<arr.size();i++){
-            if(i>ind && arr[i]==arr[i-1]) continue;
-           temp.push_back(arr[i]);
-           solve(i,sum+arr[i],k,arr,ans,temp);
-           temp.pop_back();
-       }
         
+        for(int i=ind;i<arr.size();i++){
+            if(i!=ind && arr[i]==arr[i-1]) continue;
+            temp.push_back(arr[i]);
+            solve(i,sum+arr[i],target,arr,ans,temp);
+                temp.pop_back();            
+        }
     }
-    vector<vector<int> > combinationSum(vector<int> &arr, int k) {
+    vector<vector<int> > combinationSum(vector<int> &A, int B) {
         // Your code here
-        sort(arr.begin(),arr.end());
+        
         vector<vector<int>>ans;
         vector<int>temp;
-        solve(0,0,k,arr,ans,temp);
+        sort(A.begin(),A.end());
+        solve(0,0,B,A,ans,temp);
         return ans;
-        
     }
 };
 
