@@ -7,24 +7,25 @@ class Solution
 {
 	public:
 	void solve(int ind,string s,vector<string>&ans){
-	   // cout<<ind<<endl;
 	    if(ind==s.size()){
-	     ans.push_back(s);
+	        ans.push_back(s);
 	        return;
 	    }
 	    for(int i=ind;i<s.size();i++){
-	        swap(s[i],s[ind]);
+	        swap(s[ind],s[i]);
 	        solve(ind+1,s,ans);
-	        swap(s[i],s[ind]);
+	        swap(s[ind],s[i]);
 	    }
+	    
 	}
-		vector<string>find_permutation(string s)
+		vector<string>find_permutation(string S)
 		{
 		    // Code here there
 		    vector<string>ans;
-		    solve(0,s,ans);
+		    solve(0,S,ans);
 		    sort(ans.begin(),ans.end());
 		    return ans;
+		    
 		}
 };
 
