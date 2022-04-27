@@ -15,26 +15,25 @@ class Solution
         // Your code here
         stack<char>st;
         for(int i=0;i<x.size();i++){
-            char k=x[i];
-            if(k=='['||k=='('|| k=='{'){
-                st.push(k);
-            }
-            else{
-                if(st.empty())
-                return false;
-                char s=st.top();
+            char ch=x[i];
+            if(ch=='{' || ch=='('  || ch=='['){
+                st.push(ch);
+            }else{
+                if(st.empty()) return false;
+                char top=st.top();
                 st.pop();
-                if(k==']'){
-                    if(s!='[')
-                    return false;
-                }else if(k=='}'){
-                     if(s!='{')
-                    return false;
-                }else{
-                     if(s!='(')
+                if(ch=='}'){
+                    if(top!='{')
                     return false;
                 }
-                
+              else  if(ch==']'){
+                    if(top!='[')
+                    return false;
+                }
+              else{
+                    if(top!='(')
+                    return false;
+                }
             }
         }
         return st.empty();
