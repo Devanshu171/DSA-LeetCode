@@ -2,7 +2,7 @@
 ## Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a stack with<strong> push(), pop(), empty() </strong>operations, delete the&nbsp;<strong>middle </strong>of the stack&nbsp;without using any additional data structure.<br>
-<strong>Middle: </strong>ceil(size_of_stack/2.0) </span><br>
+<strong>Middle: </strong>ceil((size_of_stack+1)/2) (1-based index)</span><br>
 &nbsp;</p>
 
 <p><strong><span style="font-size:18px">Example 1:</span></strong></p>
