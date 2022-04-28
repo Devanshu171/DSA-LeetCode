@@ -26,40 +26,43 @@ int main(){
 	}
 }// } Driver Code Ends
 
-// stack<int>st;
-stack<int>ss;
-void push(stack<int>& st, int a){
+stack<int>st;
+void push(stack<int>& s, int a){
 	// Your code goes here
+	s.push(a);
+	if(st.empty() || st.top()>=a){
 	st.push(a);
-	if(ss.empty() || ss.top()>a) ss.push(a);
-	
-}
-
-bool isFull(stack<int>& st,int n){
-	// Your code goes here
-	return st.size()==n;
-	
-}
-
-bool isEmpty(stack<int>& st){
-	// Your code goes here
-	return st.empty();
-}
-
-int pop(stack<int>& st){
-	// Your code goes here
-	if(st.empty()) return -1;
-	if(!ss.empty()&&ss.top()==st.top()) {
-	    ss.pop();
-	    
 	}
-int x=st.top();
-st.pop();
-return x;
+}
+
+bool isFull(stack<int>& s,int n){
+	// Your code goes here
+	return s.size()==n;
+}
+
+bool isEmpty(stack<int>& s){
+	// Your code goes here
+	return s.size()==0;
+}
+
+int pop(stack<int>& s){
+	// Your code goes here
+	int a=-1;
+	if(!s.empty()){
+	     a=s.top();
+	     if(a==st.top())
+	     st.pop();
+	    s.pop();
+	}
+	
+	return a;
 }
 
 int getMin(stack<int>& s){
 	// Your code goes here
 	
-	return ss.top();
+	if(st.empty())
+	return -1;
+else	return st.top();
+	
 }
