@@ -1,26 +1,27 @@
 class Solution {
 public:
-    void solve(int indx,string s,string temp,string map[],vector<string>&ans){
-        if(indx==s.size()){
+    void solve(int ind,string s,string map[],vector<string>&ans,string temp){
+        if(ind==s.size()){
             ans.push_back(temp);
             return;
         }
-        int number=s[indx]-'0';
-        string value=map[number];
-        for(int i=0;i<value.size();i++){
-            temp.push_back(value[i]);
-            solve(indx+1,s,temp,map,ans);
+        // cout<<"i was here"<<endl;
+        string k=map[s[ind]-'0'];
+        for(int i=0;i<k.size();i++){
+            temp.push_back(k[i]);
+            solve(ind+1,s,map,ans,temp);
             temp.pop_back();
         }
+    
     }
     vector<string> letterCombinations(string s) {
+        int n=s.size();
         
-vector<string>ans;
-        if(s.empty())
+        string map[10]={"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        vector<string>ans;
+        if(n==0)
             return ans;
-        string map[10]={"", "", "abc", "def", "ghi","jkl","mno","pqrs","tuv","wxyz"};
-        solve(0,s,"",map,ans);
+        solve(0,s,map,ans,"");
         return ans;
     }
 };
-
