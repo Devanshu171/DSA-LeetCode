@@ -47,7 +47,7 @@ class Solution {
                     st.pop();
                 }else{
                     
-                    while( !st.empty() && precedence(st.top())>=precedence(x)){
+                    while( !st.empty() && precedence(st.top())>=precedence(x) &&isLeftToRightAssociative(x)){
                         ans.push_back(st.top());
                         st.pop();
                     }
