@@ -66,16 +66,15 @@ int QueueStack :: pop()
         // cout<<q2.front()<<endl;
         if(q1.empty())
         return -1;
-        while(q1.size()!=1){
-            q2.push(q1.front());
-            q1.pop();
-        }
-        int ans=q1.front();
-        q1.pop();
-        while(!q2.empty()){
-            q1.push(q2.front());
-            q2.pop();
-        }
+       int n=q1.size();
+       int i=0;
+       while(i<n-1){
+           q1.push(q1.front());
+           q1.pop();
+           i++;
+       }
+       int ans=q1.front();
+       q1.pop();
         
         return ans;
 }
