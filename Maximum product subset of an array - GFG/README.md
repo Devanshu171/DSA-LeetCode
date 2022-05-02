@@ -1,5 +1,5 @@
 # Maximum product subset of an array
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array <strong>A[]</strong>. The task&nbsp;is to find the maximum product possible with the subset of elements present in the array. The maximum product can be a single element also.<br>
 Since the product can be large, return it modulo&nbsp;(10<sup>9</sup>&nbsp;+ 7).</span></p>
