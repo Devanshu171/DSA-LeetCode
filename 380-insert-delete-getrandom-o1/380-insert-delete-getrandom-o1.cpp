@@ -11,8 +11,9 @@ public:
         if(mpp.find(val)!=mpp.end()){
             return false;
         }
+         mpp[val]=arr.size();
           arr.push_back(val);
-            mpp[val]=arr.size()-1;
+           
           
         return true;
     }
