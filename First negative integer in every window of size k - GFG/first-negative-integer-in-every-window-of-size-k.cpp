@@ -28,25 +28,27 @@ int main() {
 // } Driver Code Ends
 
 
-
-vector<long long> printFirstNegativeInteger(long long int arr[],
-                                             long long int n, long long int k) {
+#define ll long long
+vector<long long> printFirstNegativeInteger(long long int A[],
+                                             long long int N, long long int K) {
                                                  
-                         long long  i=0,j=0;
-                         deque< long long >q;
-                         vector< long long >ans;
-                         while(j<n){
-                             if(arr[j]<0) q.push_back(arr[j]);
-                             if(j-i+1<k) j++;
-                             else if(j-i+1==k){
-                                 if(q.size()==0) ans.push_back(0);
-                                   else { 
-                                       ans.push_back(q.front());
-                                         if(arr[i]==q.front()) q.pop_front();
-                                   }
-                                 i++;j++;
-                               }
-                         }
-                         return ans;
-                                                 
+                 deque<ll>q;
+                 vector<ll>ans;
+                 ll i=0,j=0;
+                 while(j<N){
+                     if(A[j]<0)
+                     q.push_back(A[j]);
+                     
+                     if(j-i+1==K){
+                         if(q.empty())
+                         ans.push_back(0);
+                         else 
+                         ans.push_back(q.front());
+                         if(A[i]==q.front())
+                         q.pop_front();
+                         i++;
+                     }
+                     j++;
+                 }
+                 return ans;
  }
