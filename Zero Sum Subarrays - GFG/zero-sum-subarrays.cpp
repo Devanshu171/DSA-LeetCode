@@ -11,19 +11,16 @@ using namespace std;
 class Solution{
     public:
     //Function to count subarrays with sum equal to 0.
-    #define ll long long
+    
     ll findSubarray(vector<ll> arr, int n ) {
         //code here
-        ll ans=0;
-        ll sum=0;
-        unordered_map<int,int>mpp;
+        unordered_map<ll,ll>mpp;
+        ll ans=0,sum=0;
         for(int i=0;i<n;i++){
             sum+=arr[i];
-
             if(sum==0) ans++;
-            if(mpp.find(sum)!=mpp.end()){
-                ans+=mpp[sum];
-            }
+            // if(arr[i]==0) ans++;
+            ans+=mpp[sum];
             mpp[sum]++;
         }
         return ans;
