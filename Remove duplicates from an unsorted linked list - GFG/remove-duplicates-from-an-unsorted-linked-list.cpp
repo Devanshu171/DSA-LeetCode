@@ -44,21 +44,22 @@ class Solution
     Node * removeDuplicates( Node *head) 
     {
      // your code goes here
-     unordered_set<int>st;
      
-     Node* k=head,*prev;
-     while(k){
-         if(st.count(k->data)){
-             prev->next=k->next;
-             delete k;
-             k=prev->next;
+     unordered_set<int>st;
+     Node *dummy=new Node(-1);
+     dummy->next=head;
+     Node *k=dummy;
+     while(k->next){
+         if(st.count(k->next->data)){
+             Node *temp=k->next;
+             k->next=temp->next;
+             delete temp;
          }else{
-             st.insert(k->data);
-             prev=k;
+             st.insert(k->next->data);
              k=k->next;
-         }   
+         }
      }
-     return head;
+     return dummy->next;
     }
 };
 
