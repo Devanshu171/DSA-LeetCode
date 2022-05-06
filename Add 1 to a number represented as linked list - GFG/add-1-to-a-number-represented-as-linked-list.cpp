@@ -46,36 +46,36 @@ struct Node
 class Solution
 {
     public:
-    Node* reverse(Node* k){
-    Node *prev=NULL;
-    while(k){
-        Node*  next=k->next;
-        k->next=prev;
-        prev=k;
-        k=next;
+    Node *reverse(Node *head){
+        Node *cur=head,*prev=NULL;
+        
+        while(cur){
+            Node *next=cur->next;
+            cur->next=prev;
+            prev=cur;
+            cur=next;
+        }
+        return prev;
     }
-    return prev;
-}
-
     Node* addOne(Node *head) 
     {
-       head=reverse(head);
-        Node *k=head,*prev=k;
-        int carry=1;
-            while(carry!=0 && k){
-                int val=k->data+carry;
-                k->data=val%10;
-
-                carry=val/10;
-                prev=k;
-                k=k->next;
-            }
-            if(carry>0){
-                prev->next=new Node(carry);
-            }
+        // Your Code here
+        // return head of list after adding one
         
+        head=reverse(head);
+        Node *k=head,*prev;
+        int car=1;
+        while(k){
+            int val=k->data+car;
+            k->data=val%10;
+            car=val/10;
+            prev=k;
+            k=k->next;
+        }
+        if(car>0){
+            prev->next=new Node(car);
+        }
         return reverse(head);
-        
     }
 };
 
