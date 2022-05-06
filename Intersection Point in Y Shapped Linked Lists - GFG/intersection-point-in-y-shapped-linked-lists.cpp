@@ -84,17 +84,19 @@ struct Node {
 int intersectPoint(Node* head1, Node* head2)
 {
     // Your Code Here
-    if(!head1 || !head2)
-    return -1;
     Node *k=head1;
     Node *j=head2;
     
-    while(j!=k){
-        if(!j) j=head1;
-        else j=j->next;
-        if(!k) k=head2;
-        else k=k->next;
+    while(k && j){
+        if(k==j)
+        return k->data;
+        
+        if(!k->next) k=head2;
+        if(!j->next) j=head1;
+        k=k->next;
+        j=j->next;
+        
     }
-    return j==NULL? -1:j->data;
+    return -1;
 }
 
