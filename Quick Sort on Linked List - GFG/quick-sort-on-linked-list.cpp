@@ -112,21 +112,7 @@ triplet* getPivot(node *head){
     }
   if(ll)  ll->next=NULL;
    if(lr) lr->next=NULL;
-//   node *l=left->next,*r=right->next;
-   
-//   cout<<"pvt-->"<<pivot->data<<endl;
-//   cout<<"left-->";
-//   while(l){
-//       cout<<l->data<<" ";
-//       l=l->next;
-//   }
-//   cout<<endl;
-//   cout<<"right-->";
-//   while(r){
-//       cout<<r->data<<" ";
-//       r=r->next;
-//   }
-//   cout<<endl;
+
     return new triplet(left->next,right->next,pivot);
 }
 
