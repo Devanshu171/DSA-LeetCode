@@ -84,12 +84,13 @@ struct Node
 Node* findIntersection(Node* head1, Node* head2)
 {
     // Your Code Here
+    Node *k=head1;
+    Node *j=head2;
     
-      Node* k=head1;
-    Node* j=head2;
-    Node* dummy=new Node(-1);
-    Node* last=dummy;
-    while(k && j){
+    Node *dummy=new Node(-1);
+    Node *last=dummy;
+    
+    while(j && k){
         if(k->data==j->data){
             Node *temp=new Node(k->data);
             last->next=temp;
@@ -103,5 +104,4 @@ Node* findIntersection(Node* head1, Node* head2)
         }
     }
     return dummy->next;
-  
 }
