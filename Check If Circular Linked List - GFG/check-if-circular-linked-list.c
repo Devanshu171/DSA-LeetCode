@@ -21,7 +21,8 @@ bool isCircular(struct Node *head){
     //code here
    struct Node *k=head;
     while(k){
-    if( k->next==head) return true;
+        if(k->next==head)
+        return true;
         k=k->next;
     }
     return false;
