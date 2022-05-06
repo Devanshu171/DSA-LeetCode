@@ -61,57 +61,55 @@ class Solution
 {
     public:
     //Function to add two numbers represented by linked list.
-    Node *reverse(struct Node* k){
-        Node *prev=NULL;
-        while(k){
-            Node* next=k->next;
-            k->next=prev;
-            prev=k;
-            k=next;
-        }
-        return prev;
+    Node *reverse(Node *head){
+        if(!head || !head->next)
+        return head;
+        
+        Node *newHead=reverse(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        
+        return newHead;
     }
     struct Node* addTwoLists(struct Node* first, struct Node* second)
     {
-        // code here
-        Node * k=reverse(first);
-        Node *j=reverse(second);
         
+        Node *l1=reverse(first);
+        Node *l2=reverse(second);
+       
+        Node* newHead=new Node(-1);
+        Node *last=newHead;
         int carry=0;
-        Node *dummy=new Node(-1),*last=dummy;
-        while(k && j){
-            int val=k->data+j->data+carry;
-            // cout<<k->data<<" "<<j->data<<endl;
+        while(l1 && l2){
+            int val=l1->data+l2->data+carry;
             Node *temp=new Node(val%10);
-            last->next=temp;
-            // cout<<last->data<<endl;
-            last=temp;
             carry=val/10;
-            k=k->next;
-            j=j->next;
+            last->next=temp;
+            last=temp;
+            l1=l1->next;
+            l2=l2->next;
         }
-        while(k){
-              int val=k->data+carry;
+        while(l1){
+               int val=l1->data+carry;
             Node *temp=new Node(val%10);
+            carry=val/10;
             last->next=temp;
             last=temp;
-            carry=val/10;
-            k=k->next;
-
+            l1=l1->next;
         }
-         while(j){
-              int val=j->data+carry;
+        while(l2){
+               int val=l2->data+carry;
             Node *temp=new Node(val%10);
+            carry=val/10;
             last->next=temp;
             last=temp;
-            carry=val/10;
-            j=j->next;
-
+            l2=l2->next;
         }
         if(carry>0){
             last->next=new Node(carry);
         }
-        return reverse(dummy->next);
+        return reverse(newHead->next);
+        
         
     }
 };
