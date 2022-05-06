@@ -16,73 +16,64 @@ struct Node {
 
 
  // } Driver Code Ends
-/* Structure of the linked list node is as
-struct Node 
-{
-    int data;
-    struct Node* next;
-    Node(int x) { data = x;  next = NULL; }
-};
-*/
+
 
 
 class Solution{
   public:
-    //Function to sort the given linked list using Merge Sort.
-    Node* merge(Node* a,Node* b){
-        if(!a) return b;
-        if(!b) return a;
+  Node *getMid(Node *head){
+      Node *slow=head;
+      Node *fast=head,*temp=head;
+      
+      while(fast && fast->next){
+          temp=slow;
+          slow=slow->next;
+          fast=fast->next->next;
+      }
+      return temp;
+  }
+    Node *merge(Node *l1,Node *l2){
+        if(!l2)
+        return l1;
+        if(!l1)
+        return l2;
+        Node *dummy=new Node(-1);
+        Node *last=dummy;
         
-        Node* dummy=new Node(-1);
-        Node* last=dummy;
-        while( a && b){
-            if(a->data<=b->data){
-                last->next=a;
-                last=a;
-                a=a->next;
+        while(l1 && l2){
+            if(l1->data<=l2->data){
+                last->next=l1;
+                last=l1;
+                l1=l1->next;
             }else{
-                 
-                last->next=b;
-                last=b;
-                b=b->next;
+                last->next=l2;
+                last=l2;
+                l2=l2->next;
             }
         }
-        if(a) last->next=a;
-        if(b) last->next=b;
+        if(l1) last->next=l1;
+        if(l2) last->next=l2;
         
         return dummy->next;
     }
-    Node* findMid(Node* k){
-        Node* slow=k,*fast=k,*temp;
-        
-        while(fast && fast->next){
-            temp=slow;
-            slow=slow->next;
-            fast=fast->next->next;
-        }
-        return temp;
-    }
     Node* mergeSort(Node* head) {
-        // your code here
-        if(!head || !head->next){
-            return head;
-        }
         
-        Node* mid=findMid(head);
+        if(!head || !head->next)
+        return head;
         
-        Node* left=head;
-        Node* right=mid->next;
+        Node *left=head;
+        Node *mid=getMid(head);
+        Node *right=mid->next;
         mid->next=NULL;
         
-        left=mergeSort(left);
-        right=mergeSort(right);
+       left= mergeSort(left);
+       right= mergeSort(right);
         
-        Node* res= merge(left,right);
+        Node *result=merge(left,right);
+        return result;
         
-        return res;
         
-        
-    }
+     }
 };
 
 
