@@ -32,38 +32,36 @@ struct Node {
 class Solution{
   public:
     //Function to check whether the list is palindrome.
-    Node *reverse(Node *head){
-        Node *cur=head,*prev=NULL;
+    Node *rev(Node  *head){
+        Node* cur=head,*prev=NULL;
+        
         while(cur){
-            Node *nxt=cur->next;
+            Node *next=cur->next;
             cur->next=prev;
             prev=cur;
-            cur=nxt;
+            cur=next;
         }
         return prev;
     }
     bool isPalindrome(Node *head)
     {
-        //Your code here
-        Node *slow=head,*fast=head;
-        bool flag=true;
-        while(fast->next && fast->next->next){
+        
+        
+        Node *slow=head,*fast=head->next;
+        while(fast && fast->next){
             slow=slow->next;
             fast=fast->next->next;
         }
-        slow->next=reverse(slow->next);
-        Node*mid=slow->next;
-        Node *first=head;
+        slow->next=rev(slow->next);
+        Node *start=head,*mid=slow->next;
         while(mid){
-            if(first->data!=mid->data){
-            flag=false;
-            break;
+            if(start->data!=mid->data)
+            return false;
+            mid=mid->next;
+            start=start->next;
         }
-        first=first->next;
-        mid=mid->next;
-        }
-        slow->next=reverse(slow->next);
-        return flag;
+        slow->next=rev(slow->next);
+        return true;
     }
 };
 
