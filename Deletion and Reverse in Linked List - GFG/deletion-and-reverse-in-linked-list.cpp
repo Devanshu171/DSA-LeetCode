@@ -120,30 +120,24 @@ void deleteNode(struct Node **head, int key)
 {
 
 // Your code goes here
-
-        if(!*head ) return;
-        Node *k=*head;
-        Node *prev;
-        if(k->data==key){
-            prev=k;
-                while(prev->next!=k) prev=prev->next;
-                *head=k->next;
-                prev->next=*head;
-                delete k;
-        }else{
-            
-            while(k->next!=*head){
-                if(k->data==key)
-                break;
-                prev=k;
-                k=k->next;
-            }
-            if(k->data==key){
-                prev->next=k->next;
-                delete k;
-            }
-        }
-
+Node *temphead=*head;
+Node *k=temphead;
+if(k->data==key){
+    Node *temp=k;
+    while(temp->next!=temphead) temp=temp->next;
+    temp->next=temphead->next;
+    temphead=temphead->next;
+    delete k;
+}else{
+    Node *prev;
+    while(k->data!=key){
+        prev=k;
+        k=k->next;
+    }
+    prev->next=k->next;
+    delete k;
+}
+*head=temphead;
 }
 
 /* Function to reverse the linked list */
@@ -151,19 +145,16 @@ void deleteNode(struct Node **head, int key)
 {
 
 // Your code goes here
-Node *head=* head_ref;
-   Node *cur=* head_ref;
+    Node *cur=*head_ref;
+    Node *head=*head_ref;
     Node *prev=NULL;
-    
     do{
         Node *next=cur->next;
         cur->next=prev;
         prev=cur;
         cur=next;
     }while(cur!=head);
-    
-        head->next=prev;
+    head->next=prev;
     *head_ref=prev;
-
 
 }
