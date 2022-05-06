@@ -102,23 +102,18 @@ struct Node
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
     // your code goes here
-    Node *slow=head,*fast=head;
+    *head1_ref=head;
+    Node *slow=head,*fast=head,*prev=head;
     do{
         fast=fast->next->next;
-        if(fast!=head) slow=slow->next;
+       if(fast!=head) slow=slow->next;
     }while(fast!=head && fast->next!=head);
     
-    if(fast->next==head){
-    fast->next=slow->next;
-    }
-    else{
-        Node *temp=slow->next;
-        while(temp->next!=head) temp=temp->next;
-        temp->next=slow->next;
-    }
+    Node *temp=head;
+    while(temp->next!=head) temp=temp->next;
+    temp->next=slow->next;
     *head2_ref=slow->next;
-     *head1_ref=head;
-     slow->next=head;
+    slow->next=head;
     
     
 }
