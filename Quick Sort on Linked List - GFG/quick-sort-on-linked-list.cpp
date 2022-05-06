@@ -85,75 +85,72 @@ struct node
 }; */
 
 //you have to complete this function
-//   static class Triplet{
-//       Node left,pivot,right;
-//       Triplet(Node left, Node pivot, Node right){
-//           this.left = left;
-//           this.pivot = pivot;
-//           this.right = right;
-//       }
-//   }
-   
-//   static Triplet getPivot(Node head){
-//       Node pivot = head;
-//       head = head.next;
-//       pivot.next = null;
-//       Node left = new Node(0);
-//       Node right = new Node(0);
-//       Node lptr = left;
-//       Node rptr = right;
-//       while(head!=null){
-//           if(head.data<pivot.data){
-//               lptr.next = head;
-//               lptr = lptr.next;
-//           }else{
-//               rptr.next = head;
-//               rptr = rptr.next;
-//           }
-//           head = head.next;
-//       }
-//       if(lptr!=null) lptr.next = null;
-//       if(rptr!=null) rptr.next = null;
-//       return new Triplet(left.next,pivot,right.next);
-//   }
-   
-//   public static Node quickSort(Node node){
-//       //Your code here
-//       if(node==null || node.next==null) return node;
-//       Triplet curr = getPivot(node);
-//       curr.left = quickSort(curr.left);
-//       curr.right = quickSort(curr.right);
-//       curr.pivot.next = curr.right;
-//       if(curr.left==null) return curr.pivot;
-//       Node temp = curr.left;
-//       while(temp.next!=null) temp = temp.next;
-//       temp.next = curr.pivot;
-//       return curr.left;
-//   }
-// }
-node *parti(node* head,node* tail){
-    node *pvt=head,*cur=head->next,*prev=head;
-    while(cur!=tail->next){
-        if(pvt->data >cur->data){
-            swap(prev->next->data,cur->data);
-            prev=prev->next;
+class triplet{
+    public:
+  node *left,*right,*pivot;
+  triplet(node *l,node *r,node *p){
+      left=l;
+      right=r;
+      pivot=p;
+  }
+};
+triplet* getPivot(node *head){
+    node *pivot=head;
+    head=head->next;
+    pivot->next=NULL;
+    node *left=new node(-1),*right=new node(-1);
+    node *ll=left,*lr=right;
+    while(head){
+        if(head->data<pivot->data){
+            ll->next=head;
+            ll=head;
+        }else{
+            lr->next=head;
+            lr=head;   
         }
-        cur=cur->next;
+        head=head->next;
     }
-    swap(pvt->data,prev->data);
-    return prev;
+  if(ll)  ll->next=NULL;
+   if(lr) lr->next=NULL;
+//   node *l=left->next,*r=right->next;
+   
+//   cout<<"pvt-->"<<pivot->data<<endl;
+//   cout<<"left-->";
+//   while(l){
+//       cout<<l->data<<" ";
+//       l=l->next;
+//   }
+//   cout<<endl;
+//   cout<<"right-->";
+//   while(r){
+//       cout<<r->data<<" ";
+//       r=r->next;
+//   }
+//   cout<<endl;
+    return new triplet(left->next,right->next,pivot);
 }
-void qs(node * head,node* tail){
-    if(!head || !tail || head==tail) return;
-    node *pvt=parti(head,tail);
-    qs(head,pvt);
-    qs(pvt->next,tail);
-}
-void quickSort(struct node **head) {
-    // if(!head || !head->next) return;
-    node *tail=*head;
-    while(tail->next) tail=tail->next;
-    qs(*head,tail);
+
+node* qs(node *head){
+    
+    if(!head || !head->next)
+    return head;
+    
+    triplet* cur=getPivot(head);
+    node *pivot=cur->pivot;
+    cur->left=qs(cur->left);
+    cur->right=qs(cur->right);
+
+   pivot->next=cur->right;
+    if(!cur->left) return pivot;
+    node *temp=cur->left;
+    while(temp->next) temp=temp->next;
+    temp->next=pivot;
+    return cur->left;
     
     
+}
+void quickSort(struct node **headRef) {
+    node *head=*headRef;
+    // cout<<head->data<<endl;
+   *headRef= qs(*headRef);
 }
