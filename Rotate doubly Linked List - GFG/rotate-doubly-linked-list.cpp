@@ -40,22 +40,19 @@ public:
     Node *update(Node *start,int p)
     {
         //Add your code here
-        Node *last=start;
-        while(last->next)
-        last=last->next;
         
-        Node *newHead=start;
-        for(int i=1;i<=p && start;i++)
-        newHead=newHead->next;
-        
+        Node *cur=start,*last=start;
+        while(last->next) last=last->next;
+        for(int i=1;i<p;i++){
+            cur=cur->next;
+        }
         last->next=start;
         start->prev=last;
+        start=cur->next;
+        start->prev=NULL;
+        cur->next=NULL;
         
-        newHead->prev->next=NULL;
-        newHead->prev=NULL;
-        
-        return newHead;
-        
+        return start;
         
     }
 };
