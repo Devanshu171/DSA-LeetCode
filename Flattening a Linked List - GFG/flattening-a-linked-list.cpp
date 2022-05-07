@@ -110,46 +110,34 @@ struct Node{
 
 /*  Function which returns the  root of 
     the flattened linked list. */
-    Node *merge(Node *root,Node *cur){
-        Node *k=root,*last=NULL;
-        while(k && cur){
-            if(k->data<=cur->data){
-                if(!last){
-                    last=k;
-                    k=k->bottom;
-                }else{
-                last->bottom=k;
-                last=k;
-                k=k->bottom;
-                }
-            }else{
-                if(!last){
-                    root=cur;
-                    last=cur;
-                    cur=cur->bottom;
-                }else{
-               last->bottom=cur;
-                last=cur;
-                cur=cur->bottom; 
-            }
-            }
-        }
-        if(k)last->bottom=k;
-        if(cur) last->bottom=cur;
-        return root;
-    }
+    
+struct cmp{
+  bool operator()(Node *a,Node*b){
+      return a->data>b->data;
+  }  
+};
 Node *flatten(Node *root)
 {
-   // Your code here
-   if(!root)
-   return root;
-   Node *cur=root->next;
+    if(!root || !root->next)
+    return root;
+   priority_queue<Node*,vector<Node*>,cmp>pq;
+   Node *cur=root;
    while(cur){
-       Node *temp=cur->next;
-     root= merge(root,cur);
-       root->next=temp; 
-       cur=temp;
+       pq.push(cur);
+       cur=cur->next;
    }
-   return root;
+   
+   Node *dummy=new Node(-1);
+   Node *last=dummy;
+   while(!pq.empty()){
+       Node *temp=pq.top();
+       pq.pop();
+       last->bottom=temp;
+       last=temp;
+       if(temp->bottom)
+       pq.push(temp->bottom);
+       
+   }
+   return dummy->bottom;
 }
 
