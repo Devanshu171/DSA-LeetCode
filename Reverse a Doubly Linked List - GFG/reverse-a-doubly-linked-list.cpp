@@ -100,16 +100,20 @@ struct Node
 */
 Node* reverseDLL(Node * head)
 {
-    if(!head || !head->next) return head;
-    Node *k=head;
-    while(k){
-        if(k->next==NULL) head=k;
-        Node *temp=k->next;
-        k->next=k->prev;
-        k->prev=temp;
-        k=k->prev;
-    }
+    //Your code here
+    if(!head || !head->next)
     return head;
+    
+    Node *cur=head,*prev=NULL;
+    
+    while(cur){
+        Node *next=cur->next;
+        cur->prev=cur->next;
+        cur->next=prev;
+        prev=cur;
+        cur=next;
+    }
+    return prev;
 }
 
 
