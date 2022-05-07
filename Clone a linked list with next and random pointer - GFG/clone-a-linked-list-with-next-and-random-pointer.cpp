@@ -24,50 +24,47 @@ class Solution
     Node *copyList(Node *head)
     {
         //Write your code here
+          Node *cur=head;
+        // 1 inserting node b/w
+        while(cur){
+            Node *next=cur->next;
+            cur->next=new Node(cur->data);
+            cur->next->next=next;
+            cur=next;
+        }
         
-        // 1 insert a copy of node just after node
-         
-        Node *l1=head,*l2;
-        while(l1){
-            Node *nxt=l1->next;
-            Node *temp=new Node(l1->data);
-            l1->next=temp;
-            temp->next=nxt;
-            l1=nxt;
-            
-        }
-   
-        // 2 pointing random pointer with the help old node
-        l1=head;
-        while(l1){
-           if(l1->arb) l1->next->arb=l1->arb->next;
-            l1=l1->next->next;
-        }
-         
-        //3 disconnect old and new nodes and linking new nodes
-        l1=head,l2=head->next;
-        Node *newHead=l2;
+       
         
-        while(l1->next && l2->next){
-            l1->next=l2->next;
-            l1=l1->next;
-            l2->next=l1->next;
-            l2=l2->next;
+        // 2 marking random
+        cur=head;
+        while(cur){
+            if(cur->arb)
+            cur->next->arb=cur->arb->next;
+            cur=cur->next->next;
         }
-        l1->next=NULL;
-        //     Node *k=head;
-        // while(k){
-        //     cout<<k->data<<" ";
-        //     k=k->next;
+         cur=head;
+        
+        Node *head2=head->next;
+        cur=head;
+        while(cur->next){
+            Node *next=cur->next;
+            cur->next=next->next;
+            cur=next;
+        }
+        // cur=head;
+        // while(cur){
+        //     cout<<cur->data<<" ";
+        //     cur=cur->next;
         // }
         // cout<<endl;
-        
-        // Node *k=newHead;
-        // while(k){
-        //     cout<<k->data<<" ";
-        //     k=k->next;
+        // cur=head2;
+        // while(cur){
+        //     cout<<cur->data<<" ";
+        //     cur=cur->next;
         // }
-        return newHead;
+        // cout<<endl;
+        // // 3 disconnection
+        return head2;
     }
 
 };
