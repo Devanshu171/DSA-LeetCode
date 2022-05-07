@@ -42,26 +42,24 @@ struct Node
 class Solution{
 public:
     Node* divide(int N, Node *head){
-        // code 
+        // code here
         if(!head || !head->next)
         return head;
         
-        Node *odd=new Node(-1),*even=new Node(-1);
-        Node *last_odd=odd,*last_even=even;
-        Node *cur=head;
-        
-        while(cur){
-            if(cur->data & 1){
-                last_odd->next=cur;
-                last_odd=cur;
+        Node *even=new Node(-1),*odd=new Node(-1);
+        Node *lo=odd,*le=even;
+        while(head){
+            if(head->data & 1){
+                lo->next=head;
+                lo=head;
             }else{
-                last_even->next=cur;
-                last_even=cur;
-            }
-            cur=cur->next;
+                le->next=head;
+                le=head;
+            }           
+            head=head->next;
         }
-        last_even->next=odd->next;
-        last_odd->next=NULL;
+        le->next=odd->next;
+        lo->next=NULL;
         return even->next;
     }
 };
