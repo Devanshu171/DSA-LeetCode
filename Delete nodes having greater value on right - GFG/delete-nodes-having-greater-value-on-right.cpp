@@ -58,24 +58,22 @@ class Solution
     }
     Node *compute(Node *head)
     {
-        // your code goes here
-        if(!head || !head->next)
-        return head;
         head=reverse(head);
-       Node *cur=head;
-       int mx=cur->data;
-       while(cur && cur->next){
-           if(cur->next->data<mx){
-               Node *temp=cur->next;
-               cur->next=temp->next;
-               delete temp;
-           }else{
-               mx=cur->next->data;
-               cur=cur->next;
-           }
-       }
-       return reverse(head);
-        
+        // int mx=head->data;
+        Node *cur=head->next;
+        Node *prev=head;
+        while(cur){
+            if(cur->data<prev->data){
+                prev->next=cur->next;
+                delete cur;
+                cur=prev->next;
+            }else{
+                prev=cur;
+                cur=cur->next;
+            }
+        }
+        return reverse(head);
+       
     }
     
 };
