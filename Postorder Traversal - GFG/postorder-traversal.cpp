@@ -123,17 +123,31 @@ struct Node
 }; */
 
 //Function to return a list containing the postorder traversal of the tree.
-
-void solve(Node *node,vector<int>&ans){
-    if(!node) return;
-    solve(node->left,ans);
-    solve(node->right,ans);
-    ans.push_back(node->data);
-}
 vector <int> postOrder(Node* root)
 {
- 
- vector<int>ans;
- solve(root,ans);
- return ans;
+  // Your code here
+  stack<Node*>st;
+  vector<int>ans;
+  Node *cur=root;
+  
+  while(cur || !st.empty()){
+      if(cur){
+          st.push(cur);
+          cur=cur->left;
+      }else{
+          Node *temp=st.top()->right;
+          if(!temp){
+              
+              while(!st.empty() && st.top()->right==temp){
+                  temp=st.top();
+                  st.pop();
+                  ans.push_back(temp->data);
+              }
+            //   cur=st.top()->right;
+          }else{
+              cur=temp;
+          }
+      }
+  }
+  return ans;
 }
