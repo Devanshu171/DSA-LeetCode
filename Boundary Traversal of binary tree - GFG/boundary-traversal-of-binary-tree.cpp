@@ -105,45 +105,61 @@ struct Node
 
 class Solution {
 public:
-    void left(Node *root,vector<int>&ans){
-        Node *cur=root->left;
-        while(cur){
-            if(!isLeaf(cur)) ans.push_back(cur->data);
-            if(cur->left) cur=cur->left;
-            else cur=cur->right;
+
+    bool isLeaf(Node *node){
+        return (!node->left && !node->right);
+    }
+    
+    void getLeft(Node* node,vector<int>&ans){
+        while(node){
+            if(isLeaf(node))
+            break;
+            ans.push_back(node->data);
+            if(node->left)
+            node=node->left;
+            else
+            node=node->right;
         }
     }
-    void right(Node *root,vector<int>&ans){
-        Node *cur=root->right;
-        vector<int>temp;
-        while(cur){
-            if(!isLeaf(cur)) temp.push_back(cur->data);
-            if(cur->right) cur=cur->right;
-            else cur=cur->left;
+    
+    void getLeaf(Node *node,vector<int>&ans){
+        if(!node)
+        return ;
+        if(isLeaf(node)){
+            ans.push_back(node->data);
         }
-        for(int i=temp.size()-1;i>=0;i--){
-            ans.push_back(temp[i]);
-        }
+        getLeaf(node->left,ans);
+        getLeaf(node->right,ans);
+    }
+    
+    void getRight(Node *node,vector<int>&ans){
+        vector<int>vec;
+        while(node){
+            if(isLeaf(node))
+            break;
+            vec.push_back(node->data);
+            if(node->right)
+        node=node->right;
+        else
+        node=node->left;
         
-    }
-    void leaf(Node * root,vector<int>&ans){
-        if(!root) return;
-        leaf(root->left,ans);
-        if(isLeaf(root)) ans.push_back(root->data);
-        leaf(root->right,ans);
-    }
-    bool isLeaf(Node * cur){
-        return (!cur->left && !cur->right);
+        }
+        for(int i=vec.size()-1;i>=0;i--){
+            ans.push_back(vec[i]);
+        }
     }
     vector <int> boundary(Node *root)
     {
         //Your code here
-        if(!root) return {};
+        
         vector<int>ans;
-        if(!isLeaf(root))ans.push_back(root->data);
-        left(root,ans);
-        leaf(root,ans);
-        right(root,ans);
+        if(!root)
+        return ans;
+        ans.push_back(root->data);
+        getLeft(root->left,ans);
+        if(!isLeaf(root))
+        getLeaf(root,ans);
+        getRight(root->right,ans);
         return ans;
     }
 };
