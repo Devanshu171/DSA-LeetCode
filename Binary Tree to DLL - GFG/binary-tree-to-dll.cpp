@@ -122,7 +122,6 @@ class Solution
         // your code here
         Node *head=NULL;
         stack<Node*>st;
-        // st.push(root);
         Node *curt=root,*curl;
         while(curt || !st.empty()){
             if(curt){
@@ -146,7 +145,7 @@ class Solution
                 curt=right;
             }
         }
-        curl->right=NULL;
+        // curl->right=NULL;
         // print(head);
                     
         return head;
