@@ -96,7 +96,9 @@ class Solution {
     string solve(Node *node,unordered_map<string,int>&mpp){
         if(!node)return "";
         
-        string str=solve(node->left,mpp)+"#"+to_string(node->data)+"#"+solve(node->right,mpp);
+        string left=solve(node->left,mpp);
+        string right=solve(node->right,mpp);
+        string str=left+"#"+to_string(node->data)+"#"+right;
         if(node->left && node->right){
             mpp[str]++;
         }
