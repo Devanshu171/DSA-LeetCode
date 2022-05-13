@@ -117,8 +117,8 @@ struct Node
 class Solution
 {
 public:
-  int ans=INT_MIN,maxlevel=0;
-    void traverse(Node* r,int level,int sum){
+  
+    void traverse(Node* r,int level,int sum, int &ans,int &maxlevel){
         if(r==NULL) return;
         sum+=r->data;
         if(level>maxlevel){
@@ -128,12 +128,13 @@ public:
         else if(level==maxlevel){
             ans=max(ans,sum);
         }
-        traverse(r->left,level+1,sum);
-        traverse(r->right,level+1,sum);
+        traverse(r->left,level+1,sum,ans,maxlevel);
+        traverse(r->right,level+1,sum,ans,maxlevel);
     }
     int sumOfLongRootToLeafPath(Node *root)
     {
-        traverse(root,1,0);
+        int ans=INT_MIN,maxlevel=0;
+        traverse(root,1,0,ans,maxlevel);
         return ans;
     }
 };
