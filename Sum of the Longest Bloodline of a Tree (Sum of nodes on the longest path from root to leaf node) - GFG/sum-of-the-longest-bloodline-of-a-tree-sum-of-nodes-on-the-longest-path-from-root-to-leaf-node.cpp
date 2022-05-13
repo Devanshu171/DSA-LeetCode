@@ -121,13 +121,11 @@ public:
     void traverse(Node* r,int level,int sum, int &ans,int &maxlevel){
         if(r==NULL) return;
         sum+=r->data;
-        if(level>maxlevel){
-            ans=sum;
+        if(level>=maxlevel){
+            ans=max(ans,sum);
             maxlevel=level;
         }
-        else if(level==maxlevel){
-            ans=max(ans,sum);
-        }
+       
         traverse(r->left,level+1,sum,ans,maxlevel);
         traverse(r->right,level+1,sum,ans,maxlevel);
     }
