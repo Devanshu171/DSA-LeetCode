@@ -107,6 +107,8 @@ class Solution
 	}
 	solve(node->left,sum,k,ans,temp);
 	solve(node->right,sum,k,ans,temp);
+	temp.pop_back();
+	sum-=node->key;
 
 	
 }
