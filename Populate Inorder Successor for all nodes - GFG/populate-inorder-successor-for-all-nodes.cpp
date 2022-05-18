@@ -126,22 +126,26 @@ struct Node
 class Solution
 {
 public:
-    
-    void solve(Node *root,Node *&parent){
-        if(!root)
-        return;
-        
-        solve(root->right,parent);
-        root->next=parent;
-        parent=root;
-        solve(root->left,parent);
-        return;
-    }
+
     void populateNext(Node *root)
     {
-        //code her
-        Node *parent=NULL;
-        solve(root,parent);
+        //code here
+        stack<Node*>st;
+        Node *cur=root;
+        Node *prev=NULL;
+        
+        while(cur || !st.empty()){
+            if(cur){
+                st.push(cur);
+                cur=cur->left;
+            }else{
+                Node *temp=st.top();
+                st.pop();
+                if(prev) prev->next=temp;
+                prev=temp;
+                cur=temp->right;
+            }
+        }
     }
 };
 
