@@ -97,29 +97,25 @@ struct Node {
 class Solution
 {
     public:
-    int kthLargest(Node *root, int k)
+    int kthLargest(Node *root, int &k)
     {
         //Your code here
-    Node *cur=root;
-    stack<Node*>st;
-    int ans;
-    while(cur || !st.empty()){
-        if(cur){
-            st.push(cur);
-            cur=cur->right;
-        }else{
-            Node *temp=st.top();
-            st.pop();
-            k--;
-            if(k==0)
-            {
-               ans=temp->data;
-               break;
-            }
-            cur=temp->left;
+        if(!root)
+        return -1;
+       int right=kthLargest(root->right,k);
+       
+        k--;
+        if(k==0){
+            return root->data;
         }
-    }
-    return ans;
+      int left=kthLargest(root->left,k);
+      
+      if(left!=-1)
+      return left;
+      else
+      return right;
+        
+        
     }
 };
 
