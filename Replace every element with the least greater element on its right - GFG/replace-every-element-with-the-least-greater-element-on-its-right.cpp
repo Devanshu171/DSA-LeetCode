@@ -17,19 +17,25 @@ class Solution{
             left=right=NULL;
         }
     };
-    Node* InsertInBST(Node *&root,int x){
+    void InsertInBST(Node *&root,int x){
         if(!root){
             root=new Node(x);
-            return root;
+            
         }
-        
-        if(root->data>x){
-       root->left=InsertInBST(root->left,x);
-        }else{
-           root->right=InsertInBST(root->right,x);
-        }
-        
-        return root;
+            Node *cur=root,*prev=NULL;
+            while(cur){
+                prev=cur;
+                if(cur->data<x){
+                    cur=cur->right;
+                }else{
+                    cur=cur->left;
+                }
+            }
+            if(prev->data<x){
+                prev->right=new Node(x);
+            }else{
+                prev->left=new Node(x);
+            }
           
     }
     int getUpperBound(Node *root,int x){
