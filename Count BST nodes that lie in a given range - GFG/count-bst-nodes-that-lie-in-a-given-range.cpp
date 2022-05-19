@@ -109,27 +109,23 @@ public:
 //     return left+right+1;
     
 // }
-void solve(Node *root,int l,int h,int &ans){
-    if(!root)
-    return;
-    if(root->data>=l && root->data<=h){
-        ans++;
-    solve(root->left,l,h,ans);
-    solve(root->right,l,h,ans);
-    }else{
-        if(root->data>h){
-            solve(root->left,l,h,ans);
-        }else if(root->data<l){
-            solve(root->right,l,h,ans);
-        }
-    }
-}
+
     int getCount(Node *root, int l, int h)
     {
         
-        int ans=0;
-        solve(root,l,h,ans);
-        return ans;
+        if(!root)
+        return 0;
+        if(root->data>=l && root->data<=h){
+          
+ return 1+getCount(root->left,l,h) + getCount(root->right,l,h);
+ 
+        }else{
+            if(root->data>h){
+                getCount(root->left,l,h);
+            }else if(root->data<l){
+                getCount(root->right,l,h);
+            }
+        }
       
     }
 };
