@@ -114,9 +114,15 @@ void solve(Node *root,int l,int h,int &ans){
     return;
     if(root->data>=l && root->data<=h){
         ans++;
-    }
     solve(root->left,l,h,ans);
     solve(root->right,l,h,ans);
+    }else{
+        if(root->data>h){
+            solve(root->left,l,h,ans);
+        }else if(root->data<l){
+            solve(root->right,l,h,ans);
+        }
+    }
 }
     int getCount(Node *root, int l, int h)
     {
