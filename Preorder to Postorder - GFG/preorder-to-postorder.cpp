@@ -174,9 +174,29 @@ Node *buildBST(int arr[],int &i,int n,int ub){
     root->right=buildBST(arr,i,n,ub);
     return root;
 }
+void solve(int arr[],int &i,int n,int ub,vector<int>&post){
+    if(i>=n || arr[i]>ub)
+    return;
+    
+    int bound=arr[i];
+    i++;
+    
+    solve(arr,i,n,bound-1,post);
+    solve(arr,i,n,ub,post);
+    post.push_back(bound);
+    
+}
 Node* post_order(int pre[], int size)
 {
     // sort(pre,pre+size);
     int i=0;
-    return buildBST(pre,i,size,INT_MAX);
+    int j=0;
+    vector<int>post;
+    solve(pre,j,size,INT_MAX,post);
+    for(int i=0;i<size;i++){
+        cout<<post[i]<<" ";
+    }
+    // cout<<endl;
+    return NULL;
+    // return buildBST(pre,i,size,INT_MAX);
 }
