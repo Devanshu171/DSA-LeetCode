@@ -106,7 +106,7 @@ bool solve(Node *root,int min,int max){
         return false;
     }
     
-    if(min==root->data && max==root->data)
+    if(min==max)
     return true;
     
   if(solve(root->left,min,root->data-1))
