@@ -99,21 +99,23 @@ void inorder(struct Node* root)
 class Solution
 {
     public:
-    void solve(Node *root,Node *&prev){
-         //code here
-        if(!root){
-            return;
-        }
-        solve(root->right,prev);
-        solve(root->left,prev);
-        root->left=NULL;
-        root->right=prev;
-        prev=root;
-    }
     void flatten(Node *root)
     {
-        Node *prev=NULL;
-        solve(root,prev);  
+        //code here
+        
+        Node *cur=root;
+        while(cur){
+            if(cur->left){
+                Node *pre=cur->left;
+                while(pre->right){
+                    pre=pre->right;
+                }
+                pre->right=cur->right;
+                cur->right=cur->left;
+                cur->left=NULL;
+            }
+            cur=cur->right;
+        }
     }
 };
 
