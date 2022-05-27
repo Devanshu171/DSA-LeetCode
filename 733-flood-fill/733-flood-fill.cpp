@@ -1,25 +1,21 @@
 class Solution {
 public:
-    bool isValid(int i,int j,int n,int m,int color,vector<vector<int>>image){
-        if(i>=0 && i<n && j>=0 && j<m && image[i][j]==color) return true;
-        return false;
-    }
-    void fill(int i,int j,int n,int m,int newColor,int oldcolor,vector<vector<int>>&image){
-        image[i][j]=newColor;
-        int di[]={1,-1,0,0};
-        int dj[]={0,0,-1,1};
-        for(int k=0;k<4;k++){
-            if(isValid(i+di[k],j+dj[k],n,m,oldcolor,image)){
-                fill(i+di[k],j+dj[k],n,m,newColor,oldcolor,image);
-            }
-        }
+    void solve(vector<vector<int>>& image, int x, int y,int n,int m, int newColor,int prevColor){
+        if(x<0 || x>=n || y<0 || y>=m || image[x][y]!=prevColor || newColor==prevColor) return;
+        image[x][y]=newColor;
+        int dx[]={0,0,1,-1};
+        int dy[]={1,-1,0,0};
         
+        for(int i=0;i<4;i++){
+            int newX=x+dx[i];
+            int newY=y+dy[i];
+            solve(image,newX,newY,n,m,newColor,prevColor);
+        }
     }
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         int n=image.size();
         int m=image[0].size();
-        if(image[sr][sc]!=newColor)
-        fill(sr,sc,n,m,newColor,image[sr][sc],image);
+        solve(image,sr,sc,n,m,newColor,image[sr][sc]);
         return image;
     }
 };
