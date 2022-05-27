@@ -22,45 +22,28 @@ public:
 class Solution {
 public:
     Node* cloneGraph(Node* node) {
-        unordered_map<int,Node*>mpp;
+        unordered_map<Node*,Node*>mpp;
         if(!node)
             return NULL;
         queue<Node*>q;
-        vector<bool>vis(101,0);
         q.push(node);
-        vis[1]=1;
+        mpp[node]=new Node(node->val,{});
+
         while(!q.empty()){
-            int val=q.front()->val;
-            auto list=q.front()->neighbors;
+            Node *cur=q.front();
             q.pop();
-            vector<Node*>vec;
-            for(auto it:list){
-                if(mpp.find(it->val)!=mpp.end()){
-                    vec.push_back(mpp[it->val]);
-                }else{
-                    mpp[it->val]=new Node(it->val);
-                    vec.push_back(mpp[it->val]);
-                }
-            }
-            if(mpp.find(val)==mpp.end()){
-            Node *temp=new Node(val,vec);
-            mpp[val]=temp;
-            }else{
-                // for(int i=0;i<vec.size();i++){
-                //     mpp[val]->neighbors.push_back(vec[i]);
-                // }
-                 mpp[val]->neighbors=vec;
-            }
-           
-            for(auto it:list){
-                if(!vis[it->val]){
-                     vis[it->val]=1;
+
+            for(auto it:cur->neighbors){
+                
+                if(mpp.find(it)==mpp.end()){
+                    mpp[it]=new Node(it->val,{});
                     q.push(it);
                 }
+             
+                mpp[cur]->neighbors.push_back(mpp[it]);
             }
-            
-            
-            }
-        return mpp[1];
+             
+        }
+        return mpp[node];
     }
 };
