@@ -11,8 +11,8 @@ public:
 	    dist[0]=0;
 	    for(int i=1;i<=n-1;i++){
 	        for(auto it:adj){
-                int  v=it[0];
-	            int u=it[1];
+                int  v=it[1];
+	            int u=it[0];
 	            int w=it[2];
 	            if(dist[u]+w<dist[v]){
 	                dist[v]=dist[u]+w;
@@ -21,8 +21,8 @@ public:
 	    }
 	    
 	     for(auto it:adj){
-	            int  v=it[0];
-	            int u=it[1];
+	            int  v=it[1];
+	            int u=it[0];
 	            int w=it[2];
 	            if(dist[u]+w<dist[v]){
                     return true;	            
