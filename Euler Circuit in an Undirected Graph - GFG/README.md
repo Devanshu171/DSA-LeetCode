@@ -1,5 +1,5 @@
 # Euler Circuit in an Undirected Graph
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Eulerian Path&nbsp;is a path in a graph that visits every edge exactly once. Eulerian Circuit is an Eulerian Path that starts and ends on the same vertex. Given the number of vertices V and adjacency list adj denoting the graph.&nbsp;Your task is to find that there exists the Euler circuit or not</span></p>
 
