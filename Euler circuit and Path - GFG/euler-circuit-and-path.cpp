@@ -29,13 +29,13 @@ void dfs(int node,vector<int>adj[],vector<int>&vis){
                 }
 	    
 	   // cout<<node<<endl;
-	    vector<int>vis(V,0);
-	    dfs(node,adj,vis);
-	    for(int i=0;i<V;i++){
-	        if(vis[i]==0 && adj[i].size()>0){
-	            return 0;
-	        }
-	    }
+	   // vector<int>vis(V,0);
+	   // dfs(node,adj,vis);
+	   // for(int i=0;i<V;i++){
+	   //     if(vis[i]==0 && adj[i].size()>0){
+	   //         return 0;
+	   //     }
+	   // }
 	    if(oddCount==0)
 	    return 2;
 	    else if(oddCount==2)
