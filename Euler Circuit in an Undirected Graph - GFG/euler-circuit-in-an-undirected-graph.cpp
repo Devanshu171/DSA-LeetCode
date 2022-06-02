@@ -17,7 +17,7 @@ void dfs(int node,vector<int>adj[],vector<int>&vis){
 	bool isEularCircuitExist(int n, vector<int>adj[]){
 	    // Code here
 	    int maxDeg=-1;
-    int node;
+    int node=0;
     // int countOdd=0;
     for(int i=0;i<n;i++){
         if(adj[i].size() & 1)
@@ -27,14 +27,14 @@ void dfs(int node,vector<int>adj[],vector<int>&vis){
             node=i;
         }
     }
+    vector<int>vis(n,0);
+    dfs(node,adj,vis);
+    for(int i=0;n>1 && i<n;i++){
+        if(vis[i]==0 && adj[i].size()>0){
+            return false;
+        }
+    }
 
-    // vector<int>vis(n,0);
-    // dfs(node,adj,vis);
-    // for(int i=0;i<n;i++){
-    //     if(vis[i]==0 && adj[i].size()>1){
-    //         return false;
-    //     }
-    // }
     
     return true;
 	}
