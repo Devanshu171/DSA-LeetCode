@@ -16,13 +16,13 @@ class Solution{
         //code here
         // if(A.size()!=B.size())
         // return false;
-        unordered_map<int,int>mpp1,mpp2;
+        unordered_map<int,int>mpp;
         for(int i=0;i<N;i++){
-          mpp1[A[i]]++;
-          mpp2[B[i]]++;
+          mpp[A[i]]++;
+          mpp[B[i]]--;
         }
-        for(int i=0;i<N;i++){
-            if(mpp1[A[i]]!=mpp2[A[i]])
+        for(auto it:mpp){
+            if(it.second!=0)
             return false;
         }
         
