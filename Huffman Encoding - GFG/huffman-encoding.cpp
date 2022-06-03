@@ -7,12 +7,12 @@ class Solution
 {
 	public:
 	    struct Node{
-	        string symbol;
+	       // string symbol;
 	        int freq;
 	        Node* left,*right;
 	        bool isLeaf;
-	        Node(string symbol,int freq){
-	            this->symbol=symbol;
+	        Node(int freq){
+	           // this->symbol=symbol;
 	            this->freq=freq;
 	            left=right=NULL;
 	            isLeaf=false;
@@ -41,7 +41,7 @@ class Solution
 		    Node *node,*node1,*node2,*newNode,*root;
 		    vector<string>res;
 		    for(int i=0;i<N;i++){
-		        node=new Node(string(1,s[i]),f[i]);
+		        node=new Node(f[i]);
 		        node->isLeaf=true;
 		        pq.push(node);
 		    }
@@ -51,7 +51,7 @@ class Solution
 		        pq.pop();
 		        node2=pq.top();
 		        pq.pop();
-		        newNode=new Node((node1->symbol+node2->symbol),node1->freq+node2->freq);
+		        newNode=new Node(node1->freq+node2->freq);
 		        newNode->left=node1;
 		        newNode->right=node2;
 		        pq.push(newNode);
