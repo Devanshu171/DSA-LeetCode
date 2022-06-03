@@ -27,32 +27,38 @@ class Solution
 {
     public:
     //Function to find the maximum profit and the number of jobs done.
+    static bool cmp(Job &a ,Job &b){
+            return a.profit>b.profit;
+        }
+    
     vector<int> JobScheduling(Job arr[], int n) 
     { 
-  
-        int mxd=0;
-        for(int i=0;i<n;i++){
-            mxd=max(mxd,arr[i].dead);   
-        }
-        vector<int>timeSlot(mxd+1,0);
-        sort(arr,arr+n,[](Job &a,Job &b){
-            return a.profit>b.profit;
-        });
-        int Tprofit=0,job=0;
-        for(int i=0;i<n;i++){
-            int deadline=arr[i].dead;
-            int profit=arr[i].profit;
-        
-            for(int i=timeSlot.size()-1;i>0;i--){
-                if(timeSlot[i]==0 && i<=deadline){
-                    timeSlot[i]=1;
-                    job++;
-                    Tprofit+=profit;
-                    break;
+        // your code here
+                sort(arr,arr+n,cmp);
+                int total=0;
+                int jobs=0;
+                int maxdead=-1;
+                for(int i=0;i<n;i++){
+                    maxdead=max(maxdead,arr[i].dead);
                 }
-            }
-        }
-        return {job,Tprofit};
+                vector<int>slot(maxdead+1,-1);
+                for(int i=0;i<n;i++){
+                    int deadline=arr[i].dead;
+                    int profit=arr[i].profit;
+                    for(int j=deadline;j>=1;j--){
+                        if(slot[j]==-1){
+                            slot[j]=arr[i].id;
+                            total+=profit;
+                            jobs++;
+                            break;
+                        }
+                    }
+                }
+                
+                // for(int i=1;i<=maxdead;i++){
+                //     cout<<slot[i]<<endl;
+                // }
+                return {jobs,total};
     } 
 };
 
