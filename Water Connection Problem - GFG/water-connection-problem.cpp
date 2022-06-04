@@ -6,12 +6,12 @@ using namespace std;
 class Solution
 {
     public:
-    void dfs(int node,int start,int mini,vector<vector<int>>adj[],vector<vector<int>>&ans,vector<int>&vis,vector<int>&out){
-        vis[node]=1;
+    void dfs(int node,int start,int mini,vector<vector<int>>adj[],vector<vector<int>>&ans,vector<int>&out){
+      
         for(auto it:adj[node]){
-            if(!vis[it[0]] && out[it[0]]==1){
+            if(out[it[0]]==1){
                 mini=min(mini,it[1]);
-                dfs(it[0],start,mini,adj,ans,vis,out);
+                dfs(it[0],start,mini,adj,ans,out);
             }else if(out[it[0]]==0){
                  mini=min(mini,it[1]);
                 ans.push_back({start,it[0],mini});
@@ -37,12 +37,12 @@ class Solution
                 tap++;
             }
         }
-        vector<int>temp;
+        // vector<int>temp;
         
         for(int i=1;i<=n;i++){
-            if(in[i]==0 && out[i]!=0 && !vis[i]){
+            if(in[i]==0 && out[i]!=0){
                 int mini=INT_MAX;
-                dfs(i,i,mini,adj,ans,vis,out);
+                dfs(i,i,mini,adj,ans,out);
             }
         }
         
