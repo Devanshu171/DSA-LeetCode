@@ -19,7 +19,7 @@ public:
                 N-=cur[i];
                 ans.push_back(cur[i]);
             }
-            if(N==0)break;
+            // if(N==0)break;
         }
         return ans;
     }
