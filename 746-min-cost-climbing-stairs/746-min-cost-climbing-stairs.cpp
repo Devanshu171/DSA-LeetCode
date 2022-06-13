@@ -65,13 +65,8 @@ dp[n]=min(solve(n-1,cost,dp),solve(n-2,cost,dp));
     
     ********** tablution DP*************
                 bottom up
-                
-    
-    
-    
-    */
-
-    int minCostClimbingStairs(vector<int>& cost) {
+                1d array
+     int minCostClimbingStairs(vector<int>& cost) {
         int n=cost.size();
         vector<int>dp(n+1);
         dp[0]=cost[0];
@@ -79,7 +74,24 @@ dp[n]=min(solve(n-1,cost,dp),solve(n-2,cost,dp));
         for(int i=2;i<n;i++){
             dp[i]=min(dp[i-1],dp[i-2])+cost[i];
         }
-return min(dp[n-1],dp[n-2]);
+                return min(dp[n-1],dp[n-2]);
+        
+    }
+    
+    
+    */
+
+    int minCostClimbingStairs(vector<int>& cost) {
+        int n=cost.size();
+        // vector<int>dp(n+1);
+        int prev1=cost[1];
+        int prev2=cost[0];
+        for(int i=2;i<n;i++){
+            int cur=min(prev2,prev1)+cost[i];
+            prev2=prev1;
+            prev1=cur;
+        }
+            return min(prev2,prev1);
         
     }
 };
