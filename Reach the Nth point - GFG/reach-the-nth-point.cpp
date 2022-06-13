@@ -5,17 +5,18 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
 	public:
+	const int m=1000000000+7;
+	int solve(int n,vector<int>&dp){
+	    if(dp[n]!=-1)return dp[n];
+	    if(n==1 || n==0) return 1;
+	    dp[n-1]=solve(n-1,dp);
+	    dp[n-2]=solve(n-2,dp);
+	    
+	    return (dp[n-1]+dp[n-2])%m;
+	}
 		int nthPoint(int n){
-		    // Code here
-		    int m=1000000000+7;
-		    if(n<=1) return n;
-		   int  prev1=1,prev2=1;
-		   for(int i=2;i<=n;i++){
-		       int cur=(prev1+prev2)%m;
-		       prev2=prev1;
-		       prev1=cur;
-		   }
-		   return prev1;
+		    vector<int>dp(n+1,-1);
+		    return solve(n,dp);
 		}
 };
 
