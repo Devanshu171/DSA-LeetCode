@@ -19,19 +19,32 @@ public:
     
              // vector<int>dp(n,-1);   
         // return solve(nums,n-1,dp);
-           vector<int>dp(n,0);   
-	   // return solve(arr,n-1,dp);
-	   dp[0]=nums[0];
+//            vector<int>dp(n,0);   
+// 	   // return solve(arr,n-1,dp);
+// 	   dp[0]=nums[0];
+// 	   for(int i=1;i<n;i++){
+	       
+// 	       int withCur=nums[i];
+	       
+// 	       if(i>1) withCur+=dp[i-2];
+// 	       int withoutCur=dp[i-1];
+	       
+// 	       dp[i]=max(withoutCur,withCur);
+// 	   }
+	   
+	   // return dp[n-1];
+        
+         int prev1=nums[0],prev2;
 	   for(int i=1;i<n;i++){
 	       
 	       int withCur=nums[i];
 	       
-	       if(i>1) withCur+=dp[i-2];
-	       int withoutCur=dp[i-1];
-	       
-	       dp[i]=max(withoutCur,withCur);
+	       if(i>1) withCur+=prev2;
+	       int withoutCur=prev1;
+	       prev2=prev1;
+	       prev1=max(withoutCur,withCur);
 	   }
 	   
-	   return dp[n-1];
+	   return prev1;
     }
 };
