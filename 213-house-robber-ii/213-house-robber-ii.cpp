@@ -5,9 +5,7 @@ public:
 	   int prev1=0,prev2=0;
 	   for(int i=lo;i<=hi;i++){
 	       
-	       int withCur=arr[i];
-	       
-	       if(i>1) withCur+=prev2;
+	       int withCur=arr[i]+prev2;
 	       int withoutCur=prev1;
 	       prev2=prev1;
 	       prev1=max(withoutCur,withCur);
