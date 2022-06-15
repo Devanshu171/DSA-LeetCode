@@ -27,8 +27,20 @@ public:
 	int findMaxSum(int *arr, int n) {
 	    // code here
 
-             vector<int>dp(n,-1);   
-	    return solve(arr,n-1,dp);
+             vector<int>dp(n,0);   
+	   // return solve(arr,n-1,dp);
+	   dp[0]=arr[0];
+	   for(int i=1;i<n;i++){
+	       
+	       int withCur=arr[i];
+	       
+	       if(i>1) withCur+=dp[i-2];
+	       int withoutCur=dp[i-1];
+	       
+	       dp[i]=max(withoutCur,withCur);
+	   }
+	   
+	   return dp[n-1];
 	}
 };
 
