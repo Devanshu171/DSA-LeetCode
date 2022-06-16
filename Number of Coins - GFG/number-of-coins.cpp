@@ -23,9 +23,20 @@ class Solution{
 	int minCoins(int nums[], int M, int V) 
 	{ 
 	    // Your code goes here4
-	    vector<int>dp(V+1,-1);
-    int ans=solve(V,nums,M,dp);
-    return   ans==INT_MAX?-1:ans;
+	   // vector<int>dp(V+1,-1);
+    // int ans=solve(V,nums,M,dp);
+     vector<int>dp(V+1,INT_MAX);
+            dp[0]=0;
+            
+   for(int i=1;i<=V;i++){
+    for(int j=0;j<M;j++){
+        if(i-nums[j]>=0 && dp[i-nums[j]]!=INT_MAX)
+        dp[i]=min(dp[i],dp[i-nums[j]]+1);
+    }
+   }
+    
+    return dp[V]==INT_MAX?-1:dp[V];
+    // return   ans==;
 	} 
 	  
 };
