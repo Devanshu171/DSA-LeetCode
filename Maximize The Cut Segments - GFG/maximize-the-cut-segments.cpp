@@ -17,11 +17,7 @@ class Solution
     if(dp[n]!=-1) return dp[n];
     int maxi=INT_MIN;
     for(int i=0;i<3;i++){
-        int seg=solve(n-arr[i],arr,dp);
-        if(seg!=INT_MIN){
-            maxi=max(maxi,seg+1); 
-        }
-        
+        maxi=max(maxi, solve(n-arr[i],arr,dp)+1); 
     }
     return dp[n]= maxi;
 }
@@ -31,7 +27,7 @@ class Solution
         int arr[3]={x,y,z};
     vector<int>dp(n+1,-1);
     int ans= solve(n,arr,dp);
-    return ans==INT_MIN?0:ans;
+    return ans<0?0:ans;
     }
 };
 
