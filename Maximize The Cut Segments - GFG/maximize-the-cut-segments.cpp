@@ -23,7 +23,7 @@ class Solution
     }
 
     int solveTabu(int n,int arr[]){
-        vector<int>dp(n+1,INT_MIN);
+        vector<int>dp(n+1,-1);
         dp[0]=0;
         for(int len=1;len<=n;len++){
             
