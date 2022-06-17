@@ -18,16 +18,32 @@ class Solution
     int maxi=INT_MIN;
     for(int i=0;i<3;i++){
         maxi=max(maxi, solve(n-arr[i],arr,dp)+1); 
+        }
+        return dp[n]= maxi;
     }
-    return dp[n]= maxi;
-}
+
+    int solveTabu(int n,int arr[]){
+        vector<int>dp(n+1,INT_MIN);
+        dp[0]=0;
+        for(int len=1;len<=n;len++){
+            
+            for(int i=0;i<3;i++){
+                if(len>=arr[i] && dp[len-arr[i]]>=0){
+                    dp[len]=max(dp[len],dp[len-arr[i]]+1);
+                }
+            }
+        }
+        
+        return dp[n]<0?0:dp[n];
+    }
     int maximizeTheCuts(int n, int x, int y, int z)
     {
         //Your code here
         int arr[3]={x,y,z};
-    vector<int>dp(n+1,-1);
-    int ans= solve(n,arr,dp);
-    return ans<0?0:ans;
+        return solveTabu(n,arr);
+    // vector<int>dp(n+1,-1);
+    // int ans= solve(n,arr,dp);
+    // return ans<0?0:ans;
     }
 };
 
