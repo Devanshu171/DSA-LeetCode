@@ -11,6 +11,7 @@ public:
    }
     return ans==INT_MAX?ans:ans+grid[i][j];
 }
+    
 int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
    
     if(i==0) return grid[i][j];
@@ -23,6 +24,8 @@ int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
    }
     return dp[i][j]= ans==INT_MAX?ans:ans+grid[i][j];
 }
+    
+    
 int solveTabu(vector<vector<int>>&grid){
     int n=grid.size();
            vector<vector<int>>dp(n,vector<int>(n,0));
@@ -44,9 +47,31 @@ int solveTabu(vector<vector<int>>&grid){
            for(int i=0;i<n;i++){
                ans=min(ans,dp[n-1][i]);
            }
-           return ans;
-
+           return ans;  
+}
     
+    
+    int solveTabuSo(vector<vector<int>>&grid){
+    int n=grid.size();
+      vector<int>prev(grid[0]);
+           for(int i=1;i<n;i++){
+               vector<int>cur(n,0);
+               for(int j=0;j<n;j++){
+                     int ans=INT_MAX;
+           for(int l=0;l<n;l++ ){
+               if(l!=j)
+               ans=min(ans,prev[l]);
+           }
+         cur[j]=ans+grid[i][j];
+                        
+               }
+               prev=cur;
+           }
+           int ans=INT_MAX;
+           for(int i=0;i<n;i++){
+               ans=min(ans,prev[i]);
+           }
+           return ans;  
 }
     int minFallingPathSum(vector<vector<int>>& grid) {
           int ans=INT_MAX;
@@ -59,6 +84,7 @@ int solveTabu(vector<vector<int>>&grid){
         //     ans=min(ans,solveMemo(n-1,i,grid,dp));
         // }
         // return ans;
-        return solveTabu(grid);
+        // return solveTabu(grid);
+        return solveTabuSo(grid);
     }
 };
