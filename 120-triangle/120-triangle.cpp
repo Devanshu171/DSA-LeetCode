@@ -24,18 +24,26 @@ public:
         return dp[i][j]= min(fs,ss)+triangle[i][j];
         
     }
-//     int solveTabu(vector<vector<int>>& triangle){
-//         int n=triangle.size();
-//                 vector<vector<int>>dp(n,vector<int>(n,0));
-//         for(int i=n-1,i>=0;i--){
-//             for(int j=0;j<i+1,j++){
-//                 if()
-//             }
-//         }
+    int solveTabu(vector<vector<int>>& triangle){
+        int n=triangle.size();
+                vector<vector<int>>dp(n,vector<int>(n,0));
+        for(int i=n-1;i>=0;i--){
+            for(int j=i;j>=0;j--){
+                if(i==n-1) dp[i][j]=triangle[i][j];
+                else{
+                    int fs=INT_MAX,ss=INT_MAX;
+                    fs=dp[i+1][j];
+                     ss=dp[i+1][j+1];
+                        dp[i][j]=min(fs,ss)+triangle[i][j];
+                }
+            }
+        }
+        
+        return dp[0][0];
 
         
         
-//     }
+    }
    
     int minimumTotal(vector<vector<int>>& triangle) {
          
@@ -45,6 +53,7 @@ public:
         vector<vector<int>>dp(n,vector<int>(n,INT_MAX));
 
       // return solveRec(0,0,triangle);
-        return solveMemo(0,0,triangle,dp);
+        // return solveMemo(0,0,triangle,dp);
+        return solveTabu(triangle);
     }
 };
