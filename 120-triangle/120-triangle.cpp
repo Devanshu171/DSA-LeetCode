@@ -40,9 +40,23 @@ public:
         }
         
         return dp[0][0];
+    }
+      int solveTabuSo(vector<vector<int>>& triangle){
+        int n=triangle.size();
+                vector<int>prev(triangle.back());
+        for(int i=n-2;i>=0;i--){
+            vector<int>cur(n,0);
+            for(int j=i;j>=0;j--){
+              
 
+                   int fs=prev[j];
+                   int  ss=prev[j+1];
+                        cur[j]=min(fs,ss)+triangle[i][j];
+            }
+            prev=cur;
+        }
         
-        
+        return prev[0];
     }
    
     int minimumTotal(vector<vector<int>>& triangle) {
@@ -54,6 +68,7 @@ public:
 
       // return solveRec(0,0,triangle);
         // return solveMemo(0,0,triangle,dp);
-        return solveTabu(triangle);
+        // return solveTabu(triangle);
+        return solveTabuSo(triangle);
     }
 };
