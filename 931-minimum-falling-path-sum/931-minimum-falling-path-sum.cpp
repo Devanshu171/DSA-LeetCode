@@ -10,6 +10,7 @@ public:
     
     return min(up,min(topRight,topLeft))+grid[i][j];
 }
+    
 int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
     if(i<0 || j<0 || j==grid.size()) return INT_MAX;
     if(i==0) return grid[i][j];
@@ -21,6 +22,7 @@ int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
     
     return dp[i][j]= min(up,min(topRight,topLeft))+grid[i][j];
 }
+    
 int solveTabu(vector<vector<int>>&grid){
     int n=grid.size();
            vector<vector<int>>dp(n,vector<int>(n,0));
@@ -46,6 +48,30 @@ int solveTabu(vector<vector<int>>&grid){
 
     
 }
+    int solveTabuSo(vector<vector<int>>&grid){
+    int n=grid.size();
+           vector<int>prev(grid[0]);
+           for(int i=1;i<n;i++){
+               vector<int>cur(n,0);
+               for(int j=0;j<n;j++){
+                       int up=INT_MAX,topRight=INT_MAX,topLeft=INT_MAX;
+                        if(i>0)        up=prev[j];
+                        if(i>0 && j<n-1)  topRight=prev[j+1];
+                        if(i>0 && j>0)   topLeft=prev[j-1];
+        
+     cur[j]= min(up,min(topRight,topLeft))+grid[i][j];
+                       
+               }
+               prev=cur;
+           }
+           int ans=INT_MAX;
+           for(int i=0;i<n;i++){
+               ans=min(ans,prev[i]);
+           }
+           return ans;
+
+    
+}
     int minFallingPathSum(vector<vector<int>>& grid) {
          int ans=INT_MAX;
         int n=grid.size();
@@ -53,10 +79,11 @@ int solveTabu(vector<vector<int>>&grid){
         // for(int i=0;i<n;i++){
         //     ans=min(ans,solve(n-1,i,grid));
         // }
-         for(int i=0;i<n;i++){
-            ans=min(ans,solveMemo(n-1,i,grid,dp));
-        }
-        return ans;
+        //  for(int i=0;i<n;i++){
+        //     ans=min(ans,solveMemo(n-1,i,grid,dp));
+        // }
+        // return ans;
         // return solveTabu(grid);
+        return solveTabuSo(grid);
     }
 };
