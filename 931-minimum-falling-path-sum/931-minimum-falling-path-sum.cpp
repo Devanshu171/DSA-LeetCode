@@ -1,7 +1,7 @@
 class Solution {
 public:
     int solve(int i,int j,vector<vector<int>>&grid){
-    if(i<0 && j<0) return INT_MAX;
+    if(i<0 || j<0 || j==grid.size()) return INT_MAX;
     if(i==0) return grid[i][j];
     
     int up=solve(i-1,j,grid);
@@ -47,16 +47,16 @@ int solveTabu(vector<vector<int>>&grid){
     
 }
     int minFallingPathSum(vector<vector<int>>& grid) {
-         int ans=0;
+         int ans=INT_MAX;
         int n=grid.size();
         vector<vector<int>>dp(n,vector<int>(n,-1));
         // for(int i=0;i<n;i++){
         //     ans=min(ans,solve(n-1,i,grid));
         // }
-        //  for(int i=0;i<n;i++){
-        //     ans=min(ans,solveMemo(n-1,i,grid,dp));
-        // }
-        // return ans;
-        return solveTabu(grid);
+         for(int i=0;i<n;i++){
+            ans=min(ans,solveMemo(n-1,i,grid,dp));
+        }
+        return ans;
+        // return solveTabu(grid);
     }
 };
