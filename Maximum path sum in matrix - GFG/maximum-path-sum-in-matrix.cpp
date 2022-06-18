@@ -30,6 +30,31 @@ int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
     
     return dp[i][j]= max(up,max(topRight,topLeft))+grid[i][j];
 }
+int solveTabu(vector<vector<int>>&grid){
+    int n=grid.size();
+           vector<vector<int>>dp(n,vector<int>(n,0));
+           for(int i=0;i<n;i++){
+               for(int j=0;j<n;j++){
+                   if(i==0) dp[i][j]=grid[i][j];
+                   else{
+                       int up=INT_MIN,topRight=INT_MIN,topLeft=INT_MIN;
+                        if(i>0)        up=dp[i-1][j];
+                        if(i>0 && j<n-1)  topRight=dp[i-1][j+1];
+                        if(i>0 && j>0)   topLeft=dp[i-1][j-1];
+        
+     dp[i][j]= max(up,max(topRight,topLeft))+grid[i][j];
+                       
+                   }
+               }
+           }
+           int ans=INT_MIN;
+           for(int i=0;i<n;i++){
+               ans=max(ans,dp[n-1][i]);
+           }
+           return ans;
+
+    
+}
     int maximumPath(int n, vector<vector<int>> grid)
     {
         // code here
@@ -38,10 +63,11 @@ int solveMemo(int i,int j,vector<vector<int>>&grid,vector<vector<int>>&dp){
         // for(int i=0;i<n;i++){
         //     ans=max(ans,solve(n-1,i,grid));
         // }
-         for(int i=0;i<n;i++){
-            ans=max(ans,solveMemo(n-1,i,grid,dp));
-        }
-        return ans;
+        //  for(int i=0;i<n;i++){
+        //     ans=max(ans,solveMemo(n-1,i,grid,dp));
+        // }
+        // return ans;
+        return solveTabu(grid);
     }
 };
 
