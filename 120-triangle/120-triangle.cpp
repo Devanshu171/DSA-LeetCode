@@ -31,9 +31,9 @@ public:
             for(int j=i;j>=0;j--){
                 if(i==n-1) dp[i][j]=triangle[i][j];
                 else{
-                    int fs=INT_MAX,ss=INT_MAX;
-                    fs=dp[i+1][j];
-                     ss=dp[i+1][j+1];
+                     // fs=INT_MAX,ss=INT_MAX;
+                   int fs=dp[i+1][j];
+                   int  ss=dp[i+1][j+1];
                         dp[i][j]=min(fs,ss)+triangle[i][j];
                 }
             }
