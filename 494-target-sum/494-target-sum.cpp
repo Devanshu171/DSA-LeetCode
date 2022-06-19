@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int solve(int i,vector<int>& nums, int target){
+    int solveRec(int i,vector<int>& nums, int target){
         if(i==nums.size()){
             if(target==0)
             return 1;
@@ -8,12 +8,27 @@ public:
             return 0;
         }
         
-        int pos=solve(i+1,nums,target-nums[i]);
-        int neg=solve(i+1,nums,target-(-nums[i]));
+        int pos=solveRec(i+1,nums,target-nums[i]);
+        int neg=solveRec(i+1,nums,target-(-nums[i]));
         
         return pos+neg;
     }
+    int solveMemo(int i,vector<int>& nums, int target,map<pair<int,int>,int>&dp){
+        if(i==nums.size()){
+            if(target==0)
+            return 1;
+            else 
+            return 0;
+        }
+        if(dp.find({i,target})!=dp.end()) return dp[{i,target}];
+        int pos=solveMemo(i+1,nums,target-nums[i],dp);
+        int neg=solveMemo(i+1,nums,target-(-nums[i]),dp);
+        
+        return dp[{i,target}]=pos+neg;
+    }
     int findTargetSumWays(vector<int>& nums, int target) {
-        return solve(0,nums,target);
+    map<pair<int,int>,int>dp;
+        // return solve(0,nums,target);
+        return solveMemo(0,nums,target,dp);
     }
 };
