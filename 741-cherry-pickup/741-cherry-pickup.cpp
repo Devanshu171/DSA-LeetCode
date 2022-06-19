@@ -7,13 +7,16 @@ public:
        
 
         int maxi=-1e8;
-        int dr=solveRec(i1+1,j1,i2,j2+1,grid);
+        
+         int dr=solveRec(i1+1,j1,i2,j2+1,grid);
          int rd=solveRec(i1,j1+1,i2+1,j2,grid);
          int rr=solveRec(i1,j1+1,i2,j2+1,grid);
          int dd=solveRec(i1+1,j1,i2+1,j2,grid);
+        
         maxi=max({dd,rr,dr,rd});
         if(i1==i2 && j1==j2) maxi+=grid[i1][j1];
         else maxi+=grid[i1][j1]+grid[i2][j2];
+        
         return maxi;
         
     }
