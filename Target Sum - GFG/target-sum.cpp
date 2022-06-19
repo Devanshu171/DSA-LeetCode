@@ -39,8 +39,8 @@ class Solution {
         
     int findTargetSumWays(vector<int>& nums, int target) {
     map<pair<int,int>,int>dp;
-        // return solve(0,nums,target);
-        return solveMemo(0,nums,target,dp);
+        return solveRec(0,nums,target);
+        // return solveMemo(0,nums,target,dp);
     }
     
 };
