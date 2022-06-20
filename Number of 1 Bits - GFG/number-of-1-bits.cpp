@@ -9,8 +9,9 @@ class Solution {
         // Write Your Code here
          int cnt = 0;
        while(n){
-           if(n % 2 == 1) cnt++;
-           n /= 2;
+         if(1 & n ) cnt++;
+         n=n>>1;
+       ;
        }
        
        return (cnt);
