@@ -40,30 +40,24 @@ public:
                     node=node->get(bit);
                 }
             node->setEnd();
-            // cout<<n<<" "<<num<<" inset"<<endl;
         }
         int getMax(int n){
             int num=0;
             Node *node=root;
             for(int i=31;i>=0;i--){
-                if(n>>i & 1){
-                    if(node->containsKey(0)){ 
-                        node=node->get(0);
-                    }else{
-                         num=(num|1<<i);
-                        node=node->get(1);
-                    }
+                
+                  int bit=(n>>i & 1);
+                if(node->containsKey(!bit)){
+                    if(bit==0) num=(num |1<<i); 
+                    node=node->get(!bit);
                 }else{
-                    if(node->containsKey(1)){
-                        num=(num|1<<i);
-                        node=node->get(1);
-                    }else{
-                        node=node->get(0);
-                    }
+                    if(bit==1) num=(num |1<<i);
+                     node=node->get(bit);
                 }
+                
                
             }
-            // cout<<num<<" "<<n<<endl;
+
             return num^n;
         }
      
