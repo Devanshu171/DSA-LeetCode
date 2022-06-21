@@ -1,5 +1,5 @@
 # Word Boggle
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given a dictionary of distinct <strong>words</strong> and an <strong>M x N</strong> board where every cell has one character. Find all possible words from the dictionary that can be formed by a sequence of adjacent characters on the board. We can move to any of 8 adjacent characters</span></p>
 
