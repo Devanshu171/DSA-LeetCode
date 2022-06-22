@@ -64,12 +64,41 @@ bool solveTabu(vector<int>arr, int sum){
     
     return dp[n-1][sum];
 }
+bool solveTabuSo(vector<int>arr, int sum){
+    int n=arr.size();
+    vector<bool>cur(sum+1,false),prev(sum+1,false);
+    
+    // 1st base case
+   prev[0]=cur[0]=true;
+    if(arr[0]<=sum) prev[arr[0]]=cur[arr[0]]=true;
+   
+    // nested loops for state chaning variables,
+    // opposite of recursion i.e top down ->bottom up
+    
+    for(int i=1;i<n;i++){
+        for(int target=1;target<=sum;target++){
+               
+         bool notTake=prev[target];
+         bool take=false;
+        
+             if(arr[i]<=target)
+         take=prev[target-arr[i]];
+        
+         cur[target]= (notTake || take);
+            
+        }
+        prev=cur;
+    }
+    
+    return prev[sum];
+}
     bool isSubsetSum(vector<int>arr, int sum){
      
      vector<vector<int>>dp(arr.size(),vector<int>(sum+1,-1));
     //   return solveRec(arr.size()-1,sum,arr);
     // return solveMemo(arr.size()-1,sum,arr,dp);
-    return solveTabu(arr,sum);
+    // return solveTabu(arr,sum);
+    return solveTabuSo(arr,sum);
     }
 };
 
