@@ -81,9 +81,9 @@ bool solveMemo(int ind,int target,vector<int>&arr,vector<vector<int>>&dp){
     for(auto it:arr) sum+=it;
     if(sum%2!=0) return false;
         
-    //     return solveRec(n-1,sum/2,arr);
-    // vector<vector<int>>dp(n,vector<int>(sum/2+1,-1));
-    //     return solveMemo(n-1,sum/2,arr,dp);
+        // return solveRec(n-1,sum/2,arr);
+    vector<vector<int>>dp(n,vector<int>(sum/2+1,-1));
+        return solveMemo(n-1,sum/2,arr,dp);
     //     return solveTabu(sum/2,arr);
         return solveTabuSo(sum/2,arr);
     }
