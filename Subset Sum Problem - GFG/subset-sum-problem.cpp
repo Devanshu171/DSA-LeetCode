@@ -34,11 +34,42 @@ bool solveMemo(int ind,int target,vector<int>&arr,vector<vector<int>>&dp){
         
         return dp[ind][target]= (notTake || take);
 }
+bool solveTabu(vector<int>arr, int sum){
+    int n=arr.size();
+    vector<vector<bool>>dp(n,vector<bool>(sum+1,false));
+    
+    // 1st base case
+    for(int i=0;i<n;i++){
+        dp[i][0]=true;
+    }
+    // 2nd base case (from recursion)
+    if(arr[0]<=sum) dp[0][arr[0]]=true;
+    
+    // nested loops for state chaning variables,
+    // opposite of recursion i.e top down ->bottom up
+    
+    for(int i=1;i<n;i++){
+        for(int target=1;target<=sum;target++){
+               
+         bool notTake=dp[i-1][target];
+         bool take=false;
+        
+             if(arr[i]<=target)
+         take=dp[i-1][target-arr[i]];
+        
+         dp[i][target]= (notTake || take);
+            
+        }
+    }
+    
+    return dp[n-1][sum];
+}
     bool isSubsetSum(vector<int>arr, int sum){
      
      vector<vector<int>>dp(arr.size(),vector<int>(sum+1,-1));
     //   return solveRec(arr.size()-1,sum,arr);
-    return solveMemo(arr.size()-1,sum,arr,dp);
+    // return solveMemo(arr.size()-1,sum,arr,dp);
+    return solveTabu(arr,sum);
     }
 };
 
