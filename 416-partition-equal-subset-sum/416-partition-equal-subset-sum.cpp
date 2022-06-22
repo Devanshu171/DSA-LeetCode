@@ -39,6 +39,26 @@ bool solveMemo(int ind,int target,vector<int>&arr,vector<vector<int>>&dp){
         return dp[n-1][sum];
         
 }
+    bool solveTabuSo(int sum,vector<int>&arr){
+        int n=arr.size();
+    vector<bool>prev(sum+1,false),cur(sum+1,false);
+        prev[0]=cur[0]=true;
+        if(arr[0]<=sum) prev[arr[0]]=cur[arr[0]]=true;
+        
+        for(int i=1;i<n;i++){
+            for(int target=1;target<=sum;target++){
+                 bool notTake=prev[target];
+                    bool take=false;
+                    if(arr[i]<=target) take=prev[target-arr[i]];
+
+                    cur[target]= (take||notTake);
+            }
+            prev=cur;
+        }
+                                               
+        return prev[sum];
+        
+}
 
     bool canPartition(vector<int>& arr) {
             int sum=0,n=arr.size();
@@ -48,6 +68,7 @@ bool solveMemo(int ind,int target,vector<int>&arr,vector<vector<int>>&dp){
 //     return solveRec(n-1,sum/2,arr);
     // vector<vector<int>>dp(n,vector<int>(sum/2+1,-1));
     // return solveMemo(n-1,sum/2,arr,dp);
-        return solveTabu(sum/2,arr);
+        // return solveTabu(sum/2,arr);
+        return solveTabuSo(sum/2,arr);
     }
 };
