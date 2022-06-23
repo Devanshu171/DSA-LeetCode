@@ -17,9 +17,13 @@ class Solution{
     
     return (take+notTake)%mod;
 }
-int solveMemo(int ind,int tar,vector<int>&arr,vector<vector<int>>&dp){
-    if(tar==0) return 1;
-    if(ind==0) return arr[ind]==tar;
+int solveMemo(int ind,int tar,int arr[],vector<vector<int>>&dp){
+   
+    if(ind==0){
+    if(tar==0 && arr[0]==0) return 2;
+    else if(tar==0 || arr[0]==tar) return 1;
+    else return 0;
+    }
     
     if(dp[ind][tar]!=-1) return dp[ind][tar];
     
@@ -32,21 +36,11 @@ int solveMemo(int ind,int tar,vector<int>&arr,vector<vector<int>>&dp){
 
 	int perfectSum(int arr[], int n, int sum)
 	{
-        // Your code goes here
-        vector<int>ar;
-         int zeros=0;
-        for(int i=0;i<n;i++) {
-            if(arr[i]!=0)
-            ar.push_back(arr[i]);
-            else
-              zeros++;
-            
-        }
-
+     
         //  int ans= solveRec(ar.size()-1,sum,ar);
-        vector<vector<int>>dp(ar.size(),vector<int>(sum+1,-1));
-        int ans=solveMemo(ar.size()-1,sum,ar,dp);
-         ans*=pow(2,zeros);
+        vector<vector<int>>dp(n,vector<int>(sum+1,-1));
+        int ans=solveMemo(n-1,sum,arr,dp);
+  
          return ans;
 	}
 	  
