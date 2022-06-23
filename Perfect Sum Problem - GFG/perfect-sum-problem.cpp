@@ -20,7 +20,9 @@ class Solution{
 int solveMemo(int ind,int tar,vector<int>&arr,vector<vector<int>>&dp){
     if(tar==0) return 1;
     if(ind==0) return arr[ind]==tar;
+    
     if(dp[ind][tar]!=-1) return dp[ind][tar];
+    
      int notTake=solveMemo(ind-1,tar,arr,dp);
     int take=0;
     if(arr[ind]<=tar) take=solveMemo(ind-1,tar-arr[ind],arr,dp);
