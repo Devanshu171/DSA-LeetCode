@@ -28,6 +28,32 @@ public:
         return dp[ind][m][n]=max(pick,notPick);
         
         }
+    int solveTabu(vector<vector<int>>&vec, int m, int n){
+    vector<vector<vector<int>>>dp(vec.size(),vector<vector<int>>(m+1,vector<int>(n+1,0)));
+         
+        for(int i=vec[0][0];i<=m;i++){
+            for(int j=vec[0][1];j<=n;j++){
+                dp[0][i][j]=1;
+            }
+        }
+        
+        for(int ind=1;ind<vec.size();ind++){
+            for(int zeros=0;zeros<=m;zeros++){
+                for(int ones=0;ones<=n;ones++){
+                    
+                       int notPick=dp[ind-1][zeros][ones];
+                        int pick=0;
+                        if(zeros>=vec[ind][0] && ones>=vec[ind][1]) 
+                            pick=1+dp[ind-1][zeros-vec[ind][0]][ones-vec[ind][1]];
+
+                         dp[ind][zeros][ones]=max(pick,notPick);
+                }
+            }
+        }
+        
+        return dp[vec.size()-1][m][n];
+
+    }
     int findMaxForm(vector<string>& strs, int m, int n) {
         vector<vector<int>>vec;
         for(auto it:strs){
@@ -41,7 +67,8 @@ public:
         }
         
        // return solveRec(vec.size()-1,vec,m,n);
-        vector<vector<vector<int>>>dp(vec.size(),vector<vector<int>>(m+1,vector<int>(n+1,-1)));
-        return solveMemo(vec.size()-1,vec,m,n,dp);
+        // vector<vector<vector<int>>>dp(vec.size(),vector<vector<int>>(m+1,vector<int>(n+1,-1)));
+        // return solveMemo(vec.size()-1,vec,m,n,dp);
+        return solveTabu(vec,m,n);
     }
 };
