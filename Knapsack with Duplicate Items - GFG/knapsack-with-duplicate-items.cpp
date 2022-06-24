@@ -11,7 +11,7 @@ class Solution{
 public:
     int solveRec(int ind,int w,int val[],int wt[]){
         if(ind==0){
-            if(w>=wt[0]) return val[0];
+            if(w>=wt[0])  (w/wt[0])*val[0];
             else return 0;
         }
         
@@ -34,12 +34,31 @@ public:
         
         return dp[ind][w]=max(pick,notPick);
     }
+    int solveTabu(int n,int W,int val[],int wt[]){
+        vector<vector<int>>dp(n,vector<int>(W+1,0));
+        for(int i=wt[0];i<=W;i++) 
+        dp[0][i]=(i/wt[0])*val[0];
+        
+        for(int ind=1;ind<n;ind++){
+            for(int w=1;w<=W;w++){
+                  int notPick=dp[ind-1][w];
+                    int pick=0;
+                    if(w>=wt[ind]) pick=val[ind]+dp[ind][w-wt[ind]];
+                    
+                     dp[ind][w]=max(pick,notPick);
+            }
+        }
+        
+        return dp[n-1][W];
+    }
+    
     int knapSack(int N, int W, int val[], int wt[])
     {
         // code here
         // return solveRec(N-1,W,val,wt);
-        vector<vector<int>>dp(N,vector<int>(W+1,-1));
-        return solveMemo(N-1,W,val,wt,dp);
+        // vector<vector<int>>dp(N,vector<int>(W+1,-1));
+        // return solveMemo(N-1,W,val,wt,dp);
+        return solveTabu(N,W,val,wt);
         
     }
 };
