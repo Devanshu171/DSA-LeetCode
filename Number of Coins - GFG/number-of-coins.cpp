@@ -53,13 +53,34 @@ int solveTabu(int nums[], int M, int V){
     
     return dp[M-1][V];
 }
+int solveTabuSo(int nums[], int M, int V){
+  vector<int>prev(V+1,1e8),cur(V+1,1e8);
+    prev[0]=0,cur[0]=0;
+    for(int i=nums[0];i<=V;i++){
+        if(i%nums[0]==0) prev[i]=i/nums[0];
+    }
+    
+    for(int ind=1;ind<M;ind++){
+        for(int tar=1;tar<=V;tar++){
+             int notPick=prev[tar];
+                 int pick=1e8;
+                if(tar>=nums[ind]) pick=1+cur[tar-nums[ind]];
+    
+             cur[tar]=min(notPick,pick);
+        }
+        prev=cur;
+    }
+    
+    return prev[V];
+}
 	int minCoins(int nums[], int M, int V) 
 	{ 
 	    // Your code goes here4
 	   // int ans= solveRec(M-1,V,nums);
 	    vector<vector<int>>dp(M,vector<int>(V+1,-1));
 	   // int ans=solveMemo(M-1,V,nums,dp);
-	   int ans=solveTabu(nums,M,V);
+	   //int ans=solveTabu(nums,M,V);
+	   int ans=solveTabuSo(nums,M,V);
 	    return ans==1e8?-1:ans;
   
 	} 
