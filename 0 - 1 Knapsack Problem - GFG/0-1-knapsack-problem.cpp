@@ -37,7 +37,11 @@ class Solution
         
         vector<vector<int>>dp(n,vector<int>(w+1,0));
         
-        // base case w==0 val=0
+        // base case w>=w[0] -->val[0];
+        for(int weight=0;weight<=w;weight++){
+            if(weight>=wt[0])
+            dp[0][weight]=val[0];
+        }
       if(w>=wt[0])  dp[0][wt[0]]=val[0];
       for(int i=1;i<n;i++){
           for(int weight=1;weight<=w;weight++){
@@ -53,8 +57,8 @@ class Solution
     int knapSack(int W, int wt[], int val[], int n) 
     { 
             //   return solveRec(W,wt,val,n-1);
-            vector<vector<int>>dp(n,vector<int>(W+1,-1));
-            return solveMemo(W,wt,val,n-1,dp);
+            // vector<vector<int>>dp(n,vector<int>(W+1,-1));
+            // return solveMemo(W,wt,val,n-1,dp);
             return solveTabu(W,wt,val,n);
        
     }
