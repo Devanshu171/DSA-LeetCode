@@ -54,8 +54,8 @@ public:
     }
     int mincostTickets(vector<int>& days, vector<int>& costs) {
         // return solveRec(0,0,days,costs);
-        // vector<int>dp(365+31,-1);
-        // return solveMemo(0,0,days,costs,dp);
+        vector<int>dp(365+31,-1);
+        return solveMemo(0,0,days,costs,dp);
         return solveTabu(days,costs);
         
     }
