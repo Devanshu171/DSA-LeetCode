@@ -51,14 +51,33 @@ public:
         
         return dp[n-1][W];
     }
-    
+    int solveTabuSo(int n,int W,int val[],int wt[]){
+        vector<int>prev(W+1,0),cur(W+1,0);
+        for(int i=wt[0];i<=W;i++) 
+        prev[i]=(i/wt[0])*val[0];
+        
+        for(int ind=1;ind<n;ind++){
+            for(int w=1;w<=W;w++){
+                  int notPick=prev[w];
+                    int pick=0;
+                    if(w>=wt[ind]) pick=val[ind]+cur[w-wt[ind]];
+                    
+                     cur[w]=max(pick,notPick);
+            }
+            prev=cur;
+        }
+        
+        return prev[W];
+    }
     int knapSack(int N, int W, int val[], int wt[])
     {
         // code here
         // return solveRec(N-1,W,val,wt);
         // vector<vector<int>>dp(N,vector<int>(W+1,-1));
         // return solveMemo(N-1,W,val,wt,dp);
-        return solveTabu(N,W,val,wt);
+        // return solveTabu(N,W,val,wt);
+        return solveTabuSo(N,W,val,wt);
+
         
     }
 };
