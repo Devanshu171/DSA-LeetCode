@@ -6,37 +6,40 @@ using namespace std;
 class Solution{
 
 	public:
-	int solve(int x,int nums[],int m,vector<int>&dp){
-    
-      if(x==0)  return 0;
-       if(x<0) return INT_MAX;
-    
-    if(dp[x]!=-1) return dp[x];
-    int mini=INT_MAX;
-    for(int i=0;i<m;i++){
-        mini=min(mini,solve(x-nums[i],nums,m,dp));
+int solveRec(int ind,int tar,int nums[]){
+    if(tar==0) return 0;
+    if(ind==0){
+        if(nums[0]<=tar && tar%nums[0]==0) return tar/nums[0];
+        else return 1e8;
     }
     
-    return dp[x]= mini==INT_MAX?mini: 1+ mini;
-
+    int notPick=solveRec(ind-1,tar,nums);
+    int pick=1e8;
+    if(tar>=nums[ind]) pick=1+solveRec(ind,tar-nums[ind],nums);
+    
+    return min(notPick,pick);
+}
+int solveMemo(int ind,int tar,int nums[],vector<vector<int>>&dp){
+    if(tar==0) return 0;
+    if(ind==0){
+        if(nums[0]<=tar && tar%nums[0]==0) return tar/nums[0];
+        else return 1e8;
+    }
+    if(dp[ind][tar]!=-1) return dp[ind][tar];
+    int notPick=solveMemo(ind-1,tar,nums,dp);
+    int pick=1e8;
+    if(tar>=nums[ind]) pick=1+solveMemo(ind,tar-nums[ind],nums,dp);
+    
+    return dp[ind][tar]= min(notPick,pick);
 }
 	int minCoins(int nums[], int M, int V) 
 	{ 
 	    // Your code goes here4
-	   // vector<int>dp(V+1,-1);
-    // int ans=solve(V,nums,M,dp);
-     vector<int>dp(V+1,INT_MAX);
-            dp[0]=0;
-            
-   for(int i=1;i<=V;i++){
-    for(int j=0;j<M;j++){
-        if(i-nums[j]>=0 && dp[i-nums[j]]!=INT_MAX)
-        dp[i]=min(dp[i],dp[i-nums[j]]+1);
-    }
-   }
-    
-    return dp[V]==INT_MAX?-1:dp[V];
-    // return   ans==;
+	   // int ans= solveRec(M-1,V,nums);
+	    vector<vector<int>>dp(M,vector<int>(V+1,-1));
+	    int ans=solveMemo(M-1,V,nums,dp);
+	    return ans==1e8?-1:ans;
+  
 	} 
 	  
 };
