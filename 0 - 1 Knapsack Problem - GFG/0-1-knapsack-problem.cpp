@@ -54,12 +54,35 @@ class Solution
       }
       return dp[n-1][w];
     }
+     int solveTabuSo(int w,int wt[],int val[],int n){
+        
+        vector<int>prev(w+1,0),cur(w+1,0);
+        
+        // base case w>=w[0] -->val[0];
+        for(int weight=0;weight<=w;weight++){
+            if(weight>=wt[0])
+            prev[weight]=val[0];
+        }
+      if(w>=wt[0])  prev[wt[0]]=val[0];
+      for(int i=1;i<n;i++){
+          for(int weight=1;weight<=w;weight++){
+              int notPick=prev[weight];
+        int pick=0;
+        if(wt[i]<=weight) pick=prev[weight-wt[i]]+val[i]; 
+        
+         cur[weight]= max(pick,notPick);
+          }
+          prev=cur;
+      }
+      return prev[w];
+    }
     int knapSack(int W, int wt[], int val[], int n) 
     { 
             //   return solveRec(W,wt,val,n-1);
             // vector<vector<int>>dp(n,vector<int>(W+1,-1));
             // return solveMemo(W,wt,val,n-1,dp);
-            return solveTabu(W,wt,val,n);
+            // return solveTabu(W,wt,val,n);
+        return solveTabuSo(W,wt,val,n);
        
     }
 };
