@@ -10,8 +10,11 @@ class Solution
     //Function to return max value that can be put in knapsack of capacity W.
     int solveRec(int w,int wt[],int val[],int ind){
         
-        if((ind==0 && w<wt[0])|| w==0) return 0;
-        else if(ind==0 && w>=wt[0]) return val[0];
+        if(ind==0){
+            if(w>=wt[0]) return val[0];
+            else return 0;
+        }
+        
         
         int notPick=solveRec(w,wt,val,ind-1);
         int pick=0;
@@ -59,11 +62,10 @@ class Solution
         vector<int>prev(w+1,0),cur(w+1,0);
         
         // base case w>=w[0] -->val[0];
-        for(int weight=0;weight<=w;weight++){
-            if(weight>=wt[0])
+        for(int weight=wt[0];weight<=w;weight++){
             prev[weight]=val[0];
         }
-      if(w>=wt[0])  prev[wt[0]]=val[0];
+   
       for(int i=1;i<n;i++){
           for(int weight=1;weight<=w;weight++){
               int notPick=prev[weight];
