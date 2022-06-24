@@ -10,21 +10,35 @@ using namespace std;
 
 class Solution{
   public:
-  int solve(int price[],int len,int n, vector<vector<int>>&dp){
-      if(len==0) return 0;
-      if(len<0 || n<=0) return INT_MIN;
-      if(dp[n][len]!=-1) return dp[n][len];
+  int solveRec(int ind,int len,int price[],int n){
+      if(len==n) return 0;
+      if(ind>n) return 0;
       
-      return dp[n][len]= max(solve(price,len,n-1,dp),solve(price,len-n,n,dp)+price[n-1]);
-    
+      
+      int notPick=solveRec(ind+1,len,price,n);
+      int pick=0;
+      if(len+ind<=n) pick=solveRec(ind,len+ind,price,n)+price[ind-1];
+      
+      return max(pick,notPick);
   }
-  
-//   return dp[n]=m/axi;
-//   }
+  int solveMemo(int ind,int len,int price[],int n,vector<vector<int>>&dp){
+      if(len==n) return 0;
+      if(ind>n) return 0;
+      
+      if(dp[ind][len]!=-1) return dp[ind][len];
+      
+      int notPick=solveMemo(ind+1,len,price,n,dp);
+      int pick=0;
+      if(len+ind<=n) pick=solveMemo(ind,len+ind,price,n,dp)+price[ind-1];
+      
+      return dp[ind][len]= max(pick,notPick);
+  }
     int cutRod(int price[], int n) {
         //code here
+        // return solveRec(1,0,price,n);
         vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
-        return solve(price,n,n,dp);
+        return solveMemo(1,0,price,n,dp);
+        
     }
 };
 
