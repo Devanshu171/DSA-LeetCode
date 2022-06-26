@@ -2,6 +2,8 @@ class Solution {
 public:
     int maxScore(vector<int>& arr, int k) {
         
+        
+        // need to find subarray of size n-k with min sum so that rest has max sum i.e score
         int sum=0;
         int n=arr.size();
         for(int i=0;i<n;i++) sum+=arr[i];
