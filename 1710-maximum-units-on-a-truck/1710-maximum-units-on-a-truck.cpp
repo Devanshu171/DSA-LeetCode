@@ -6,7 +6,6 @@ public:
         });
         int ans=0;
             for(int i=0;i<boxTypes.size();i++){
-                
                 int x=min(truckSize,boxTypes[i][0]);
                 ans+=x*boxTypes[i][1];
                 truckSize-=x;
