@@ -54,10 +54,31 @@ public:
         
         return dp[n][m];
     }
+       int solveTabuSo(string s,string t){
+        int n=s.size(),m=t.size();
+        vector<int>prev(m+1,0),cur(m+1,0);
+           prev[0]=cur[0]=1;
+        
+        for(int ind1=1;ind1<=n;ind1++){
+            for(int ind2=1;ind2<=m;ind2++){
+                  int notPick=prev[ind2],pick=0;
+         
+        if(s[ind1-1]==t[ind2-1]){
+             pick=prev[ind2-1]; 
+        }
+         
+          cur[ind2]=(pick+notPick)%1000000007;
+            }
+            prev=cur;
+        }
+        
+        return prev[m];
+    }
     int numDistinct(string s, string t) {
         // return solveRec(s.size()-1,t.size()-1,s,t);
-        vector<vector<int>>dp(s.size(),vector<int>(t.size(),-1));
-        return solveMemo(s.size()-1,t.size()-1,s,t,dp);
+        // vector<vector<int>>dp(s.size(),vector<int>(t.size(),-1));
+        // return solveMemo(s.size()-1,t.size()-1,s,t,dp);
         // return solveTabu(s,t);
+        return solveTabuSo(s,t);
     }
 };
