@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int solveRec(int ind1,int ind2,string s,string t){
+    int solveRec(int ind1,int ind2,string &s,string &t){
         if(ind2==-1){
             return 1;
         }
@@ -16,7 +16,7 @@ public:
             return solveRec(ind1-1,ind2,s,t);
         }
     }
-     int solveMemo(int ind1,int ind2,string s,string t,vector<vector<int>>&dp){
+     int solveMemo(int ind1,int ind2,string &s,string &t,vector<vector<int>>&dp){
         if(ind2==-1){
             return 1;
         }
@@ -56,8 +56,8 @@ public:
     }
     int numDistinct(string s, string t) {
         // return solveRec(s.size()-1,t.size()-1,s,t);
-        // vector<vector<int>>dp(s.size(),vector<int>(t.size(),-1));
-        // return solveMemo(s.size()-1,t.size()-1,s,t,dp);
-        return solveTabu(s,t);
+        vector<vector<int>>dp(s.size(),vector<int>(t.size(),-1));
+        return solveMemo(s.size()-1,t.size()-1,s,t,dp);
+        // return solveTabu(s,t);
     }
 };
