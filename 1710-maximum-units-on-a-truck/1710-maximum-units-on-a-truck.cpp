@@ -6,12 +6,10 @@ public:
         });
         int ans=0;
             for(int i=0;i<boxTypes.size();i++){
-                while(truckSize>0 && boxTypes[i][0]>0){
-                    ans+=boxTypes[i][1];
-                    boxTypes[i][0]--;
-                    truckSize--;
-                }
                 
+                int x=min(truckSize,boxTypes[i][0]);
+                ans+=x*boxTypes[i][1];
+                truckSize-=x;
             }
         return ans;
     }
