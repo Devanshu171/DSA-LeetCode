@@ -14,7 +14,7 @@ public:
             return min(remove,min(replace,insert));
         }
     }
-    int solveMemo(int ind1,int ind2,string s1,string s2,vector<vector<int>>&dp){
+    int solveMemo(int ind1,int ind2,string &s1,string &s2,vector<vector<int>>&dp){
         if(ind2==-1) return ind1+1;
         if(ind1==-1) return ind2+1;
         if(dp[ind1][ind2]!=-1) return dp[ind1][ind2];
