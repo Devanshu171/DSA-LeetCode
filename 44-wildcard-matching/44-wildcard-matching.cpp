@@ -65,11 +65,36 @@ public:
         return dp[n][m];
 
     }
-    
+     int solveTabuSo(string &s, string &p){
+        int n=s.size(),m=p.size();
+               vector<int>prev(m+1,0),cur(m+1,0);
+        prev[0]=cur[0]=1;
+        // for(int i=1;i<=n;i++) dp[i][0]=0;
+        // for(int i=1;i<=m;i++) dp[0][i]=0;
+        for(int i=1;i<=m;i++){
+            if(p[i-1]=='*') prev[i]=1;
+                else break;
+        }
+        
+        for(int ind1=1;ind1<=n;ind1++){
+            for(int ind2=1;ind2<=m;ind2++){
+         if(s[ind1-1]==p[ind2-1] || p[ind2-1]=='?') cur[ind2]= prev[ind2-1];
+       
+       else if(p[ind2-1]=='*'){
+             cur[ind2]= prev[ind2] || cur[ind2-1];
+        }
+         else cur[ind2] =false;
+            }
+            cur=prev;
+        }
+        return prev[m];
+
+    }
     bool isMatch(string s, string p) {
         // return solveRec(s.size()-1,p.size()-1,s,p);
         vector<vector<int>>dp(s.size(),vector<int>(p.size(),-1));
         // return solveMemo(s.size()-1,p.size()-1,s,p,dp);
         return solveTabu(s,p);
+        return solveTabuSo(s,p);
     }
 };
