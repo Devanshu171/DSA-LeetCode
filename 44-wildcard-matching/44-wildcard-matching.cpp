@@ -72,7 +72,7 @@ public:
         // for(int i=1;i<=n;i++) dp[i][0]=0;
         // for(int i=1;i<=m;i++) dp[0][i]=0;
         for(int i=1;i<=m;i++){
-            if(p[i-1]=='*') prev[i]=1;
+            if(p[i-1]=='*') prev[i]=cur[i]=1;
                 else break;
         }
         
@@ -95,6 +95,6 @@ public:
         vector<vector<int>>dp(s.size(),vector<int>(p.size(),-1));
         // return solveMemo(s.size()-1,p.size()-1,s,p,dp);
         return solveTabu(s,p);
-        return solveTabuSo(s,p);
+        // return solveTabuSo(s,p);
     }
 };
