@@ -58,33 +58,40 @@ public:
     }
      int solveTabuSo(vector<int>&prices){
         int n=prices.size();
-        vector<int>next(2,0),cur(2,0);
+       vector<vector<int>>cur(2,vector<int>(2,0));
+                vector<vector<int>>next(2,vector<int>(2,0));
+
         
         
         for(int ind=n-1;ind>=0;ind--){
             for(int buy=0;buy<2;buy++){
+                for(int cd=1;cd>=0;cd--){
                  int profit=0;
+                if(cd) profit= next[buy][0];
+
+                   else if(buy){
+                        profit=max(-prices[ind]+next[0][0],next[1][0]);
+                    }else{
+                        profit=max(prices[ind]+next[1][1],next[0][0]);
+                    }
         
-        if(buy){
-            profit=max(-prices[ind]+next[0],next[1]);
-        }else{
-            profit=max(prices[ind]+next[1],next[0]);
-        }
-        
-             cur[buy]=profit;
+                     cur[buy][cd]=profit;
+                }
             }
-            next=cur;
+            swap(cur,next);
+                
         }
         
-        return next[1];
+        return next[1][0];
     }
+   
     int maxProfit(vector<int>& prices) {
         // return solveRec(0,1,0,prices);
         // int n=prices.size();
         // vector<vector<vector<int>>>dp(n,vector<vector<int>>(2,vector<int>(2,-1)));
         // return solveMemo(0,1,0,prices,dp);
-        return solveTabu(prices);
-                // return solveTabuSo(prices);
+        // return solveTabu(prices);
+                return solveTabuSo(prices);
 
     }
     
