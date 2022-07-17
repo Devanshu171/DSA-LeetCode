@@ -26,22 +26,24 @@ public:
     }
     int solveTabu(vector<int>&prices){
         int n=prices.size();
-                vector<vector<vector<int>>>dp(n+1,vector<vector<int>>(2,vector<int>(3,0)));
+               vector<vector<int>>next(2,vector<int>(3,0));
+        vector<vector<int>>cur(2,vector<int>(3,0));
         
         for(int ind=n-1;ind>=0;ind--){
             for(int buy=0;buy<2;buy++){
                 for(int trans=2;trans>=1;trans--){
                       int profit=0;
         if(buy){
-             profit=max(-prices[ind]+dp[ind+1][0][trans],dp[ind+1][1][trans]);
+             profit=max(-prices[ind]+next[0][trans],next[1][trans]);
         }else{
-             profit=max(prices[ind]+dp[ind+1][1][trans-1],dp[ind+1][0][trans]);
+             profit=max(prices[ind]+next[1][trans-1],next[0][trans]);
         }
-         dp[ind][buy][trans]= profit;
+         cur[buy][trans]= profit;
                 }
             }
+            next=cur;
         }
-        return dp[0][1][2];
+        return next[1][2];
 
     }
     int maxProfit(vector<int>& prices){
