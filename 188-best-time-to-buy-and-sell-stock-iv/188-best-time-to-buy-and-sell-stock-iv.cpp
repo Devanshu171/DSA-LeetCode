@@ -61,7 +61,7 @@ public:
          cur[buy][trans]= profit;
                 }
             }
-            next=cur;
+            swap(cur,next);
         }
         return next[1][k];
 
