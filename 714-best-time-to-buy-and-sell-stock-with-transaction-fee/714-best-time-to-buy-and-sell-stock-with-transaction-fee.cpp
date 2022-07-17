@@ -27,7 +27,7 @@ public:
         
        return dp[ind][buy]=profit;
     }
-    int solveTabu(vector<int>&prices){
+    int solveTabu(int fee,vector<int>&prices){
         int n=prices.size();
         vector<vector<int>>dp(n+1,vector<int>(2,0));
         
@@ -39,7 +39,7 @@ public:
         if(buy){
             profit=max(-prices[ind]+dp[ind+1][0],dp[ind+1][1]);
         }else{
-            profit=max(prices[ind]+dp[ind+1][1],dp[ind+1][0]);
+            profit=max(prices[ind]+dp[ind+1][1]-fee,dp[ind+1][0]);
         }
         
              dp[ind][buy]=profit;
@@ -73,10 +73,10 @@ public:
 
     int maxProfit(vector<int>& prices, int fee) {
              // return solveRec(0,1,fee,prices);
-        int n=prices.size();
-        vector<vector<int>>dp(n+1,vector<int>(2,-1));
-        return solveMemo(0,1,fee,prices,dp);
-        // return solveTabu(prices);
+        // int n=prices.size();
+        // vector<vector<int>>dp(n+1,vector<int>(2,-1));
+        // return solveMemo(0,1,fee,prices,dp);
+        return solveTabu(fee,prices);
                 // return solveTabuSo(prices);
 
     }
