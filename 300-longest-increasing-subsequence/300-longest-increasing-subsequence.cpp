@@ -42,6 +42,30 @@ public:
         }
         return dp[n-2][n-1];
     }
+     int solveTabuSo(vector<int>&nums){
+        nums.push_back(1e9);
+        int n=nums.size();
+        vector<int>prevv(n,0),cur(n,0);
+        
+        for(int i=1;i<n;i++){
+            if(nums[0]<nums[i]) prevv[i]=1;
+        }
+            
+        for(int ind=1;ind<n-1;ind++){
+            for(int prev=1;prev<n;prev++){
+              if(ind==prev) continue;    
+        if(nums[ind]>=nums[prev])   cur[prev]=prevv[prev];
+                else{
+                    int pick=prevv[ind]+1;
+                    int notPick=prevv[prev];
+
+                      cur[prev]=max(pick,notPick);
+                }
+            }
+            swap(cur,prevv);
+        }
+        return prevv[n-1];
+    }
     int lengthOfLIS(vector<int>& nums) {
         nums.push_back(1e9);
         int n=nums.size();
@@ -49,6 +73,7 @@ public:
         
         // vector<vector<int>>dp(n,vector<int>(n,-1));
         // return solveMemo(n-2,n-1,nums,dp);
-        return solveTabu(nums);
+        // return solveTabu(nums);
+        return solveTabuSo(nums);
     }
 };
