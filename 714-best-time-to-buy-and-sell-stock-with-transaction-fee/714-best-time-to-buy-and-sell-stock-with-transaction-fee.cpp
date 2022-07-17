@@ -48,7 +48,7 @@ public:
         
         return dp[0][1];
     }
-     int solveTabuSo(vector<int>&prices){
+     int solveTabuSo(int fee,vector<int>&prices){
         int n=prices.size();
         vector<int>next(2,0),cur(2,0);
         
@@ -60,12 +60,12 @@ public:
         if(buy){
             profit=max(-prices[ind]+next[0],next[1]);
         }else{
-            profit=max(prices[ind]+next[1],next[0]);
+            profit=max(prices[ind]+next[1]-fee,next[0]);
         }
         
              cur[buy]=profit;
             }
-            next=cur;
+            swap(cur,next);
         }
         
         return next[1];
@@ -76,8 +76,8 @@ public:
         // int n=prices.size();
         // vector<vector<int>>dp(n+1,vector<int>(2,-1));
         // return solveMemo(0,1,fee,prices,dp);
-        return solveTabu(fee,prices);
-                // return solveTabuSo(prices);
+        // return solveTabu(fee,prices);
+                return solveTabuSo(fee,prices);
 
     }
 };
