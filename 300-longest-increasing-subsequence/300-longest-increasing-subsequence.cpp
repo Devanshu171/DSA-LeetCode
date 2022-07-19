@@ -70,37 +70,40 @@ public:
         int n=nums.size();
         
         vector<int>dp(n,1);
-        // int ans=1;
-        // for(int i=0;i<n;i++){
-        //     for(int j=0;j<i;j++){
-        //         if(nums[i]>nums[j]){
-        //             dp[i]=max(dp[i],dp[j]+1);
-        //         }
-        //     }
-        //     ans=max(ans,dp[i]);
-        // }
-        // return ans;
-        
-         int ans=1;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<i;j++){
-            if(nums[i]>nums[j]){
-                dp[i]=max(dp[i],dp[j]+1);
+        int ans=1;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<i;j++){
+                if(nums[i]>nums[j]){
+                    dp[i]=max(dp[i],dp[j]+1);
+                }
             }
+            ans=max(ans,dp[i]);
         }
-        ans=max(ans,dp[i]);
-    }
+    
     return ans-1;
     }
-    int lengthOfLIS(vector<int>& nums) {
-        nums.push_back(1e9);
-        int n=nums.size();
-        // return solveRec(n-1,1e9,nums);
+    int lengthOfLIS(vector<int>& arr) {
+//         nums.push_back(1e9);
+        int n=arr.size();
+//         // return solveRec(n-1,1e9,nums);
         
-        // vector<vector<int>>dp(n,vector<int>(n,-1));
-        // return solveMemo(n-2,n-1,nums,dp);
-        // return solveTabu(nums);
-        // return solveTabuSo(nums);
-        return solveTabu2(nums);
+//         // vector<vector<int>>dp(n,vector<int>(n,-1));
+//         // return solveMemo(n-2,n-1,nums,dp);
+//         // return solveTabu(nums);
+//         // return solveTabuSo(nums);
+//         return solveTabu2(nums);
+              vector<int>temp;
+    
+    temp.push_back(arr[0]);
+    
+    for(int i=1;i<n;i++){
+        if(arr[i]>temp.back()){
+            temp.push_back(arr[i]);
+        }else{
+            int ind=lower_bound(temp.begin(),temp.end(),arr[i])-temp.begin();
+            temp[ind]=arr[i];
+        }
+    }
+    return temp.size();
     }
 };
