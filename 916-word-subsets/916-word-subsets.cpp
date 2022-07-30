@@ -1,46 +1,44 @@
 class Solution {
 public:
     
-    bool match(string & s1,unordered_map<char,int>&mpp2){
-      unordered_map<char,int>mpp1;
-        for(int i=0;i<s1.size();i++){
-            mpp1[s1[i]]++;
-        }
-       
-        for(auto it2:mpp2){
-            
-            if(mpp1.find(it2.first)==mpp1.end() || mpp1[it2.first]<it2.second){
-                return false;
+   vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
+        map<char, int> data;
+        vector<string> wordsAnswer;
+        for(int i = 0; i < words2.size(); i++){
+            string word = words2[i];
+            map<char,int> tempData;
+            for(int j = 0; j< word.size(); j++){
+                tempData[word[j]]++;
+            }
+
+            for(auto k : tempData){
+                data[k.first] = max(data[k.first], k.second);
             }
         }
-        return true;
-    }
-    vector<string> wordSubsets(vector<string>& words1, vector<string>& word2) {
-        
-        vector<string>ans;
-        int n=words1.size();
-        
-                  unordered_map<char,int>mpp2;
-        for(int i=0;i<word2.size();i++){
-                unordered_map<char,int>mpp3;
-            for(int j=0;j<word2[i].size();j++){
-                mpp3[word2[i][j]]++;
+
+
+        map<char,int> data2;
+
+        for(int i = 0; i < words1.size(); i++){
+            string word = words1[i];
+            map<char,int> tempData;
+            for(int j = 0; j < word.size(); j++){
+                tempData[word[j]]++;
             }
-            for(auto it:mpp3){
-                if(mpp2.find(it.first)==mpp2.end()){
-                    mpp2[it.first]=it.second;
-                }else{
-                    mpp2[it.first]=max(mpp2[it.first],it.second);
+            bool flag = true;
+            for(auto k : data){
+                if(k.second > tempData[k.first]){
+                    flag = false;
                 }
             }
-        }
-        
-        for(int i=0;i<n;i++){
-            if(match(words1[i],mpp2)){
-                ans.push_back(words1[i]);
+
+            if(flag){
+                wordsAnswer.push_back(word);
             }
+
         }
         
-        return ans;
+        return wordsAnswer;
+
     }
 };
