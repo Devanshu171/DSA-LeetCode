@@ -1,44 +1,32 @@
 class Solution {
 public:
     
-   vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
-        map<char, int> data;
-        vector<string> wordsAnswer;
-        for(int i = 0; i < words2.size(); i++){
-            string word = words2[i];
-            map<char,int> tempData;
-            for(int j = 0; j< word.size(); j++){
-                tempData[word[j]]++;
-            }
-
-            for(auto k : tempData){
-                data[k.first] = max(data[k.first], k.second);
-            }
+    vector<int> freqCount(string &s1){
+        vector<int>count(26,0);
+        for(int i=0;i<s1.size();i++){
+            count[s1[i]-'a']++;
         }
-
-
-        map<char,int> data2;
-
-        for(int i = 0; i < words1.size(); i++){
-            string word = words1[i];
-            map<char,int> tempData;
-            for(int j = 0; j < word.size(); j++){
-                tempData[word[j]]++;
+        return count;
+    }
+    vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
+        vector<string>ans;
+        vector<int>maxCount(26,0);
+        for(int i=0;i<words2.size();i++){
+            vector<int> count=freqCount(words2[i]);
+            for(int i=0;i<26;i++){
+                maxCount[i]=max(maxCount[i],count[i]);
             }
-            bool flag = true;
-            for(auto k : data){
-                if(k.second > tempData[k.first]){
-                    flag = false;
-                }
-            }
-
-            if(flag){
-                wordsAnswer.push_back(word);
-            }
-
         }
         
-        return wordsAnswer;
-
+        for(auto it:words1){
+            vector<int>count=freqCount(it);
+            int i;
+            for( i=0;i<26;i++){
+                if(count[i]<maxCount[i]) break;
+            }
+            if(i==26) ans.push_back(it);
+        }
+        return ans;
+        
     }
 };
