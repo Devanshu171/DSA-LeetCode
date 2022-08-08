@@ -92,7 +92,9 @@ public:
 //         // return solveTabu(nums);
 //         // return solveTabuSo(nums);
 //         return solveTabu2(nums);
-              vector<int>temp;
+      
+//      Binary search   -------------------------
+                    vector<int>temp;
     
     temp.push_back(arr[0]);
     
