@@ -10,7 +10,7 @@ public:
         priority_queue<int>pq;
         
         for(int i=0;i<n;i++){
-            if(stations[i][0]>=target) break;
+            // if(stations[i][0]>=target) break;
             tank-=stations[i][0]-prev;
             prev=stations[i][0];
   
