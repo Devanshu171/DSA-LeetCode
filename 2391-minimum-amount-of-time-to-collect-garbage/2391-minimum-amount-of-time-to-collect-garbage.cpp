@@ -2,10 +2,9 @@ class Solution {
 public:
     int garbageCollection(vector<string>& garbage, vector<int>& travel) {
         int n=garbage.size();
-        vector<int>pret(n-1,0);
-        pret[0]=travel[0];
-        for(int i=1;i<travel.size();i++){
-            pret[i]=travel[i]+pret[i-1];
+        vector<int>pret(n,0);
+        for(int i=1;i<n;i++){
+            pret[i]=travel[i-1]+pret[i-1];
         }
             int countG=0,countM=0,countP=0;
             int lastG=-1,lastM=-1,lastP=-1;
@@ -27,18 +26,15 @@ public:
         int ans=0;
         if(countM!=0){
             ans+=countM;
-            if(lastM!=0)
-            ans+=pret[lastM-1];
+            ans+=pret[lastM];
         }
          if(countP!=0){
             ans+=countP;
-              if(lastP!=0)
-            ans+=pret[lastP-1];
+            ans+=pret[lastP];
         }
          if(countG!=0){
             ans+=countG;
-              if(lastG!=0)
-            ans+=pret[lastG-1];
+            ans+=pret[lastG];
         }
         
         return ans;
