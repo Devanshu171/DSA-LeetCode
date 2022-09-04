@@ -7,9 +7,9 @@ public:
             if(end==s) return 1;
             else return 0;
             }
-        // if(abs(end-s)>k){
-        //     return 0;
-        // }
+        if(abs(end-s)>k){
+            return 0;
+        }
         // if(s<0){
         //     if(abs(s-end)>k) return 0;
         // }
