@@ -1,45 +1,38 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int n=matrix.size();
-        int m=matrix[0].size();
         vector<int>ans;
-      
-        int top=0;
-        int right=m-1;
-        int bottom=n-1;
-        int left=0;
-        
+        int n=matrix.size(),m=matrix[0].size();
         int count=0;
-        int total=n*m;
+        int top=0,down=n-1,right=m-1,left=0;
         
-        while(count<total){
+        while(count<n*m){
             
-            // left to right
-            for(int i=left;count<total &&i<=right;i++){
+            // cout<<top<<" "<<down<<" "<<right<<" "left<<endl;
+            for(int i=left;i<=right && count<n*m;i++){
+                cout<<top<<" "<<i<<endl;
                 ans.push_back(matrix[top][i]);
                 count++;
             }
             top++;
-            // top to bottom
-            for(int i=top;count<total &&i<=bottom;i++){
+            for(int i=top;i<=down && count<n*m;i++){
+                 cout<<i<<" "<<right<<endl;
                 ans.push_back(matrix[i][right]);
-                 count++;
+                count++;
             }
             right--;
-            // right to left
-            for(int i=right;count<total &&i>=left;i--){
-                ans.push_back(matrix[bottom][i]);
-                 count++;
+            for(int i=right;i>=left && count<n*m;i-- ){
+                 cout<<down<<" "<<i<<endl;
+                ans.push_back(matrix[down][i]);
+                count++;
             }
-            bottom--;
-            // bottom to top
-            for(int i=bottom;count<total &&i>=top;i--){
+            down--;
+            for(int i=down;i>=top && count<n*m;i--){
+                cout<<left<<" "<<i<<endl;
                 ans.push_back(matrix[i][left]);
-                 count++;
+                count++;
             }
             left++;
-            
         }
         return ans;
     }
