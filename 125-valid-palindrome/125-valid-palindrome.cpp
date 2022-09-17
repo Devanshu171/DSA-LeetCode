@@ -1,32 +1,23 @@
 class Solution {
 public:
-    void tolower(string &s){
+    void toLower(string &s){
         for(int i=0;i<s.size();i++){
-            if(s[i]>='A'&& s[i]<='Z'){
+            if(s[i]>='A' && s[i]<='Z'){
                 s[i]=s[i]-'A'+'a';
             }
         }
     }
-    bool ischar(char x){
-        return ((x>='a'&&x<='z')||(x>='0' && x<='9'));
-    }
     bool isPalindrome(string s) {
-        tolower(s);
-        cout<<s<<endl;
-        int i=0,j=s.size()-1;
+
+            int i=0,j=s.size()-1;
+        toLower(s);
         while(i<j){
-            if(!ischar(s[i])){
-                i++;
-            }else if(!ischar(s[j])){
-                j--;
-            }else if(s[i]==s[j]){
+            while( i<j && !isalpha(s[i]) && !(s[i]>='0' && s[i]<='9')) i++;
+           while(i<j && !isalpha(s[j]) &&  !(s[j]>='0' && s[j]<='9'))j--;
+                if(s[i]!=s[j]) return false;
                 i++;
                 j--;
-            }else{
-                return false;
-            }
         }
-           return true;
+        return true;
     }
- 
 };
