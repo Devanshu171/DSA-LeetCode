@@ -23,10 +23,16 @@ public:
     }
     int countSubstrings(string s) {
        
-        vector<int>dp(s.size(),-1);
-         return countPalin(0,s,dp);
-        // cout<<s.substr(2,2)<<endl;
-        // return 6;
+        // vector<int>dp(s.size(),-1);
+        //  return countPalin(0,s,dp);
+    int ans=0;
+        for(int i=0;i<s.size();i++){
+            int l=i,h=i;
+            while(l>=0 && h<s.size() && s[l--]==s[h++]) ans++;
+            l=i,h=i+1;
+            while(l>=0 && h<s.size() && s[l--]==s[h++]) ans++;
+        }
+        return ans;
         
      }
 };
