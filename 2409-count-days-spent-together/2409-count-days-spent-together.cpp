@@ -7,7 +7,9 @@ public:
         int ald=month[stoi(leaveAlice.substr(0,2))-1]+stoi(leaveAlice.substr(3));
         int bad=month[stoi(arriveBob.substr(0,2))-1]+stoi(arriveBob.substr(3));
         int bld=month[stoi(leaveBob.substr(0,2))-1]+stoi(leaveBob.substr(3));
-        unordered_map<int,int>mpp;
+        cout<<aad<<" "<<ald<<endl;
+        cout<<bad<<" "<<bld<<endl;
+        int mpp[366]={0};
         int ans=0;
         for(int i=aad;i<=ald;i++) mpp[i]++;
         for(int i=bad;i<=bld;i++){
