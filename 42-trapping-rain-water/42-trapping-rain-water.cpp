@@ -3,16 +3,18 @@ public:
     int trap(vector<int>& height) {
         int n=height.size();
         vector<int>left(n),right(n);
-        int maxl=0,maxr=0;
-        for(int i=0;i<n;i++){
+        int maxl=height[0],maxr=height[n-1];
+        for(int i=1;i<n;i++){
             maxl=max(maxl,height[i]);
             maxr=max(maxr,height[n-i-1]);
             left[i]=maxl;
             right[n-i-1]=maxr;
         }
+        
         int ans=0;
-        for(int i=0;i<n;i++){
-            ans+=(ans,min(left[i],right[i])-height[i]);
+        for(int i=1;i<n-1;i++){
+            cout<<min(left[i],right[i])-height[i]<<" "<<i<<endl;
+            ans+=min(left[i],right[i])-height[i];
         }
         return ans;
     }
