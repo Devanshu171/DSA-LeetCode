@@ -2,7 +2,7 @@ class Solution {
 public:
     int solveRec(int n,string s){
         if(n==s.size()) return 1;
-        if(n>=s.size()) return 0;
+        if(n>s.size()) return 0;
         
         int single=0,pair=0;
         if(s[n]!='0') single=solveRec(n+1,s);
@@ -46,8 +46,6 @@ public:
         int n=s.size();
         int prev1=1,prev2;
      
-
-        
         for(int i=n-1;i>=0;i--){
             int cur=0;
             if(s[i]=='0') cur=0;
