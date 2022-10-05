@@ -41,9 +41,9 @@ public:
                 if(temp->right)   q.push(temp->right);
                 }
             }
-            if(level>depth){
-                return root;
-            }
+            // if(level>depth){
+            //     return root;
+            // }
             
         }
         return root;
