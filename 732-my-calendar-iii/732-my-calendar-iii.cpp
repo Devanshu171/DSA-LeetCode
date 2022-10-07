@@ -8,11 +8,11 @@ public:
     int book(int start, int end) {
         mpp[start]++;
         mpp[end]--;
-        int k=0;
+        int sum=0;
         int ans=-1;
         for(auto it:mpp){
-            k+=it.second;
-            ans=max(k,ans);
+            sum+=it.second;
+            ans=max(sum,ans);
         }
         return ans;
     }
