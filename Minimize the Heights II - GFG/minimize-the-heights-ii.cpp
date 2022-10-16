@@ -1,21 +1,24 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 // Initial template for C++
 
 #include <bits/stdc++.h>
 using namespace std;
 
- // } Driver Code Ends
+// } Driver Code Ends
 // User function template for C++
 
 class Solution {
   public:
     int getMinDiff(int arr[], int n, int k) {
+        // code here
         sort(arr,arr+n);
         int diff=arr[n-1]-arr[0];
-        
+        int s=arr[0]+k;
+        int  l=arr[n-1]-k;
         for(int i=0;i<n-1;i++){
-            int mini=min(arr[i+1]-k,arr[0]+k);
-            int maxi=max(arr[i]+k,arr[n-1]-k);
+            int mini=min(arr[i+1]-k,s);
+            int maxi=max(arr[i]+k,l);
+            // cout<<maxi<<" "<<mini<<endl;
             if(mini<0) continue;
             diff=min(diff,maxi-mini);
         }
@@ -23,7 +26,7 @@ class Solution {
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 int main() {
     int t;
     cin >> t;
@@ -40,4 +43,5 @@ int main() {
         cout << ans << "\n";
     }
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
