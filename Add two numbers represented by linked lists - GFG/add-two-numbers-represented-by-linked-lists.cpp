@@ -1,4 +1,4 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 // driver
 
 #include <bits/stdc++.h>
@@ -43,7 +43,7 @@ void printList(Node* n)
 }
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 /* node for linked list:
 
 struct Node {
@@ -60,62 +60,141 @@ struct Node {
 class Solution
 {
     public:
-    //Function to add two numbers represented by linked list.
-    Node *reverse(Node *head){
-        if(!head || !head->next)
-        return head;
-        
-        Node *newHead=reverse(head->next);
-        head->next->next=head;
-        head->next=NULL;
-        
-        return newHead;
+    
+    void insertNode(Node *&head, Node *&tail, int data)
+{
+  if (head == NULL)
+  {
+    head = new Node(data);
+    tail = head;
+    return;
+  }
+
+  Node *n = new Node(data);
+  tail->next = n;
+  tail = n;
+  return;
+}
+    
+Node *reverse(Node *&head)
+{
+  if (head == NULL)
+  {
+    return NULL;
+  }
+
+  Node *prev = NULL;
+  Node *curr = head;
+  Node *nxt = NULL;
+
+  while (curr != NULL)
+  {
+    nxt = curr->next;
+    curr->next = prev;
+    prev = curr;
+    curr = nxt;
+  }
+  head = prev;
+  return head;
+}
+
+Node *sumOfLL(Node *&head1, Node *&head2)
+{
+  if (head1 == NULL)
+  {
+    return head2;
+  }
+  if (head2 == NULL)
+  {
+    return head1;
+  }
+
+  head1 = reverse(head1);
+  head2 = reverse(head2);
+
+  Node *newH = NULL;
+  Node *newT = newH;
+  int carry = 0;
+  int sum = 0;
+  while (head1 != NULL && head2 != NULL)
+  {
+    sum = head1->data + head2->data + carry;
+    
+
+    if (sum >= 0 && sum <= 9)
+    {
+      insertNode(newH, newT, sum);
+      carry=0;
     }
+    else
+    {
+      int temp = sum % 10;
+      insertNode(newH, newT, temp);
+      carry = sum / 10;
+    }
+    head1 = head1->next;
+    head2 = head2->next;
+  }
+
+// printList(head1);
+// cout<<carry<<endl;
+// printList(head2);
+// print
+  while (head2 != NULL)
+  {
+    sum = head2->data + carry;
+    if (sum >= 0 && sum <= 9)
+    {
+      insertNode(newH, newT, sum);
+      carry=0;
+    }
+    else
+    {
+      int temp = sum % 10;
+      insertNode(newH, newT, temp);
+      carry = sum / 10;
+    }
+    head2 = head2->next;
+  }
+//   printList(newH);
+
+  while (head1 != NULL)
+  {
+    sum = head1->data + carry;
+    if (sum >= 0 && sum <= 9)
+    {
+      insertNode(newH, newT, sum);
+      carry=0;
+    }
+    else
+    {
+      int temp = sum % 10;
+      insertNode(newH, newT, temp);
+      carry = sum / 10;
+    }
+    head1 = head1->next;
+  }
+
+  if (carry != 0)
+  {
+    insertNode(newH, newT, carry);
+  }
+
+  return reverse(newH);
+}
+    
+    
+    
+    
     struct Node* addTwoLists(struct Node* first, struct Node* second)
     {
-        
-        Node *l1=reverse(first);
-        Node *l2=reverse(second);
-       
-        Node* newHead=new Node(-1);
-        Node *last=newHead;
-        int carry=0;
-        while(l1 && l2){
-            int val=l1->data+l2->data+carry;
-            Node *temp=new Node(val%10);
-            carry=val/10;
-            last->next=temp;
-            last=temp;
-            l1=l1->next;
-            l2=l2->next;
-        }
-        while(l1){
-               int val=l1->data+carry;
-            Node *temp=new Node(val%10);
-            carry=val/10;
-            last->next=temp;
-            last=temp;
-            l1=l1->next;
-        }
-        while(l2){
-               int val=l2->data+carry;
-            Node *temp=new Node(val%10);
-            carry=val/10;
-            last->next=temp;
-            last=temp;
-            l2=l2->next;
-        }
-        if(carry>0){
-            last->next=new Node(carry);
-        }
-        return reverse(newHead->next);
-        
-        
+        // code here
+         return sumOfLL(first,second);
     }
 };
 
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
 
 int main()
 {
@@ -136,4 +215,5 @@ int main()
     }
     return 0;
 }
-  // } Driver Code Ends
+
+// } Driver Code Ends
