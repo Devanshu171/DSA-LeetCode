@@ -14,12 +14,14 @@ public:
           
             
             for(int i=0;i<n;i++){
+                
                 int k=q.front().first;
                 int x=q.front().second.first;
                 int y=q.front().second.second;
-                  bool flag=false;
                 q.pop();
+                
                 if(x==grid.size()-1 && y==grid[0].size()-1) return path;
+                
                 if(grid[x][y]==1){
                  if(k>0)  k--;
                   else continue;  
@@ -31,6 +33,7 @@ public:
                 for(int i=0;i<4;i++){
                     int newX=di[i]+x;
                     int newY=dj[i]+y;
+                    
                     if(newX>=0 && newY>=0 && newX<grid.size() && newY<grid[0].size() && vis[k][newX][newY]!=1){
                         vis[k][newX][newY]=1;
                             q.push({k,{newX,newY}});
