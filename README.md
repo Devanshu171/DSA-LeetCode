@@ -1,2 +1,2 @@
-# DSA LeetCode
+## DSA LeetCode
 Collection of LeetCode questions.
